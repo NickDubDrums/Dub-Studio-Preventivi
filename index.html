@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DUB Studio Manager</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/docx/8.5.0/docx.umd.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f8f7f4;--bg2:#fff;--bg3:#f0efe9;
+  --text:#1a1a18;--text2:#555550;--text3:#888880;
+  --border:#e0dfd8;--border2:#ccccc4;
+  --accent:#1a1a18;--accent-bg:#1a1a18;--accent-fg:#fff;
+  --danger:#c0392b;--success:#2e7d32;--warn:#b7770d;
+  --radius:10px;--radius-sm:6px;
+}
+body{font-family:'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.5}
+
+/* PIN SCREEN */
+#pin-screen{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:1000}
+.pin-box{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:48px 40px;text-align:center;max-width:340px;width:90%}
+.pin-box h1{font-size:22px;font-weight:500;margin-bottom:6px}
+.pin-box p{color:var(--text2);font-size:14px;margin-bottom:28px}
+.pin-box input{width:100%;padding:12px 16px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);font-size:20px;text-align:center;letter-spacing:6px;outline:none;background:var(--bg)}
+.pin-box input:focus{border-color:var(--accent)}
+.pin-box .pin-err{color:var(--danger);font-size:13px;margin-top:10px;min-height:20px}
+.pin-box button{margin-top:16px;width:100%;padding:12px;background:var(--accent-bg);color:var(--accent-fg);border:none;border-radius:var(--radius-sm);font-size:15px;cursor:pointer}
+
+/* LAYOUT */
+#app{display:none;min-height:100vh}
+header{background:var(--bg2);border-bottom:0.5px solid var(--border);padding:0 32px;display:flex;align-items:center;gap:32px;height:56px;position:sticky;top:0;z-index:100}
+header .logo{font-size:16px;font-weight:500;letter-spacing:0.5px}
+nav{display:flex;gap:4px;flex:1}
+nav button{background:none;border:none;padding:8px 16px;border-radius:var(--radius-sm);cursor:pointer;font-size:14px;color:var(--text2);transition:all .15s}
+nav button:hover{background:var(--bg3);color:var(--text)}
+nav button.active{background:var(--bg3);color:var(--text);font-weight:500}
+.header-right{display:flex;gap:10px;align-items:center;font-size:13px;color:var(--text3)}
+.header-right button{background:none;border:0.5px solid var(--border2);padding:6px 14px;border-radius:var(--radius-sm);cursor:pointer;font-size:13px;color:var(--text2)}
+
+main{max-width:960px;margin:0 auto;padding:32px 24px}
+section{display:none}
+section.active{display:block}
+
+/* GITHUB CONFIG BANNER */
+.config-banner{background:#fff8e1;border:0.5px solid #f9c74f;border-radius:var(--radius);padding:14px 18px;margin-bottom:24px;display:flex;align-items:center;gap:16px;font-size:14px}
+.config-banner input{flex:1;padding:8px 12px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);font-size:13px;font-family:monospace}
+.config-banner button{padding:8px 16px;background:var(--accent-bg);color:var(--accent-fg);border:none;border-radius:var(--radius-sm);cursor:pointer;font-size:13px;white-space:nowrap}
+
+/* CARDS & SECTIONS */
+.card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:24px}
+.card+.card{margin-top:16px}
+.section-title{font-size:20px;font-weight:500;margin-bottom:24px}
+.row{display:flex;gap:16px;flex-wrap:wrap}
+.field{display:flex;flex-direction:column;gap:6px;flex:1;min-width:180px}
+.field label{font-size:13px;color:var(--text2);font-weight:500}
+.field input,.field select,.field textarea{padding:9px 12px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);font-size:14px;background:var(--bg);color:var(--text);outline:none}
+.field input:focus,.field select:focus{border-color:var(--accent)}
+
+/* SERVICES TABLE */
+.services-group{margin-top:20px}
+.services-group h3{font-size:13px;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;padding-bottom:6px;border-bottom:0.5px solid var(--border)}
+.service-row{display:grid;grid-template-columns:32px 1fr 90px 200px;gap:10px;align-items:center;padding:7px 0;border-bottom:0.5px solid var(--bg3)}
+.service-row:last-child{border-bottom:none}
+.service-row input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);cursor:pointer}
+.service-row .svc-name{font-size:14px;color:var(--text)}
+.service-row .svc-price{font-size:13px;color:var(--text3);text-align:right}
+.service-row input[type=text]{padding:6px 10px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);font-size:13px;background:var(--bg);width:100%}
+.service-row input[type=number]{padding:6px 10px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);font-size:13px;background:var(--bg);width:70px}
+
+/* TOTALE */
+.totale-bar{background:var(--accent-bg);color:var(--accent-fg);border-radius:var(--radius);padding:20px 28px;display:flex;justify-content:space-between;align-items:center;margin-top:24px}
+.totale-bar .tot-label{font-size:14px;opacity:0.7}
+.totale-bar .tot-num{font-size:28px;font-weight:500}
+.totale-bar .tot-info{font-size:13px;opacity:0.6;margin-top:4px}
+
+/* BUTTONS */
+.btn{padding:10px 20px;border-radius:var(--radius-sm);cursor:pointer;font-size:14px;border:0.5px solid var(--border2);background:var(--bg2);color:var(--text);transition:all .15s}
+.btn:hover{background:var(--bg3)}
+.btn-primary{background:var(--accent-bg);color:var(--accent-fg);border-color:var(--accent-bg)}
+.btn-primary:hover{opacity:0.9;background:var(--accent-bg)}
+.btn-sm{padding:6px 14px;font-size:13px}
+.btn-danger{color:var(--danger);border-color:var(--danger)}
+.btn-danger:hover{background:#fdf0ef}
+.actions{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
+
+/* GESTIONALE */
+.filter-bar{display:flex;gap:12px;align-items:center;margin-bottom:20px;flex-wrap:wrap}
+.filter-bar input,.filter-bar select{padding:8px 12px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);font-size:14px;background:var(--bg2)}
+.filter-bar input{flex:1;min-width:160px}
+
+.prev-list{display:flex;flex-direction:column;gap:10px}
+.prev-item{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:16px 20px;cursor:pointer;transition:border-color .15s}
+.prev-item:hover{border-color:var(--border2)}
+.prev-item .pi-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.prev-item .pi-name{font-weight:500;font-size:15px}
+.prev-item .pi-brano{font-size:13px;color:var(--text2);margin-top:2px}
+.prev-item .pi-meta{display:flex;gap:10px;align-items:center;margin-top:8px;flex-wrap:wrap}
+.prev-item .pi-total{font-size:16px;font-weight:500}
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:500}
+.badge-pending{background:#fef3e2;color:#9a5d00}
+.badge-half{background:#e8f4fd;color:#1565c0}
+.badge-paid{background:#e8f5e9;color:#2e7d32}
+.badge-approved{background:#f3e8fd;color:#6a1b9a}
+.rev-badge{background:var(--bg3);color:var(--text2);font-size:12px;padding:3px 8px;border-radius:20px}
+.rev-badge.warn{background:#fff3e0;color:#e65100}
+
+/* DETAIL PANEL */
+.detail-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:200;align-items:flex-end;justify-content:center}
+.detail-overlay.open{display:flex}
+.detail-panel{background:var(--bg2);border-radius:var(--radius) var(--radius) 0 0;width:100%;max-width:680px;max-height:85vh;overflow-y:auto;padding:28px 28px 40px}
+.detail-panel h2{font-size:18px;font-weight:500;margin-bottom:4px}
+.detail-panel .dp-sub{font-size:14px;color:var(--text2);margin-bottom:20px}
+.dp-section{margin-top:20px}
+.dp-section h3{font-size:13px;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px}
+.dp-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid var(--bg3);font-size:14px}
+.dp-row:last-child{border-bottom:none}
+.payment-status{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+.payment-btn{flex:1;padding:10px;text-align:center;border-radius:var(--radius-sm);cursor:pointer;font-size:14px;border:0.5px solid var(--border2);background:var(--bg3);color:var(--text2);min-width:130px}
+.payment-btn.active{background:var(--accent-bg);color:var(--accent-fg);border-color:var(--accent-bg)}
+.rev-control{display:flex;gap:10px;align-items:center;margin-top:8px;font-size:14px}
+.rev-counter{display:flex;align-items:center;gap:8px}
+.rev-counter button{width:28px;height:28px;border-radius:50%;border:0.5px solid var(--border2);background:var(--bg2);cursor:pointer;font-size:16px;line-height:1}
+.rev-counter span{font-weight:500;min-width:24px;text-align:center}
+.close-btn{float:right;background:none;border:none;cursor:pointer;font-size:20px;color:var(--text3);margin-top:-4px}
+
+/* TARIFFE */
+.tariffe-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:600px){.tariffe-grid{grid-template-columns:1fr}}
+.tariffe-group{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:20px}
+.tariffe-group h3{font-size:13px;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:14px}
+.tariffe-row{display:flex;align-items:center;gap:10px;padding:5px 0;border-bottom:0.5px solid var(--bg3)}
+.tariffe-row:last-child{border-bottom:none}
+.tariffe-row .tr-name{flex:1;font-size:14px}
+.tariffe-row input{width:80px;padding:5px 8px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);font-size:14px;text-align:right;background:var(--bg)}
+.tariffe-row .tr-unit{font-size:13px;color:var(--text3)}
+
+.save-banner{display:none;position:fixed;bottom:24px;right:24px;background:var(--success);color:#fff;padding:12px 20px;border-radius:var(--radius);font-size:14px;z-index:300}
+
+/* RESPONSIVE */
+@media(max-width:640px){
+  header{padding:0 16px}
+  main{padding:20px 16px}
+  .service-row{grid-template-columns:28px 1fr 80px}
+  .service-row:last-child .svc-note{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- PIN SCREEN -->
+<div id="pin-screen">
+  <div class="pin-box">
+    <h1>DUB Studio</h1>
+    <p>Inserisci il PIN per accedere</p>
+    <input type="password" id="pin-input" maxlength="8" placeholder="••••" onkeydown="if(event.key==='Enter')checkPin()">
+    <div class="pin-err" id="pin-err"></div>
+    <button onclick="checkPin()">Accedi</button>
+    <p style="margin-top:16px;font-size:12px;color:var(--text3)">Prima volta? Il PIN default è <strong>1234</strong> — cambialo in Impostazioni</p>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+<header>
+  <div class="logo">DUB Studio</div>
+  <nav>
+    <button class="active" onclick="showSection('preventivo',this)">Preventivo</button>
+    <button onclick="showSection('gestionale',this)">Gestionale</button>
+    <button onclick="showSection('tariffe',this)">Tariffe</button>
+    <button onclick="showSection('impostazioni',this)">Impostazioni</button>
+  </nav>
+  <div class="header-right">
+    <span id="sync-status"></span>
+    <button onclick="syncNow()">Sincronizza</button>
+  </div>
+</header>
+
+<main>
+
+<!-- ═══════════════ PREVENTIVO ═══════════════ -->
+<section id="sec-preventivo" class="active">
+  <div class="section-title">Nuovo Preventivo</div>
+
+  <div class="card">
+    <div class="row">
+      <div class="field"><label>Nome Artista</label><input type="text" id="p-artista" placeholder="es. Mike"></div>
+      <div class="field"><label>Nome Brano / Album</label><input type="text" id="p-brano" placeholder="es. Non Moriremo Mai"></div>
+      <div class="field" style="max-width:130px"><label>N° Brani</label><input type="number" id="p-nbrani" value="1" min="1" max="50" oninput="ricalcola()"></div>
+    </div>
+
+    <!-- Servizi Pacchetto -->
+    <div class="services-group">
+      <h3>Pacchetto Studio — per brano (× sconto volume)</h3>
+      <div id="svc-inclusive"></div>
+    </div>
+
+    <!-- Extra -->
+    <div class="services-group">
+      <h3>Extra (prezzo fisso, non moltiplicato)</h3>
+      <div id="svc-extra"></div>
+    </div>
+
+    <!-- Session Artist -->
+    <div class="services-group">
+      <h3>Session Artist / Composizione (prezzo fisso)</h3>
+      <div id="svc-session"></div>
+    </div>
+
+    <!-- Revisioni -->
+    <div class="services-group">
+      <h3>Revisioni incluse gratuitamente</h3>
+      <div class="row" style="margin-top:8px">
+        <div class="field" style="max-width:200px"><label>Revisioni Mix (gratis)</label><input type="number" id="p-rev-mix" value="1" min="0" max="10" oninput="ricalcola()"></div>
+        <div class="field" style="max-width:200px"><label>Revisioni Master (gratis)</label><input type="number" id="p-rev-master" value="1" min="0" max="10" oninput="ricalcola()"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="totale-bar">
+    <div>
+      <div class="tot-label">Totale Preventivo</div>
+      <div class="tot-num" id="tot-display">€ 0</div>
+      <div class="tot-info" id="tot-sconto"></div>
+    </div>
+    <div style="text-align:right">
+      <div class="tot-info">50% all'inizio</div>
+      <div style="font-size:20px;font-weight:500" id="tot-meta">€ 0</div>
+      <div class="tot-info">50% alla consegna</div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-primary" onclick="salvaPreventivo()">Salva preventivo</button>
+    <button class="btn" onclick="esportaDocx()">Esporta .docx</button>
+    <button class="btn" onclick="resetForm()">Nuovo</button>
+  </div>
+</section>
+
+<!-- ═══════════════ GESTIONALE ═══════════════ -->
+<section id="sec-gestionale">
+  <div class="section-title">Gestionale Preventivi</div>
+  <div class="filter-bar">
+    <input type="text" id="f-search" placeholder="Cerca artista o brano..." oninput="renderGestionale()">
+    <select id="f-stato" onchange="renderGestionale()">
+      <option value="">Tutti gli stati</option>
+      <option value="bozza">Bozza</option>
+      <option value="approvato">Approvato</option>
+      <option value="acconto">Acconto ricevuto</option>
+      <option value="saldato">Saldato</option>
+    </select>
+    <select id="f-artista" onchange="renderGestionale()">
+      <option value="">Tutti gli artisti</option>
+    </select>
+  </div>
+  <div id="prev-list" class="prev-list"></div>
+</section>
+
+<!-- ═══════════════ TARIFFE ═══════════════ -->
+<section id="sec-tariffe">
+  <div class="section-title">Tariffe & Prezzi</div>
+  <p style="color:var(--text2);font-size:14px;margin-bottom:20px">Modifica i prezzi base. Le modifiche si applicano ai nuovi preventivi.</p>
+  <div class="tariffe-grid" id="tariffe-grid"></div>
+  <div class="actions" style="margin-top:20px">
+    <button class="btn btn-primary" onclick="salvaTariffe()">Salva tariffe</button>
+    <button class="btn" onclick="resetTariffe()">Ripristina default</button>
+  </div>
+
+  <div class="card" style="margin-top:24px">
+    <h3 style="font-size:14px;font-weight:500;margin-bottom:14px">Sconto volume (% sconto per brano aggiuntivo)</h3>
+    <div class="row">
+      <div class="field" style="max-width:200px">
+        <label>% sconto per brano aggiuntivo</label>
+        <input type="number" id="sconto-step" value="2" step="0.1" min="0" max="10">
+      </div>
+      <div class="field" style="max-width:200px">
+        <label>Sconto massimo (%)</label>
+        <input type="number" id="sconto-max" value="35" step="1" min="0" max="80">
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--text3);margin-top:10px">Es. con 2%: 2 brani = -2%, 3 brani = -4%... fino al massimo.</p>
+  </div>
+</section>
+
+<!-- ═══════════════ IMPOSTAZIONI ═══════════════ -->
+<section id="sec-impostazioni">
+  <div class="section-title">Impostazioni</div>
+  <div class="card">
+    <h3 style="font-size:15px;font-weight:500;margin-bottom:16px">Integrazione GitHub</h3>
+    <p style="font-size:14px;color:var(--text2);margin-bottom:16px">I preventivi vengono salvati come file <code>dub-data.json</code> nel tuo repository GitHub.</p>
+    <div class="field" style="max-width:480px;margin-bottom:12px">
+      <label>Personal Access Token (repo scope)</label>
+      <input type="password" id="gh-token" placeholder="ghp_xxxxxxxxxxxx">
+    </div>
+    <div class="row" style="max-width:480px">
+      <div class="field"><label>Username GitHub</label><input type="text" id="gh-user" placeholder="tuousername"></div>
+      <div class="field"><label>Nome Repository</label><input type="text" id="gh-repo" placeholder="dub-studio"></div>
+    </div>
+    <div class="field" style="max-width:480px;margin-top:12px">
+      <label>Branch</label>
+      <input type="text" id="gh-branch" value="main">
+    </div>
+    <div class="actions">
+      <button class="btn btn-primary" onclick="salvaGhConfig()">Salva configurazione</button>
+      <button class="btn" onclick="testGhConfig()">Testa connessione</button>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3 style="font-size:15px;font-weight:500;margin-bottom:16px">Sicurezza</h3>
+    <div class="field" style="max-width:300px">
+      <label>Cambia PIN</label>
+      <input type="password" id="new-pin" placeholder="Nuovo PIN (4-8 cifre)" maxlength="8">
+    </div>
+    <div class="actions">
+      <button class="btn btn-primary" onclick="cambiaPin()">Aggiorna PIN</button>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3 style="font-size:15px;font-weight:500;margin-bottom:16px">Intestazione Preventivi</h3>
+    <div class="row">
+      <div class="field"><label>Nome Studio</label><input type="text" id="studio-name" value="DUB Studio"></div>
+      <div class="field"><label>Indirizzo / Città</label><input type="text" id="studio-city" placeholder="Torino, IT"></div>
+    </div>
+    <div class="field" style="max-width:300px;margin-top:12px">
+      <label>Email</label>
+      <input type="email" id="studio-email" placeholder="info@dubstudio.it">
+    </div>
+    <div class="actions">
+      <button class="btn btn-primary" onclick="salvaStudioInfo()">Salva</button>
+    </div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<!-- DETAIL OVERLAY -->
+<div class="detail-overlay" id="detail-overlay" onclick="closeDetail(event)">
+  <div class="detail-panel" id="detail-panel"></div>
+</div>
+
+<!-- SAVE BANNER -->
+<div class="save-banner" id="save-banner">✓ Salvato</div>
+
+<script>
+// ═══════════ STATE ═══════════
+const DEFAULT_PIN = '1234';
+const STORAGE_KEY = 'dub_studio_v1';
+
+let state = {
+  pin: DEFAULT_PIN,
+  ghConfig: {token:'',user:'',repo:'',branch:'main'},
+  studioInfo: {name:'DUB Studio',city:'',email:''},
+  scontoStep: 2,
+  scontoMax: 35,
+  tariffe: {},
+  preventivi: [],
+  currentEdit: null,
+};
+
+// ═══════════ SERVICE DEFINITIONS ═══════════
+const DEFAULT_TARIFFE = {
+  inclusive: [
+    {id:'rec_voci',       name:'Rec Voci',                  price:40},
+    {id:'rec_chitarre',   name:'Rec Chitarre Elettriche',   price:15},
+    {id:'rec_basso',      name:'Rec Basso / MIDI',          price:10},
+    {id:'batterie_midi',  name:'Batterie MIDI',             price:10},
+    {id:'editing_voci',   name:'Editing Voci',              price:10},
+    {id:'editing_chit',   name:'Editing Chitarre',          price:5},
+    {id:'editing_basso',  name:'Editing Basso',             price:5},
+    {id:'arrangiamento',  name:'Arrangiamento',             price:50},
+    {id:'rec_batt_reali', name:'Rec Batterie Reali',        price:70},
+    {id:'edit_batt',      name:'Editing Batterie Reali',    price:30},
+    {id:'post_live',      name:'Post-Produzione per Live',  price:20},
+    {id:'sound_design',   name:'Sound Design',              price:5},
+    {id:'live_prog',      name:'Live Programming',          price:30},
+    {id:'comp_elett',     name:'Composizione Elettronica',  price:50},
+    {id:'mix',            name:'Mix',                       price:70},
+    {id:'rev_mix',        name:'Revisione Mix (extra)',      price:25},
+    {id:'master_1',       name:'Master 1 piattaforma',      price:30},
+    {id:'master_2',       name:'Master 2 piattaforme',      price:25},
+    {id:'master_3',       name:'Master 3 piattaforme',      price:28},
+    {id:'master_4',       name:'Master 4 piattaforme',      price:30},
+    {id:'rev_master',     name:'Revisione Master (extra)',   price:20},
+  ],
+  extra: [
+    {id:'x_rev_mix',    name:'Revisione Mix Extra',    price:30},
+    {id:'x_rev_master', name:'Revisione Master Extra', price:30},
+  ],
+  session: [
+    {id:'s_comp_batt',  name:'Composizione Batterie',        price:45},
+    {id:'s_comp_chit',  name:'Composizione Chitarre',        price:50},
+    {id:'s_comp_basso', name:'Composizione Basso',           price:20},
+    {id:'s_comp_amb',   name:'Composizione Ambient',         price:20},
+    {id:'s_comp_orch',  name:'Composizione Orchestra',       price:40},
+    {id:'s_comp_piano', name:'Composizione Piano',           price:20},
+    {id:'s_arr',        name:'Arrangiamento',                price:40},
+    {id:'s_rec_batt',   name:'Registrazione Batterie DW',    price:70},
+    {id:'s_edit_batt',  name:'Editing Batterie Reali DW',    price:15},
+    {id:'s_mix_batt',   name:'Mix Batterie Reali DW',        price:15},
+    {id:'s_video',      name:'Videoclip',                    price:100},
+  ]
+};
+
+function getTariffe() {
+  const t = state.tariffe;
+  const merge = (arr) => arr.map(s => ({...s, price: t[s.id] ?? s.price}));
+  return {
+    inclusive: merge(DEFAULT_TARIFFE.inclusive),
+    extra: merge(DEFAULT_TARIFFE.extra),
+    session: merge(DEFAULT_TARIFFE.session),
+  };
+}
+
+// ═══════════ STORAGE ═══════════
+function saveLocal() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+function loadLocal() {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if (raw) try { Object.assign(state, JSON.parse(raw)); } catch(e){}
+}
+
+// ═══════════ GITHUB ═══════════
+async function ghFetch(method, body) {
+  const {token,user,repo,branch} = state.ghConfig;
+  if (!token||!user||!repo) return null;
+  const url = `https://api.github.com/repos/${user}/${repo}/contents/dub-data.json`;
+  const headers = {'Authorization':`token ${token}`,'Content-Type':'application/json'};
+  if (method==='GET') {
+    const r = await fetch(url,{headers});
+    if (!r.ok) return null;
+    const j = await r.json();
+    const data = JSON.parse(atob(j.content));
+    return {data, sha: j.sha};
+  } else {
+    const existing = await ghFetch('GET');
+    const payload = {message:'DUB Studio update',content:btoa(unescape(encodeURIComponent(JSON.stringify(body,null,2)))),branch};
+    if (existing?.sha) payload.sha = existing.sha;
+    const r = await fetch(url,{method:'PUT',headers,body:JSON.stringify(payload)});
+    return r.ok;
+  }
+}
+
+async function syncNow() {
+  const el = document.getElementById('sync-status');
+  el.textContent = 'Sincronizzando...';
+  try {
+    const res = await ghFetch('GET');
+    if (res) {
+      // merge remote preventivi (keep local changes for non-conflicting)
+      const remote = res.data;
+      if (remote.preventivi) {
+        // Remote is source of truth for preventivi, merge
+        const localIds = new Set(state.preventivi.map(p=>p.id));
+        const remoteIds = new Set(remote.preventivi.map(p=>p.id));
+        // Add remote ones not in local
+        remote.preventivi.forEach(rp=>{
+          if(!localIds.has(rp.id)) state.preventivi.push(rp);
+          else {
+            // update local with remote version
+            const idx = state.preventivi.findIndex(p=>p.id===rp.id);
+            state.preventivi[idx] = rp;
+          }
+        });
+      }
+    }
+    // Push current state
+    await ghFetch('PUT', {preventivi: state.preventivi, tariffe: state.tariffe});
+    saveLocal();
+    el.textContent = '✓ Sincronizzato';
+    setTimeout(()=>el.textContent='',3000);
+    renderGestionale();
+  } catch(e) {
+    el.textContent = '⚠ Errore sync';
+    setTimeout(()=>el.textContent='',4000);
+  }
+}
+
+async function loadFromGitHub() {
+  const res = await ghFetch('GET');
+  if (res?.data) {
+    if (res.data.preventivi) state.preventivi = res.data.preventivi;
+    if (res.data.tariffe) state.tariffe = res.data.tariffe;
+    saveLocal();
+  }
+}
+
+// ═══════════ PIN ═══════════
+function checkPin() {
+  const val = document.getElementById('pin-input').value;
+  if (val === state.pin) {
+    document.getElementById('pin-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    initApp();
+  } else {
+    document.getElementById('pin-err').textContent = 'PIN non corretto';
+    document.getElementById('pin-input').value = '';
+  }
+}
+
+function cambiaPin() {
+  const v = document.getElementById('new-pin').value.trim();
+  if (v.length < 4) { alert('Il PIN deve essere di almeno 4 cifre'); return; }
+  state.pin = v;
+  saveLocal();
+  showSaveBanner();
+}
+
+// ═══════════ INIT ═══════════
+function initApp() {
+  loadGhConfigUI();
+  loadStudioInfoUI();
+  renderServiceTable();
+  ricalcola();
+  renderGestionale();
+  renderTariffe();
+  loadFromGitHub().then(()=>{renderGestionale();});
+  document.getElementById('sconto-step').value = state.scontoStep;
+  document.getElementById('sconto-max').value = state.scontoMax;
+}
+
+// ═══════════ NAV ═══════════
+function showSection(id, btn) {
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('sec-'+id).classList.add('active');
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ═══════════ SERVICE TABLE ═══════════
+function renderServiceTable() {
+  const t = getTariffe();
+  renderGroup('svc-inclusive', t.inclusive, true);
+  renderGroup('svc-extra', t.extra, false);
+  renderGroup('svc-session', t.session, false);
+}
+
+function renderGroup(containerId, services, withNote) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  services.forEach(svc => {
+    const row = document.createElement('div');
+    row.className = 'service-row';
+    if (!withNote) {
+      row.style.gridTemplateColumns = '32px 1fr 90px 1fr';
+    }
+    row.innerHTML = `
+      <input type="checkbox" id="chk_${svc.id}" onchange="ricalcola()">
+      <label for="chk_${svc.id}" class="svc-name" style="cursor:pointer">${svc.name}</label>
+      <span class="svc-price">€${svc.price}</span>
+      <input type="text" placeholder="Variante / Note" id="note_${svc.id}" style="font-size:13px">
+    `;
+    container.appendChild(row);
+  });
+}
+
+// ═══════════ CALCOLO ═══════════
+function getSconto(nbrani) {
+  if (nbrani <= 1) return 0;
+  const s = (nbrani - 1) * state.scontoStep;
+  return Math.min(s, state.scontoMax);
+}
+
+function ricalcola() {
+  const nbrani = parseInt(document.getElementById('p-nbrani').value) || 1;
+  const t = getTariffe();
+  let totIncl = 0, totExtra = 0, totSession = 0;
+
+  t.inclusive.forEach(svc => {
+    if (document.getElementById('chk_'+svc.id)?.checked) totIncl += svc.price;
+  });
+  t.extra.forEach(svc => {
+    if (document.getElementById('chk_'+svc.id)?.checked) totExtra += svc.price;
+  });
+  t.session.forEach(svc => {
+    if (document.getElementById('chk_'+svc.id)?.checked) totSession += svc.price;
+  });
+
+  const sconto = getSconto(nbrani);
+  const inclTotale = totIncl * nbrani * (1 - sconto/100);
+  const tot = Math.round(inclTotale + totExtra + totSession);
+  const meta = Math.round(tot / 2);
+
+  document.getElementById('tot-display').textContent = `€ ${tot}`;
+  document.getElementById('tot-meta').textContent = `€ ${meta}`;
+  document.getElementById('tot-sconto').textContent = sconto > 0
+    ? `Sconto volume ${sconto.toFixed(0)}% applicato (${nbrani} brani × €${Math.round(totIncl)} = €${Math.round(totIncl*nbrani)} → -${sconto}%)`
+    : nbrani > 1 ? `${nbrani} brani × €${Math.round(totIncl)}` : '';
+}
+
+// ═══════════ PREVENTIVO SAVE ═══════════
+function salvaPreventivo() {
+  const artista = document.getElementById('p-artista').value.trim();
+  const brano = document.getElementById('p-brano').value.trim();
+  if (!artista || !brano) { alert('Inserisci nome artista e brano/album'); return; }
+
+  const nbrani = parseInt(document.getElementById('p-nbrani').value) || 1;
+  const t = getTariffe();
+  const selIncl=[], selExtra=[], selSession=[];
+
+  t.inclusive.forEach(svc => {
+    if (document.getElementById('chk_'+svc.id)?.checked)
+      selIncl.push({...svc, note: document.getElementById('note_'+svc.id)?.value||''});
+  });
+  t.extra.forEach(svc => {
+    if (document.getElementById('chk_'+svc.id)?.checked)
+      selExtra.push({...svc, note: document.getElementById('note_'+svc.id)?.value||''});
+  });
+  t.session.forEach(svc => {
+    if (document.getElementById('chk_'+svc.id)?.checked)
+      selSession.push({...svc, note: document.getElementById('note_'+svc.id)?.value||''});
+  });
+
+  const sconto = getSconto(nbrani);
+  const totIncl = selIncl.reduce((s,v)=>s+v.price,0);
+  const totale = Math.round(totIncl * nbrani * (1-sconto/100) + selExtra.reduce((s,v)=>s+v.price,0) + selSession.reduce((s,v)=>s+v.price,0));
+
+  const prev = {
+    id: state.currentEdit || Date.now().toString(),
+    artista, brano, nbrani,
+    selIncl, selExtra, selSession,
+    sconto, totale,
+    revMixIncluse: parseInt(document.getElementById('p-rev-mix').value)||1,
+    revMasterIncluse: parseInt(document.getElementById('p-rev-master').value)||1,
+    revMixFatte: 0, revMasterFatte: 0,
+    stato: 'bozza',
+    dataCreazione: state.currentEdit
+      ? state.preventivi.find(p=>p.id===state.currentEdit)?.dataCreazione || new Date().toISOString()
+      : new Date().toISOString(),
+    dataModifica: new Date().toISOString(),
+  };
+
+  if (state.currentEdit) {
+    const idx = state.preventivi.findIndex(p=>p.id===state.currentEdit);
+    if (idx>=0) {
+      // keep payment/revision state
+      prev.stato = state.preventivi[idx].stato;
+      prev.revMixFatte = state.preventivi[idx].revMixFatte;
+      prev.revMasterFatte = state.preventivi[idx].revMasterFatte;
+      state.preventivi[idx] = prev;
+    }
+    state.currentEdit = null;
+  } else {
+    state.preventivi.unshift(prev);
+  }
+
+  saveLocal();
+  showSaveBanner();
+  ghFetch('PUT',{preventivi:state.preventivi,tariffe:state.tariffe}).catch(()=>{});
+  renderGestionale();
+  resetForm();
+}
+
+function resetForm() {
+  document.getElementById('p-artista').value='';
+  document.getElementById('p-brano').value='';
+  document.getElementById('p-nbrani').value='1';
+  document.getElementById('p-rev-mix').value='1';
+  document.getElementById('p-rev-master').value='1';
+  document.querySelectorAll('#sec-preventivo input[type=checkbox]').forEach(c=>c.checked=false);
+  document.querySelectorAll('#sec-preventivo input[type=text]').forEach(i=>i.value='');
+  state.currentEdit = null;
+  ricalcola();
+}
+
+// ═══════════ GESTIONALE ═══════════
+function renderGestionale() {
+  const search = document.getElementById('f-search')?.value.toLowerCase()||'';
+  const stato = document.getElementById('f-stato')?.value||'';
+  const artista = document.getElementById('f-artista')?.value||'';
+
+  // populate artista filter
+  const artistaSelect = document.getElementById('f-artista');
+  const currentArtista = artistaSelect.value;
+  const artisti = [...new Set(state.preventivi.map(p=>p.artista))].sort();
+  artistaSelect.innerHTML = '<option value="">Tutti gli artisti</option>' +
+    artisti.map(a=>`<option value="${a}" ${a===currentArtista?'selected':''}>${a}</option>`).join('');
+
+  const filtered = state.preventivi.filter(p => {
+    if (search && !p.artista.toLowerCase().includes(search) && !p.brano.toLowerCase().includes(search)) return false;
+    if (stato && p.stato !== stato) return false;
+    if (artista && p.artista !== artista) return false;
+    return true;
+  });
+
+  const list = document.getElementById('prev-list');
+  if (filtered.length===0) {
+    list.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text3);font-size:14px">Nessun preventivo trovato</div>';
+    return;
+  }
+
+  const statiLabel = {bozza:'Bozza',approvato:'Approvato',acconto:'Acconto ricevuto',saldato:'Saldato'};
+  const statiBadge = {bozza:'badge-pending',approvato:'badge-approved',acconto:'badge-half',saldato:'badge-paid'};
+
+  list.innerHTML = filtered.map(p => {
+    const revMixOk = p.revMixFatte <= p.revMixIncluse;
+    const revMasterOk = p.revMasterFatte <= p.revMasterIncluse;
+    const revMixLabel = `Mix: ${p.revMixFatte}/${p.revMixIncluse}`;
+    const revMasterLabel = `Master: ${p.revMasterFatte}/${p.revMasterIncluse}`;
+    const data = new Date(p.dataCreazione).toLocaleDateString('it-IT');
+    return `<div class="prev-item" onclick="openDetail('${p.id}')">
+      <div class="pi-top">
+        <div>
+          <div class="pi-name">${p.artista}</div>
+          <div class="pi-brano">${p.brano} · ${p.nbrani} brano${p.nbrani>1?'i':''}</div>
+        </div>
+        <div class="pi-total">€ ${p.totale}</div>
+      </div>
+      <div class="pi-meta">
+        <span class="badge ${statiBadge[p.stato]||'badge-pending'}">${statiLabel[p.stato]||p.stato}</span>
+        <span class="rev-badge ${revMixOk?'':'warn'}">${revMixLabel}</span>
+        <span class="rev-badge ${revMasterOk?'':'warn'}">${revMasterLabel}</span>
+        <span style="font-size:12px;color:var(--text3);margin-left:auto">${data}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function openDetail(id) {
+  const p = state.preventivi.find(x=>x.id===id);
+  if (!p) return;
+  const panel = document.getElementById('detail-panel');
+  const data = new Date(p.dataCreazione).toLocaleDateString('it-IT');
+  const meta = Math.round(p.totale/2);
+
+  const makeRevRow = (label, fatteProp, inclProp) => {
+    const fatte = p[fatteProp]; const incl = p[inclProp];
+    const extra = Math.max(0, fatte - incl);
+    return `<div class="dp-section">
+      <h3>${label}</h3>
+      <div class="rev-control">
+        <span>Revisioni effettuate:</span>
+        <div class="rev-counter">
+          <button onclick="changeRev('${id}','${fatteProp}',-1)">−</button>
+          <span>${fatte}</span>
+          <button onclick="changeRev('${id}','${fatteProp}',1)">+</button>
+        </div>
+        <span style="color:var(--text3)">(${incl} incluse)</span>
+        ${extra>0?`<span style="color:var(--danger);font-weight:500">+${extra} a pagamento × €30 = €${extra*30}</span>`:'<span style="color:var(--success)">✓ Nei free</span>'}
+      </div>
+    </div>`;
+  };
+
+  panel.innerHTML = `
+    <button class="close-btn" onclick="closeDetail()">×</button>
+    <h2>${p.artista}</h2>
+    <div class="dp-sub">${p.brano} · ${p.nbrani} brano${p.nbrani>1?'i':''} · ${data}</div>
+
+    <div class="dp-section">
+      <h3>Servizi inclusi</h3>
+      ${[...p.selIncl,...p.selExtra,...p.selSession].map(s=>`
+        <div class="dp-row">
+          <span>${s.name}${s.note?` <span style="color:var(--text3);font-size:12px">(${s.note})</span>`:''}</span>
+          <span>€${s.price}</span>
+        </div>`).join('')}
+      ${p.sconto>0?`<div class="dp-row" style="color:var(--success)"><span>Sconto volume ${p.sconto}%</span><span>−€${Math.round(p.selIncl.reduce((s,v)=>s+v.price,0)*p.nbrani*p.sconto/100)}</span></div>`:''}
+      <div class="dp-row" style="font-weight:500;border-top:0.5px solid var(--border2);margin-top:4px;padding-top:8px">
+        <span>Totale</span><span>€${p.totale}</span>
+      </div>
+      <div class="dp-row" style="color:var(--text2)"><span>Prima rata (50%)</span><span>€${meta}</span></div>
+      <div class="dp-row" style="color:var(--text2)"><span>Saldo (50%)</span><span>€${meta}</span></div>
+    </div>
+
+    <div class="dp-section">
+      <h3>Stato pagamento</h3>
+      <div class="payment-status">
+        ${['bozza','approvato','acconto','saldato'].map(s=>`
+          <div class="payment-btn ${p.stato===s?'active':''}" onclick="setStato('${id}','${s}')">
+            ${{bozza:'Bozza',approvato:'Approvato',acconto:'Acconto ricevuto',saldato:'Saldato'}[s]}
+          </div>`).join('')}
+      </div>
+    </div>
+
+    ${makeRevRow('Revisioni Mix','revMixFatte','revMixIncluse')}
+    ${makeRevRow('Revisioni Master','revMasterFatte','revMasterIncluse')}
+
+    <div class="actions" style="margin-top:20px">
+      <button class="btn btn-primary" onclick="editPreventivo('${id}')">Modifica</button>
+      <button class="btn" onclick="esportaDocxById('${id}')">Esporta .docx</button>
+      <button class="btn btn-danger" onclick="eliminaPreventivo('${id}')">Elimina</button>
+    </div>
+  `;
+  document.getElementById('detail-overlay').classList.add('open');
+}
+
+function closeDetail(e) {
+  if (!e || e.target===document.getElementById('detail-overlay')) {
+    document.getElementById('detail-overlay').classList.remove('open');
+    renderGestionale();
+  }
+}
+
+function setStato(id, stato) {
+  const p = state.preventivi.find(x=>x.id===id);
+  if (p) { p.stato=stato; saveLocal(); ghFetch('PUT',{preventivi:state.preventivi,tariffe:state.tariffe}).catch(()=>{}); openDetail(id); }
+}
+
+function changeRev(id, prop, delta) {
+  const p = state.preventivi.find(x=>x.id===id);
+  if (p) { p[prop]=Math.max(0,p[prop]+delta); saveLocal(); ghFetch('PUT',{preventivi:state.preventivi,tariffe:state.tariffe}).catch(()=>{}); openDetail(id); }
+}
+
+function editPreventivo(id) {
+  const p = state.preventivi.find(x=>x.id===id);
+  if (!p) return;
+  document.getElementById('p-artista').value = p.artista;
+  document.getElementById('p-brano').value = p.brano;
+  document.getElementById('p-nbrani').value = p.nbrani;
+  document.getElementById('p-rev-mix').value = p.revMixIncluse;
+  document.getElementById('p-rev-master').value = p.revMasterIncluse;
+
+  // reset all checkboxes
+  document.querySelectorAll('#sec-preventivo input[type=checkbox]').forEach(c=>c.checked=false);
+  document.querySelectorAll('#sec-preventivo input[type=text]').forEach(i=>i.value='');
+
+  [...p.selIncl,...p.selExtra,...p.selSession].forEach(s=>{
+    const chk = document.getElementById('chk_'+s.id);
+    const note = document.getElementById('note_'+s.id);
+    if (chk) chk.checked=true;
+    if (note) note.value=s.note||'';
+  });
+  state.currentEdit = id;
+  document.getElementById('detail-overlay').classList.remove('open');
+  showSection('preventivo', document.querySelector('nav button'));
+  ricalcola();
+}
+
+function eliminaPreventivo(id) {
+  if (!confirm('Eliminare questo preventivo?')) return;
+  state.preventivi = state.preventivi.filter(p=>p.id!==id);
+  saveLocal();
+  ghFetch('PUT',{preventivi:state.preventivi,tariffe:state.tariffe}).catch(()=>{});
+  document.getElementById('detail-overlay').classList.remove('open');
+  renderGestionale();
+}
+
+// ═══════════ TARIFFE ═══════════
+function renderTariffe() {
+  const grid = document.getElementById('tariffe-grid');
+  const groups = [
+    {title:'Pacchetto Studio', items: DEFAULT_TARIFFE.inclusive},
+    {title:'Extra', items: DEFAULT_TARIFFE.extra},
+    {title:'Session Artist', items: DEFAULT_TARIFFE.session},
+  ];
+  grid.innerHTML = groups.map(g=>`
+    <div class="tariffe-group">
+      <h3>${g.title}</h3>
+      ${g.items.map(s=>`
+        <div class="tariffe-row">
+          <span class="tr-name">${s.name}</span>
+          <input type="number" id="t_${s.id}" value="${state.tariffe[s.id]??s.price}" min="0" step="1">
+          <span class="tr-unit">€</span>
+        </div>`).join('')}
+    </div>`).join('');
+}
+
+function salvaTariffe() {
+  const all = [...DEFAULT_TARIFFE.inclusive,...DEFAULT_TARIFFE.extra,...DEFAULT_TARIFFE.session];
+  all.forEach(s=>{
+    const el = document.getElementById('t_'+s.id);
+    if (el) state.tariffe[s.id] = parseFloat(el.value)||0;
+  });
+  state.scontoStep = parseFloat(document.getElementById('sconto-step').value)||2;
+  state.scontoMax = parseFloat(document.getElementById('sconto-max').value)||35;
+  saveLocal();
+  ghFetch('PUT',{preventivi:state.preventivi,tariffe:state.tariffe}).catch(()=>{});
+  renderServiceTable();
+  ricalcola();
+  showSaveBanner();
+}
+
+function resetTariffe() {
+  if (!confirm('Ripristinare i prezzi di default?')) return;
+  state.tariffe = {};
+  saveLocal();
+  renderTariffe();
+  renderServiceTable();
+  ricalcola();
+}
+
+// ═══════════ IMPOSTAZIONI ═══════════
+function loadGhConfigUI() {
+  document.getElementById('gh-token').value = state.ghConfig.token||'';
+  document.getElementById('gh-user').value = state.ghConfig.user||'';
+  document.getElementById('gh-repo').value = state.ghConfig.repo||'';
+  document.getElementById('gh-branch').value = state.ghConfig.branch||'main';
+}
+function salvaGhConfig() {
+  state.ghConfig = {
+    token: document.getElementById('gh-token').value.trim(),
+    user: document.getElementById('gh-user').value.trim(),
+    repo: document.getElementById('gh-repo').value.trim(),
+    branch: document.getElementById('gh-branch').value.trim()||'main',
+  };
+  saveLocal();
+  showSaveBanner();
+}
+async function testGhConfig() {
+  salvaGhConfig();
+  const res = await ghFetch('GET');
+  alert(res ? '✓ Connessione GitHub OK' : '✗ Impossibile connettersi — verifica token, username e repo');
+}
+function loadStudioInfoUI() {
+  document.getElementById('studio-name').value = state.studioInfo.name||'DUB Studio';
+  document.getElementById('studio-city').value = state.studioInfo.city||'';
+  document.getElementById('studio-email').value = state.studioInfo.email||'';
+}
+function salvaStudioInfo() {
+  state.studioInfo = {
+    name: document.getElementById('studio-name').value.trim(),
+    city: document.getElementById('studio-city').value.trim(),
+    email: document.getElementById('studio-email').value.trim(),
+  };
+  saveLocal();
+  showSaveBanner();
+}
+
+// ═══════════ EXPORT DOCX ═══════════
+function buildPrevData() {
+  const artista = document.getElementById('p-artista').value.trim();
+  const brano = document.getElementById('p-brano').value.trim();
+  const nbrani = parseInt(document.getElementById('p-nbrani').value)||1;
+  const t = getTariffe();
+  const selIncl=[], selExtra=[], selSession=[];
+  t.inclusive.forEach(svc=>{if(document.getElementById('chk_'+svc.id)?.checked) selIncl.push({...svc,note:document.getElementById('note_'+svc.id)?.value||''});});
+  t.extra.forEach(svc=>{if(document.getElementById('chk_'+svc.id)?.checked) selExtra.push({...svc,note:document.getElementById('note_'+svc.id)?.value||''});});
+  t.session.forEach(svc=>{if(document.getElementById('chk_'+svc.id)?.checked) selSession.push({...svc,note:document.getElementById('note_'+svc.id)?.value||''});});
+  const sconto = getSconto(nbrani);
+  const totale = Math.round(selIncl.reduce((s,v)=>s+v.price,0)*nbrani*(1-sconto/100)+selExtra.reduce((s,v)=>s+v.price,0)+selSession.reduce((s,v)=>s+v.price,0));
+  const revMixIncluse = parseInt(document.getElementById('p-rev-mix').value)||1;
+  const revMasterIncluse = parseInt(document.getElementById('p-rev-master').value)||1;
+  return {artista,brano,nbrani,selIncl,selExtra,selSession,sconto,totale,revMixIncluse,revMasterIncluse};
+}
+
+function esportaDocx() {
+  const p = buildPrevData();
+  if (!p.artista||!p.brano) {alert('Compila artista e brano prima di esportare');return;}
+  generateDocx(p);
+}
+function esportaDocxById(id) {
+  const p = state.preventivi.find(x=>x.id===id);
+  if (p) generateDocx(p);
+}
+
+function generateDocx(p) {
+  const {Document,Packer,Paragraph,TextRun,Table,TableRow,TableCell,HeadingLevel,AlignmentType,BorderStyle,WidthType,ShadingType} = docx;
+  const studio = state.studioInfo;
+  const meta = Math.round(p.totale/2);
+  const data = new Date().toLocaleDateString('it-IT');
+
+  const headerCell = (text, bold=false, shade=false) => new TableCell({
+    shading: shade ? {type:ShadingType.CLEAR, color:'auto', fill:'1a1a18'} : undefined,
+    children:[new Paragraph({
+      alignment: AlignmentType.LEFT,
+      children:[new TextRun({text, bold, color: shade?'FFFFFF':'000000', font:'Helvetica Neue', size:20})]
+    })],
+    borders:{top:{style:BorderStyle.SINGLE,size:1,color:'e0dfd8'},bottom:{style:BorderStyle.SINGLE,size:1,color:'e0dfd8'},left:{style:BorderStyle.NONE},right:{style:BorderStyle.NONE}},
+    margins:{top:120,bottom:120,left:120,right:120},
+  });
+
+  const dataCell = (text, bold=false) => new TableCell({
+    children:[new Paragraph({
+      alignment: AlignmentType.LEFT,
+      children:[new TextRun({text:String(text), bold, font:'Helvetica Neue', size:20})]
+    })],
+    borders:{top:{style:BorderStyle.SINGLE,size:1,color:'e0dfd8'},bottom:{style:BorderStyle.SINGLE,size:1,color:'e0dfd8'},left:{style:BorderStyle.NONE},right:{style:BorderStyle.NONE}},
+    margins:{top:120,bottom:120,left:120,right:120},
+  });
+
+  const allServices = [];
+  if (p.selIncl.length) {
+    allServices.push(new TableRow({children:[
+      new TableCell({columnSpan:3,shading:{type:ShadingType.CLEAR,color:'auto',fill:'f0efe9'},
+        children:[new Paragraph({children:[new TextRun({text:'PACCHETTO STUDIO (per brano)',bold:true,font:'Helvetica Neue',size:18,color:'555550'})]})],
+        borders:{top:{style:BorderStyle.SINGLE,size:1,color:'e0dfd8'},bottom:{style:BorderStyle.SINGLE,size:1,color:'e0dfd8'},left:{style:BorderStyle.NONE},right:{style:BorderStyle.NONE}},
+        margins:{top:80,bottom:80,left:120,right:120}})
+    ]}));
+    p.selIncl.forEach(s=>allServices.push(new TableRow({children:[
+      dataCell(s.name+( s.note?` (${s.note})`:'') ),
+      dataCell(''),
+      dataCell(`€ ${s.price}`),
+    ]})));
+  }
+  if (p.selExtra.length) {
+    allServices.push(new TableRow({children:[
+      new TableCell({columnSpan:3,shading:{type:ShadingType.CLEAR,color:'auto',fill:'f0efe9'},
+        children:[new Paragraph({children:[new TextRun({text:'EXTRA',bold:true,font:'Helvetica Neue',size:18,color:'555550'})]})],
+        borders:{top:{style:BorderStyle.SINGLE,size:1,color:'e0dfd8'},bottom:{style:BorderStyle.SINGLE,size:1,color:'e0dfd8'},left:{style:BorderStyle.NONE},right:{style:BorderStyle.NONE}},
+        margins:{top:80,bottom:80,left:120,right:120}})
+    ]}));
+    p.selExtra.forEach(s=>allServices.push(new TableRow({children:[dataCell(s.name+(s.note?` (${s.note})`:'') ),dataCell(''),dataCell(`€ ${s.price}`)]})));
+  }
+  if (p.selSession.length) {
+    allServices.push(new TableRow({children:[
+      new TableCell({columnSpan:3,shading:{type:ShadingType.CLEAR,color:'auto',fill:'f0efe9'},
+        children:[new Paragraph({children:[new TextRun({text:'SESSION ARTIST / COMPOSIZIONE',bold:true,font:'Helvetica Neue',size:18,color:'555550'})]})],
+        borders:{top:{style:BorderStyle.SINGLE,size:1,color:'e0dfd8'},bottom:{style:BorderStyle.SINGLE,size:1,color:'e0dfd8'},left:{style:BorderStyle.NONE},right:{style:BorderStyle.NONE}},
+        margins:{top:80,bottom:80,left:120,right:120}})
+    ]}));
+    p.selSession.forEach(s=>allServices.push(new TableRow({children:[dataCell(s.name+(s.note?` (${s.note})`:'') ),dataCell(''),dataCell(`€ ${s.price}`)]})));
+  }
+
+  const revLabel = `Revisioni incluse: Mix ×${p.revMixIncluse}, Master ×${p.revMasterIncluse}. Ulteriori revisioni: €30 cad.`;
+
+  const doc = new Document({
+    styles:{default:{document:{run:{font:'Helvetica Neue',size:22}}}},
+    sections:[{
+      properties:{page:{margin:{top:1000,right:1000,bottom:1000,left:1000}}},
+      children:[
+        // HEADER
+        new Paragraph({alignment:AlignmentType.LEFT,children:[new TextRun({text:studio.name||'DUB Studio',bold:true,font:'Helvetica Neue',size:52,color:'1a1a18'})]}),
+        studio.city ? new Paragraph({children:[new TextRun({text:studio.city,font:'Helvetica Neue',size:20,color:'888880'})]}) : null,
+        studio.email ? new Paragraph({children:[new TextRun({text:studio.email,font:'Helvetica Neue',size:20,color:'888880'})]}) : null,
+        new Paragraph({children:[new TextRun({text:'',size:20})]}),
+
+        // DIVIDER
+        new Paragraph({border:{bottom:{style:BorderStyle.SINGLE,size:1,color:'e0dfd8'}},children:[new TextRun('')]}),
+        new Paragraph({children:[new TextRun({text:'',size:20})]}),
+
+        // TITLE
+        new Paragraph({children:[new TextRun({text:'PREVENTIVO',bold:true,font:'Helvetica Neue',size:40,color:'1a1a18'})]}),
+        new Paragraph({children:[new TextRun({text:`Data: ${data}`,font:'Helvetica Neue',size:20,color:'888880'})]}),
+        new Paragraph({children:[new TextRun({text:'',size:20})]}),
+
+        // INFO TABLE
+        new Table({
+          width:{size:100,type:WidthType.PERCENTAGE},
+          columnWidths:[3000,6000],
+          rows:[
+            new TableRow({children:[headerCell('Nome artista',true,true), headerCell(p.artista,false,true)]}),
+            new TableRow({children:[headerCell('Nome brano / album',true), dataCell(p.brano)]}),
+            new TableRow({children:[headerCell('Numero brani',true), dataCell(String(p.nbrani))]}),
+          ]
+        }),
+        new Paragraph({children:[new TextRun({text:'',size:20})]}),
+
+        // SERVICES TABLE
+        new Table({
+          width:{size:100,type:WidthType.PERCENTAGE},
+          columnWidths:[5000,2000,2000],
+          rows:[
+            new TableRow({children:[
+              new TableCell({shading:{type:ShadingType.CLEAR,color:'auto',fill:'1a1a18'},children:[new Paragraph({children:[new TextRun({text:'Servizio',bold:true,color:'FFFFFF',font:'Helvetica Neue',size:20})]})],borders:{top:{style:BorderStyle.NONE},bottom:{style:BorderStyle.NONE},left:{style:BorderStyle.NONE},right:{style:BorderStyle.NONE}},margins:{top:100,bottom:100,left:120,right:120}}),
+              new TableCell({shading:{type:ShadingType.CLEAR,color:'auto',fill:'1a1a18'},children:[new Paragraph({children:[new TextRun({text:'Note',bold:true,color:'FFFFFF',font:'Helvetica Neue',size:20})]})],borders:{top:{style:BorderStyle.NONE},bottom:{style:BorderStyle.NONE},left:{style:BorderStyle.NONE},right:{style:BorderStyle.NONE}},margins:{top:100,bottom:100,left:120,right:120}}),
+              new TableCell({shading:{type:ShadingType.CLEAR,color:'auto',fill:'1a1a18'},children:[new Paragraph({alignment:AlignmentType.RIGHT,children:[new TextRun({text:'Prezzo',bold:true,color:'FFFFFF',font:'Helvetica Neue',size:20})]})],borders:{top:{style:BorderStyle.NONE},bottom:{style:BorderStyle.NONE},left:{style:BorderStyle.NONE},right:{style:BorderStyle.NONE}},margins:{top:100,bottom:100,left:120,right:120}}),
+            ]}),
+            ...allServices,
+            // Sconto
+            ...(p.sconto>0 ? [new TableRow({children:[
+              dataCell(`Sconto volume ${p.sconto}% (${p.nbrani} brani)`),
+              dataCell(''),
+              dataCell(`− €${Math.round(p.selIncl.reduce((s,v)=>s+v.price,0)*p.nbrani*p.sconto/100)}`),
+            ]})] : []),
+            // TOTAL
+            new TableRow({children:[
+              new TableCell({columnSpan:2,shading:{type:ShadingType.CLEAR,color:'auto',fill:'1a1a18'},children:[new Paragraph({children:[new TextRun({text:'TOTALE',bold:true,color:'FFFFFF',font:'Helvetica Neue',size:24})]})],borders:{top:{style:BorderStyle.NONE},bottom:{style:BorderStyle.NONE},left:{style:BorderStyle.NONE},right:{style:BorderStyle.NONE}},margins:{top:120,bottom:120,left:120,right:120}}),
+              new TableCell({shading:{type:ShadingType.CLEAR,color:'auto',fill:'1a1a18'},children:[new Paragraph({alignment:AlignmentType.RIGHT,children:[new TextRun({text:`€ ${p.totale}`,bold:true,color:'FFFFFF',font:'Helvetica Neue',size:24})]})],borders:{top:{style:BorderStyle.NONE},bottom:{style:BorderStyle.NONE},left:{style:BorderStyle.NONE},right:{style:BorderStyle.NONE}},margins:{top:120,bottom:120,left:120,right:120}}),
+            ]}),
+          ]
+        }),
+
+        new Paragraph({children:[new TextRun({text:'',size:20})]}),
+
+        // PAYMENT INFO
+        new Paragraph({children:[new TextRun({text:`Prima rata (50%): € ${meta}  ·  Saldo alla consegna: € ${meta}`,font:'Helvetica Neue',size:20,color:'555550'})]}),
+        new Paragraph({children:[new TextRun({text:revLabel,font:'Helvetica Neue',size:18,color:'888880'})]}),
+        new Paragraph({children:[new TextRun({text:'',size:20})]}),
+        new Paragraph({children:[new TextRun({text:'',size:20})]}),
+
+        // CLAUSOLA
+        new Paragraph({border:{top:{style:BorderStyle.SINGLE,size:1,color:'e0dfd8'}},children:[new TextRun({text:'',size:10})]}),
+        new Paragraph({children:[new TextRun({text:'Il pagamento andrà effettuato in due parti: la prima metà all\'inizio dei lavori e la seconda metà alla consegna del prodotto completo.',font:'Helvetica Neue',size:18,color:'555550'})]}),
+        new Paragraph({children:[new TextRun({text:'',size:20})]}),
+        new Paragraph({children:[new TextRun({text:`${studio.name||'DUB Studio'}`,font:'Helvetica Neue',size:20,color:'888880'}), new TextRun({text:`\t\t\t\t\t${data}`,font:'Helvetica Neue',size:20,color:'888880'})]}),
+      ].filter(Boolean)
+    }]
+  });
+
+  Packer.toBlob(doc).then(blob=>{
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `Preventivo_${p.artista.replace(/\s+/g,'_')}_${p.brano.replace(/\s+/g,'_')}.docx`;
+    a.click();
+  });
+}
+
+// ═══════════ UTILS ═══════════
+function showSaveBanner() {
+  const b = document.getElementById('save-banner');
+  b.style.display='block';
+  setTimeout(()=>b.style.display='none', 2000);
+}
+
+// ═══════════ BOOT ═══════════
+loadLocal();
+document.getElementById('pin-input').addEventListener('keydown', e=>{ if(e.key==='Enter') checkPin(); });
+</script>
+</body>
+</html>
