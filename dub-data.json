@@ -1,4 +1,79 @@
 {
-  "preventivi": [],
+  "preventivi": [
+    {
+      "id": "1775575483119",
+      "artista": "Mike Touati",
+      "brano": "Bar Michele 2",
+      "nbrani": 1,
+      "selIncl": [
+        {
+          "id": "rec_voci",
+          "name": "Rec Voci",
+          "price": 40,
+          "note": ""
+        },
+        {
+          "id": "rec_chitarre",
+          "name": "Rec Chitarre Elettriche",
+          "price": 15,
+          "note": ""
+        },
+        {
+          "id": "rec_basso",
+          "name": "Rec Basso / MIDI",
+          "price": 10,
+          "note": ""
+        },
+        {
+          "id": "batterie_midi",
+          "name": "Batterie MIDI",
+          "price": 10,
+          "note": ""
+        },
+        {
+          "id": "editing_voci",
+          "name": "Editing Voci",
+          "price": 10,
+          "note": ""
+        },
+        {
+          "id": "editing_chit",
+          "name": "Editing Chitarre",
+          "price": 5,
+          "note": ""
+        },
+        {
+          "id": "mix",
+          "name": "Mix",
+          "price": 70,
+          "note": ""
+        }
+      ],
+      "selExtra": [],
+      "selSession": [
+        {
+          "id": "s_comp_batt",
+          "name": "Composizione Batterie",
+          "price": 45,
+          "note": ""
+        },
+        {
+          "id": "s_comp_chit",
+          "name": "Composizione Chitarre",
+          "price": 50,
+          "note": ""
+        }
+      ],
+      "sconto": 0,
+      "totale": 255,
+      "revMixIncluse": 1,
+      "revMasterIncluse": 1,
+      "revMixFatte": 0,
+      "revMasterFatte": 0,
+      "stato": "bozza",
+      "dataCreazione": "2026-04-07T15:24:43.119Z",
+      "dataModifica": "2026-04-07T15:24:43.119Z"
+    }
+  ],
   "tariffe": {}
 }
