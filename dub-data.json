@@ -1,6 +1,37 @@
 {
   "preventivi": [
     {
+      "id": "1775576021520",
+      "artista": "Drake",
+      "brano": "Change The World, Blessing, Carmine, Hashire Sakamoto, Hunting Soul, Hollow Hunger, Good Morning World, Crossing Field, Piece Sign, Iris Out, Mayday",
+      "nbrani": 11,
+      "selIncl": [
+        {
+          "id": "arrangiamento",
+          "name": "Arrangiamento",
+          "price": 30,
+          "note": ""
+        },
+        {
+          "id": "mix",
+          "name": "Mix",
+          "price": 70,
+          "note": ""
+        }
+      ],
+      "selExtra": [],
+      "selSession": [],
+      "sconto": 20,
+      "totale": 880,
+      "revMixIncluse": 1,
+      "revMasterIncluse": 1,
+      "revMixFatte": 0,
+      "revMasterFatte": 0,
+      "stato": "bozza",
+      "dataCreazione": "2026-04-07T15:33:41.520Z",
+      "dataModifica": "2026-04-07T15:33:41.520Z"
+    },
+    {
       "id": "1775575690677",
       "artista": "Stefano Bersola",
       "brano": "Mr Baseball, Farò Di Te Un Uomo, Doraemon, Tazmania, Splende Sempre Il Sole, Posso Farcela, Il Cerchio Della Vita, Via Di Qua, +Siamo + Disneiamo",
