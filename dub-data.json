@@ -1,4 +1,30 @@
 {
-  "preventivi": [],
+  "preventivi": [
+    {
+      "id": "1775567971190",
+      "artista": "Nicola Debernardi",
+      "brano": "Nicola Debernardi",
+      "nbrani": 1,
+      "selIncl": [
+        {
+          "id": "rec_voci",
+          "name": "Rec Voci",
+          "price": 40,
+          "note": ""
+        }
+      ],
+      "selExtra": [],
+      "selSession": [],
+      "sconto": 0,
+      "totale": 40,
+      "revMixIncluse": 1,
+      "revMasterIncluse": 1,
+      "revMixFatte": 0,
+      "revMasterFatte": 0,
+      "stato": "bozza",
+      "dataCreazione": "2026-04-07T13:19:31.190Z",
+      "dataModifica": "2026-04-07T13:19:31.190Z"
+    }
+  ],
   "tariffe": {}
 }
