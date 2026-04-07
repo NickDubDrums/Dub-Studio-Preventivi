@@ -8,10 +8,10 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#f8f7f4;--bg2:#fff;--bg3:#f0efe9;
-  --text:#1a1a18;--text2:#555550;--text3:#888880;
-  --border:#e0dfd8;--border2:#ccccc4;
-  --accent:#1a1a18;--accent-bg:#1a1a18;--accent-fg:#fff;
+  --bg:#121212;--bg2:#292929;--bg3:#4b4b4b;
+  --text:#D9D9D9;--text2:#b6b6b6;--text3:#999999;
+  --border:#383837;--border2:#3d3d3c;
+  --accent:#2563EB;--accent-bg:#000000;--accent-fg:#fff;
   --danger:#c0392b;--success:#2e7d32;--warn:#b7770d;
   --radius:10px;--radius-sm:6px;
 }
@@ -22,7 +22,7 @@ body{font-family:'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:va
 .pin-box{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:48px 40px;text-align:center;max-width:340px;width:90%}
 .pin-box h1{font-size:22px;font-weight:500;margin-bottom:6px}
 .pin-box p{color:var(--text2);font-size:14px;margin-bottom:28px}
-.pin-box input{width:100%;padding:12px 16px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);font-size:20px;text-align:center;letter-spacing:6px;outline:none;background:var(--bg)}
+.pin-box input{color:var(--text2);width:100%;padding:12px 16px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);font-size:20px;text-align:center;letter-spacing:6px;outline:none;background:var(--bg)}
 .pin-box input:focus{border-color:var(--accent)}
 .pin-box .pin-err{color:var(--danger);font-size:13px;margin-top:10px;min-height:20px}
 .pin-box button{margin-top:16px;width:100%;padding:12px;background:var(--accent-bg);color:var(--accent-fg);border:none;border-radius:var(--radius-sm);font-size:15px;cursor:pointer}
@@ -54,7 +54,7 @@ section.active{display:block}
 .row{display:flex;gap:16px;flex-wrap:wrap}
 .field{display:flex;flex-direction:column;gap:6px;flex:1;min-width:180px}
 .field label{font-size:13px;color:var(--text2);font-weight:500}
-.field input,.field select,.field textarea{padding:9px 12px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);font-size:14px;background:var(--bg);color:var(--text);outline:none}
+.field input,.field select,.field textarea{color:var(--text1);padding:9px 12px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);font-size:14px;background:var(--bg);color:var(--text);outline:none}
 .field input:focus,.field select:focus{border-color:var(--accent)}
 
 /* SERVICES TABLE */
@@ -65,8 +65,8 @@ section.active{display:block}
 .service-row input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);cursor:pointer}
 .service-row .svc-name{font-size:14px;color:var(--text)}
 .service-row .svc-price{font-size:13px;color:var(--text3);text-align:right}
-.service-row input[type=text]{padding:6px 10px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);font-size:13px;background:var(--bg);width:100%}
-.service-row input[type=number]{padding:6px 10px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);font-size:13px;background:var(--bg);width:70px}
+.service-row input[type=text]{color:var(--text1);padding:6px 10px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);font-size:13px;background:var(--bg);width:100%}
+.service-row input[type=number]{color:var(--text1);padding:6px 10px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);font-size:13px;background:var(--bg);width:70px}
 
 /* TOTALE */
 .totale-bar{background:var(--accent-bg);color:var(--accent-fg);border-radius:var(--radius);padding:20px 28px;display:flex;justify-content:space-between;align-items:center;margin-top:24px}
@@ -86,7 +86,7 @@ section.active{display:block}
 
 /* GESTIONALE */
 .filter-bar{display:flex;gap:12px;align-items:center;margin-bottom:20px;flex-wrap:wrap}
-.filter-bar input,.filter-bar select{padding:8px 12px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);font-size:14px;background:var(--bg2)}
+.filter-bar input,.filter-bar select{color:var(--text1);padding:8px 12px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);font-size:14px;background:var(--bg2)}
 .filter-bar input{flex:1;min-width:160px}
 
 .prev-list{display:flex;flex-direction:column;gap:10px}
@@ -132,7 +132,7 @@ section.active{display:block}
 .tariffe-row{display:flex;align-items:center;gap:10px;padding:5px 0;border-bottom:0.5px solid var(--bg3)}
 .tariffe-row:last-child{border-bottom:none}
 .tariffe-row .tr-name{flex:1;font-size:14px}
-.tariffe-row input{width:80px;padding:5px 8px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);font-size:14px;text-align:right;background:var(--bg)}
+.tariffe-row input{color:var(--text1);width:80px;padding:5px 8px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);font-size:14px;text-align:right;background:var(--bg)}
 .tariffe-row .tr-unit{font-size:13px;color:var(--text3)}
 
 .save-banner{display:none;position:fixed;bottom:24px;right:24px;background:var(--success);color:#fff;padding:12px 20px;border-radius:var(--radius);font-size:14px;z-index:300}
@@ -156,7 +156,7 @@ section.active{display:block}
     <input type="password" id="pin-input" maxlength="8" placeholder="••••" onkeydown="if(event.key==='Enter')checkPin()">
     <div class="pin-err" id="pin-err"></div>
     <button onclick="checkPin()">Accedi</button>
-    <p style="margin-top:16px;font-size:12px;color:var(--text3)">Prima volta? Il PIN default è <strong>1234</strong> — cambialo in Impostazioni</p>
+    <!--<p style="margin-top:16px;font-size:12px;color:var(--text3)">Prima volta? Il PIN default è <strong>1234</strong> — cambialo in Impostazioni</p>-->
   </div>
 </div>
 
@@ -184,8 +184,8 @@ section.active{display:block}
 
   <div class="card">
     <div class="row">
-      <div class="field"><label>Nome Artista</label><input type="text" id="p-artista" placeholder="es. Mike"></div>
-      <div class="field"><label>Nome Brano / Album</label><input type="text" id="p-brano" placeholder="es. Non Moriremo Mai"></div>
+      <div class="field"><label>Nome Artista</label><input type="text" id="p-artista" placeholder="Inserisci nome artista"></div>
+      <div class="field"><label>Nome Brano / Album</label><input type="text" id="p-brano" placeholder="Inserisci titolo canzone o album"></div>
       <div class="field" style="max-width:130px"><label>N° Brani</label><input type="number" id="p-nbrani" value="1" min="1" max="50" oninput="ricalcola()"></div>
     </div>
 
