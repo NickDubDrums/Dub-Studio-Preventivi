@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DUB Studio Manager</title>
-
+<script src="https://unpkg.com/docx@8.5.0/build/index.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -945,19 +945,19 @@ function esportaDocxById(id) {
   if (p) generateDocx(p);
 }
 
-async function generateDocx(p) {
-  // Carica docx via ESM dinamico — funziona su VSCode Live Server e GitHub Pages
-  let docxMod;
-  try {
-    docxMod = await import('https://esm.sh/docx@8.5.0');
-  } catch(e) {
-    alert('Errore nel caricamento della libreria docx.\nVerifica la connessione internet e riprova.');
+function generateDocx(p) {
+
+  const docxLib = window.docx; 
+  
+  if (!docxLib) {
+    console.error("Libreria docx non trovata.");
+    alert("Errore: La libreria 'docx' non è stata caricata. \n\nSoluzione: \n1. Verifica di essere connesso a internet. \n2. Prova a ricaricare la pagina con CTRL+F5. \n3. Se il problema persiste, il link allo script nella riga 7 potrebbe essere bloccato dal browser.");
     return;
   }
-  const {
-    Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell,
-    AlignmentType, BorderStyle, WidthType, ShadingType
-  } = docxMod;
+  const { 
+    Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, 
+    AlignmentType, BorderStyle, WidthType, ShadingType 
+  } = docxLib;
     const studio = state.studioInfo;  const meta = Math.round(p.totale/2);
   const data = new Date().toLocaleDateString('it-IT');
 
@@ -991,7 +991,7 @@ async function generateDocx(p) {
     p.selIncl.forEach(s=>allServices.push(new TableRow({children:[
       dataCell(s.name+( s.note?` (${s.note})`:'') ),
       dataCell(''),
-      dataCell(`€ ${s.price}`),
+      dataCell(''),
     ]})));
   }
   if (p.selExtra.length) {
@@ -1001,7 +1001,7 @@ async function generateDocx(p) {
         borders:{top:{style:BorderStyle.SINGLE,size:1,color:'e0dfd8'},bottom:{style:BorderStyle.SINGLE,size:1,color:'e0dfd8'},left:{style:BorderStyle.NONE},right:{style:BorderStyle.NONE}},
         margins:{top:80,bottom:80,left:120,right:120}})
     ]}));
-    p.selExtra.forEach(s=>allServices.push(new TableRow({children:[dataCell(s.name+(s.note?` (${s.note})`:'') ),dataCell(''),dataCell(`€ ${s.price}`)]})));
+    p.selExtra.forEach(s=>allServices.push(new TableRow({children:[dataCell(s.name+(s.note?` (${s.note})`:'') ),dataCell(''),dataCell('')]})));
   }
   if (p.selSession.length) {
     allServices.push(new TableRow({children:[
@@ -1010,7 +1010,7 @@ async function generateDocx(p) {
         borders:{top:{style:BorderStyle.SINGLE,size:1,color:'e0dfd8'},bottom:{style:BorderStyle.SINGLE,size:1,color:'e0dfd8'},left:{style:BorderStyle.NONE},right:{style:BorderStyle.NONE}},
         margins:{top:80,bottom:80,left:120,right:120}})
     ]}));
-    p.selSession.forEach(s=>allServices.push(new TableRow({children:[dataCell(s.name+(s.note?` (${s.note})`:'') ),dataCell(''),dataCell(`€ ${s.price}`)]})));
+    p.selSession.forEach(s=>allServices.push(new TableRow({children:[dataCell(s.name+(s.note?` (${s.note})`:'') ),dataCell(''),dataCell('')]})));
   }
 
   const revLabel = `Revisioni incluse: Mix ×${p.revMixIncluse}, Master ×${p.revMasterIncluse}. Ulteriori revisioni: €30 cad.`;
@@ -1058,13 +1058,19 @@ async function generateDocx(p) {
               new TableCell({shading:{type:ShadingType.CLEAR,color:'auto',fill:'1a1a18'},children:[new Paragraph({alignment:AlignmentType.RIGHT,children:[new TextRun({text:'Prezzo',bold:true,color:'FFFFFF',font:'Helvetica Neue',size:20})]})],borders:{top:{style:BorderStyle.NONE},bottom:{style:BorderStyle.NONE},left:{style:BorderStyle.NONE},right:{style:BorderStyle.NONE}},margins:{top:100,bottom:100,left:120,right:120}}),
             ]}),
             ...allServices,
-            // Sconto
+            // Totale lordo
+            new TableRow({children:[
+              dataCell('Totale', false),
+              dataCell(''),
+              dataCell(`€ ${Math.round(p.selIncl.reduce((s,v)=>s+v.price,0)*p.nbrani + p.selExtra.reduce((s,v)=>s+v.price,0) + p.selSession.reduce((s,v)=>s+v.price,0))}`),
+            ]}),
+            // Sconto (solo se applicato)
             ...(p.sconto>0 ? [new TableRow({children:[
-              dataCell(`Sconto volume ${p.sconto}% (${p.nbrani} brani)`),
+              dataCell(`Sconto volume ${p.sconto}%`),
               dataCell(''),
               dataCell(`− €${Math.round(p.selIncl.reduce((s,v)=>s+v.price,0)*p.nbrani*p.sconto/100)}`),
             ]})] : []),
-            // TOTAL
+            // TOTALE FINALE
             new TableRow({children:[
               new TableCell({columnSpan:2,shading:{type:ShadingType.CLEAR,color:'auto',fill:'1a1a18'},children:[new Paragraph({children:[new TextRun({text:'TOTALE',bold:true,color:'FFFFFF',font:'Helvetica Neue',size:24})]})],borders:{top:{style:BorderStyle.NONE},bottom:{style:BorderStyle.NONE},left:{style:BorderStyle.NONE},right:{style:BorderStyle.NONE}},margins:{top:120,bottom:120,left:120,right:120}}),
               new TableCell({shading:{type:ShadingType.CLEAR,color:'auto',fill:'1a1a18'},children:[new Paragraph({alignment:AlignmentType.RIGHT,children:[new TextRun({text:`€ ${p.totale}`,bold:true,color:'FFFFFF',font:'Helvetica Neue',size:24})]})],borders:{top:{style:BorderStyle.NONE},bottom:{style:BorderStyle.NONE},left:{style:BorderStyle.NONE},right:{style:BorderStyle.NONE}},margins:{top:120,bottom:120,left:120,right:120}}),
@@ -1089,11 +1095,12 @@ async function generateDocx(p) {
     }]
   });
 
-  const blob = await Packer.toBlob(doc);
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = `Preventivo_${p.artista.replace(/\s+/g,'_')}_${p.brano.replace(/\s+/g,'_')}.docx`;
-  a.click();
+  Packer.toBlob(doc).then(blob=>{
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `Preventivo_${p.artista.replace(/\s+/g,'_')}_${p.brano.replace(/\s+/g,'_')}.docx`;
+    a.click();
+  });
 }
 
 // ═══════════ UTILS ═══════════
