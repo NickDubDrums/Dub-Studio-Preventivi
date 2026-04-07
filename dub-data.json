@@ -106,5 +106,40 @@
       "dataModifica": "2026-04-07T15:24:43.119Z"
     }
   ],
-  "tariffe": {}
+  "tariffe": {
+    "rec_voci": 40,
+    "rec_chitarre": 15,
+    "rec_basso": 10,
+    "batterie_midi": 10,
+    "editing_voci": 10,
+    "editing_chit": 5,
+    "editing_basso": 5,
+    "arrangiamento": 40,
+    "rec_batt_reali": 70,
+    "edit_batt": 30,
+    "post_live": 20,
+    "sound_design": 5,
+    "live_prog": 30,
+    "comp_elett": 50,
+    "mix": 70,
+    "rev_mix": 25,
+    "master_1": 30,
+    "master_2": 25,
+    "master_3": 28,
+    "master_4": 30,
+    "rev_master": 20,
+    "x_rev_mix": 30,
+    "x_rev_master": 30,
+    "s_comp_batt": 45,
+    "s_comp_chit": 50,
+    "s_comp_basso": 20,
+    "s_comp_amb": 20,
+    "s_comp_orch": 40,
+    "s_comp_piano": 20,
+    "s_arr": 40,
+    "s_rec_batt": 70,
+    "s_edit_batt": 15,
+    "s_mix_batt": 15,
+    "s_video": 100
+  }
 }
