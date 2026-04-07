@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DUB Studio Manager</title>
-<script src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.js"></script>
+
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -945,15 +945,20 @@ function esportaDocxById(id) {
   if (p) generateDocx(p);
 }
 
-function generateDocx(p) {
-
-  const docxLib = window.docx; 
-  if (!docxLib) {
-    alert("Errore: Libreria docx non caricata. Verifica la connessione internet.");
+async function generateDocx(p) {
+  // Carica docx via ESM dinamico — funziona su VSCode Live Server e GitHub Pages
+  let docxMod;
+  try {
+    docxMod = await import('https://esm.sh/docx@8.5.0');
+  } catch(e) {
+    alert('Errore nel caricamento della libreria docx.\nVerifica la connessione internet e riprova.');
     return;
   }
-  const { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, AlignmentType, BorderStyle, WidthType, ShadingType } = docxLib;
-  const studio = state.studioInfo;  const meta = Math.round(p.totale/2);
+  const {
+    Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell,
+    AlignmentType, BorderStyle, WidthType, ShadingType
+  } = docxMod;
+    const studio = state.studioInfo;  const meta = Math.round(p.totale/2);
   const data = new Date().toLocaleDateString('it-IT');
 
   const headerCell = (text, bold=false, shade=false) => new TableCell({
@@ -1084,12 +1089,11 @@ function generateDocx(p) {
     }]
   });
 
-  Packer.toBlob(doc).then(blob=>{
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = `Preventivo_${p.artista.replace(/\s+/g,'_')}_${p.brano.replace(/\s+/g,'_')}.docx`;
-    a.click();
-  });
+  const blob = await Packer.toBlob(doc);
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `Preventivo_${p.artista.replace(/\s+/g,'_')}_${p.brano.replace(/\s+/g,'_')}.docx`;
+  a.click();
 }
 
 // ═══════════ UTILS ═══════════
