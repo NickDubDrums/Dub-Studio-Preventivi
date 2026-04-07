@@ -433,11 +433,14 @@ const headers = {'Authorization':`Bearer ${token}`,'Content-Type':'application/j
     const r = await fetch(url,{headers});
     if (!r.ok) return null;
     const j = await r.json();
-    const data = JSON.parse(atob(j.content));
+    const data = JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(j.content.replace(/\s/g,'')), c => c.charCodeAt(0))));
     return {data, sha: j.sha};
   } else {
     const existing = await ghFetch('GET');
-    const payload = {message:'DUB Studio update',content:btoa(unescape(encodeURIComponent(JSON.stringify(body,null,2)))),branch};
+    const jsonStr = JSON.stringify(body, null, 2);
+    const bytes = new TextEncoder().encode(jsonStr);
+    const b64 = btoa(String.fromCharCode(...bytes));
+    const payload = {message:'DUB Studio update', content: b64, branch};
     if (existing?.sha) payload.sha = existing.sha;
     const r = await fetch(url,{method:'PUT',headers,body:JSON.stringify(payload)});
     return r.ok;
@@ -945,19 +948,18 @@ function esportaDocxById(id) {
   if (p) generateDocx(p);
 }
 
-function generateDocx(p) {
-
-  const docxLib = window.docx; 
-  
-  if (!docxLib) {
-    console.error("Libreria docx non trovata.");
-    alert("Errore: La libreria 'docx' non è stata caricata. \n\nSoluzione: \n1. Verifica di essere connesso a internet. \n2. Prova a ricaricare la pagina con CTRL+F5. \n3. Se il problema persiste, il link allo script nella riga 7 potrebbe essere bloccato dal browser.");
+async function generateDocx(p) {
+  let docxMod;
+  try {
+    docxMod = await import('https://esm.sh/docx@8.5.0');
+  } catch(e) {
+    alert('Errore nel caricamento della libreria docx.\nVerifica la connessione internet e riprova.');
     return;
   }
-  const { 
-    Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, 
-    AlignmentType, BorderStyle, WidthType, ShadingType 
-  } = docxLib;
+  const {
+    Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell,
+    AlignmentType, BorderStyle, WidthType, ShadingType
+  } = docxMod;
     const studio = state.studioInfo;  const meta = Math.round(p.totale/2);
   const data = new Date().toLocaleDateString('it-IT');
 
@@ -1095,12 +1097,11 @@ function generateDocx(p) {
     }]
   });
 
-  Packer.toBlob(doc).then(blob=>{
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = `Preventivo_${p.artista.replace(/\s+/g,'_')}_${p.brano.replace(/\s+/g,'_')}.docx`;
-    a.click();
-  });
+  const blob = await Packer.toBlob(doc);
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `Preventivo_${p.artista.replace(/\s+/g,'_')}_${p.brano.replace(/\s+/g,'_')}.docx`;
+  a.click();
 }
 
 // ═══════════ UTILS ═══════════
