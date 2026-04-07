@@ -428,7 +428,7 @@ async function ghFetch(method, body) {
   const {token,user,repo,branch} = state.ghConfig;
   if (!token||!user||!repo) return null;
   const url = `https://api.github.com/repos/${user}/${repo}/contents/dub-data.json`;
-  const headers = {'Authorization':`token ${token}`,'Content-Type':'application/json'};
+const headers = {'Authorization':`Bearer ${token}`,'Content-Type':'application/json'};
   if (method==='GET') {
     const r = await fetch(url,{headers});
     if (!r.ok) return null;
