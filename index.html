@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DUB Studio Manager</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/docx/8.5.0/docx.umd.min.js"></script>
+<script src="https://unpkg.com/docx@8.5.0/build/index.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -946,9 +946,14 @@ function esportaDocxById(id) {
 }
 
 function generateDocx(p) {
-  const {Document,Packer,Paragraph,TextRun,Table,TableRow,TableCell,HeadingLevel,AlignmentType,BorderStyle,WidthType,ShadingType} = docx;
-  const studio = state.studioInfo;
-  const meta = Math.round(p.totale/2);
+
+  const docxLib = window.docx; 
+  if (!docxLib) {
+    alert("Errore: Libreria docx non caricata. Verifica la connessione internet.");
+    return;
+  }
+  const { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, AlignmentType, BorderStyle, WidthType, ShadingType } = docxLib;
+  const studio = state.studioInfo;  const meta = Math.round(p.totale/2);
   const data = new Date().toLocaleDateString('it-IT');
 
   const headerCell = (text, bold=false, shade=false) => new TableCell({
