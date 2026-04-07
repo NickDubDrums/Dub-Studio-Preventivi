@@ -1,6 +1,37 @@
 {
   "preventivi": [
     {
+      "id": "1775575690677",
+      "artista": "Stefano Bersola",
+      "brano": "Mr Baseball, Farò Di Te Un Uomo, Doraemon, Tazmania, Splende Sempre Il Sole, Posso Farcela, Il Cerchio Della Vita, Via Di Qua, +Siamo + Disneiamo",
+      "nbrani": 9,
+      "selIncl": [
+        {
+          "id": "arrangiamento",
+          "name": "Arrangiamento",
+          "price": 50,
+          "note": ""
+        },
+        {
+          "id": "mix",
+          "name": "Mix",
+          "price": 70,
+          "note": ""
+        }
+      ],
+      "selExtra": [],
+      "selSession": [],
+      "sconto": 16,
+      "totale": 907,
+      "revMixIncluse": 1,
+      "revMasterIncluse": 1,
+      "revMixFatte": 0,
+      "revMasterFatte": 0,
+      "stato": "bozza",
+      "dataCreazione": "2026-04-07T15:28:10.677Z",
+      "dataModifica": "2026-04-07T15:28:10.677Z"
+    },
+    {
       "id": "1775575483119",
       "artista": "Mike Touati",
       "brano": "Bar Michele 2",
