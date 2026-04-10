@@ -1,31 +1,6 @@
 {
   "preventivi": [
     {
-      "id": "1775673062560",
-      "artista": "Maracuja",
-      "brano": "Progetto Live Cubase",
-      "nbrani": 50,
-      "selIncl": [
-        {
-          "id": "post_live",
-          "name": "Post-Produzione per Live",
-          "price": 20,
-          "note": ""
-        }
-      ],
-      "selExtra": [],
-      "selSession": [],
-      "sconto": 35,
-      "totale": 650,
-      "revMixIncluse": 1,
-      "revMasterIncluse": 1,
-      "revMixFatte": 0,
-      "revMasterFatte": 0,
-      "stato": "bozza",
-      "dataCreazione": "2026-04-08T18:31:02.560Z",
-      "dataModifica": "2026-04-08T18:31:02.560Z"
-    },
-    {
       "id": "1775576021520",
       "artista": "Drake",
       "brano": "Change The World, Blessing, Carmine, Hashire Sakamoto, Hunting Soul, Hollow Hunger, Good Morning World, Crossing Field, Piece Sign, Iris Out, Mayday",
