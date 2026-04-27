@@ -130,8 +130,8 @@
       "totale": 255,
       "revMixIncluse": 1,
       "revMasterIncluse": 1,
-      "revMixFatte": 1,
-      "revMasterFatte": 1,
+      "revMixFatte": 0,
+      "revMasterFatte": 0,
       "stato": "acconto",
       "dataCreazione": "2026-04-07T15:24:43.119Z",
       "dataModifica": "2026-04-07T15:24:43.119Z"
