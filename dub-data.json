@@ -1,6 +1,37 @@
 {
   "preventivi": [
     {
+      "id": "1782721527926",
+      "artista": "Hiridis",
+      "brano": "Rec/editing Drums 2026",
+      "nbrani": 7,
+      "selIncl": [
+        {
+          "id": "rec_batt_reali",
+          "name": "Rec Batterie Reali",
+          "price": 150,
+          "note": ""
+        },
+        {
+          "id": "edit_batt",
+          "name": "Editing Batterie Reali",
+          "price": 90,
+          "note": ""
+        }
+      ],
+      "selExtra": [],
+      "selSession": [],
+      "sconto": 12,
+      "totale": 1478,
+      "revMixIncluse": 1,
+      "revMasterIncluse": 1,
+      "revMixFatte": 0,
+      "revMasterFatte": 0,
+      "stato": "bozza",
+      "dataCreazione": "2026-06-29T08:25:27.926Z",
+      "dataModifica": "2026-06-29T08:25:27.926Z"
+    },
+    {
       "id": "1779700512082",
       "artista": "Hiridis",
       "brano": "Album 2026",
