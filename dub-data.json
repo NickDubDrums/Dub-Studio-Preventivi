@@ -32,55 +32,6 @@
       "dataModifica": "2026-06-29T08:25:27.926Z"
     },
     {
-      "id": "1779700512082",
-      "artista": "Hiridis",
-      "brano": "Album 2026",
-      "nbrani": 7,
-      "selIncl": [
-        {
-          "id": "editing_voci",
-          "name": "Editing Voci",
-          "price": 50,
-          "note": ""
-        },
-        {
-          "id": "rec_batt_reali",
-          "name": "Rec Batterie Reali",
-          "price": 150,
-          "note": "+ Affitto piatti"
-        },
-        {
-          "id": "edit_batt",
-          "name": "Editing Batterie Reali",
-          "price": 90,
-          "note": ""
-        },
-        {
-          "id": "mix",
-          "name": "Mix",
-          "price": 130,
-          "note": ""
-        },
-        {
-          "id": "master_1",
-          "name": "Master 1 piattaforma",
-          "price": 60,
-          "note": ""
-        }
-      ],
-      "selExtra": [],
-      "selSession": [],
-      "sconto": 12,
-      "totale": 2957,
-      "revMixIncluse": 2,
-      "revMasterIncluse": 2,
-      "revMixFatte": 0,
-      "revMasterFatte": 0,
-      "stato": "bozza",
-      "dataCreazione": "2026-05-25T09:15:12.082Z",
-      "dataModifica": "2026-05-25T09:16:13.778Z"
-    },
-    {
       "id": "1775576021520",
       "artista": "Drake",
       "brano": "Change The World, Blessing, Carmine, Hashire Sakamoto, Hunting Soul, Hollow Hunger, Good Morning World, Crossing Field, Piece Sign, Iris Out, Mayday",
