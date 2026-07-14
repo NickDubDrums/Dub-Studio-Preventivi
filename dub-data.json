@@ -428,7 +428,7 @@
                 {
                   "id": "mrkgyhp7mwpuw",
                   "label": "Mix completato",
-                  "done": false
+                  "done": true
                 }
               ],
               "revisions": {
@@ -559,6 +559,308 @@
               "elements": [
                 {
                   "id": "mrkgyhp77juht",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        }
+      ]
+    },
+    "1775575690677": {
+      "startedAt": "2026-07-14T09:53:25.146Z",
+      "songs": [
+        {
+          "id": "mrkh46fufafs2",
+          "title": "Mr Baseball",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mrkh46furtz6x",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mrkh46fupkfud",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mrkh46fufcjkp",
+          "title": "FarÃÂÃÂ² Di Te Un Uomo",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mrkh46fuvwmu0",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mrkh46fu2jp3q",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mrkh46fua1217",
+          "title": "Doraemon",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mrkh46fub1ygh",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mrkh46fu9kvww",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mrkh46fuztd2t",
+          "title": "Tazmania",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mrkh46fuv9gbp",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mrkh46fukmmaj",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mrkh46fuhsjg4",
+          "title": "Splende Sempre Il Sole",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mrkh46fuqyqsj",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mrkh46fuocur7",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mrkh46fus5mro",
+          "title": "Posso Farcela",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mrkh46fuopdh9",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mrkh46fu3oxuw",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mrkh46fur85fc",
+          "title": "Il Cerchio Della Vita",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mrkh46fupyayg",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mrkh46fuktn2z",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mrkh46fu5mx9d",
+          "title": "Via Di Qua",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mrkh46fupdrjc",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mrkh46fu9clsf",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mrkh46fupk448",
+          "title": "+Siamo + Disneiamo",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mrkh46fufmf87",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mrkh46fu4m1le",
                   "label": "Mix completato",
                   "done": false
                 }
