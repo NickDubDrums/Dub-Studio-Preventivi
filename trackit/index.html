@@ -300,12 +300,15 @@ function workPct(prevId){
 function financeSummary(prevId){
   const prev = state.preventivi.find(p=>p.id===prevId);
   const w = workPct(prevId);
-  const paid = paymentPct(prev);
   const totale = prev.totale||0;
+  // Se è stato inserito un incassato "reale" a mano (es. pagamenti a rate diversi dal 50/100%
+  // automatico), usiamo quello. Altrimenti il classico 0/50/100% in base allo stato.
+  const usaManuale = prev.incassatoManuale !== null && prev.incassatoManuale !== undefined;
+  const paid = usaManuale ? Math.round(prev.incassatoManuale/totale*100) : paymentPct(prev);
+  const incassato = usaManuale ? prev.incassatoManuale : Math.round(totale * paid/100);
   const valoreLavoro = Math.round(totale * w/100);
-  const incassato = Math.round(totale * paid/100);
   const differenza = valoreLavoro - incassato;
-  return {totale, w, paid, valoreLavoro, incassato, differenza};
+  return {totale, w, paid, valoreLavoro, incassato, differenza, manuale:usaManuale};
 }
 function advanceIfComplete(song){
   while(song.activePhaseIndex < song.phases.length-1 && phasePct(song.phases[song.activePhaseIndex])===100){
@@ -333,7 +336,7 @@ function renderList(){
       financeHtml = `<div class="total-bar">
         <div class="tl">Avanzamento lavoro: ${w}% — Totale preventivo: €${fin.totale}</div>
         <div class="progress-row" style="margin-top:0"><div class="progress-track"><div class="progress-fill ${w===100?'done':''}" style="width:${w}%"></div></div><div class="pct">${w}%</div></div>
-        <div class="tl" style="margin-top:10px">Valore lavoro svolto: €${fin.valoreLavoro} · Incassato (${prev.stato}): €${fin.incassato}</div>
+        <div class="tl" style="margin-top:10px">Valore lavoro svolto: €${fin.valoreLavoro} · Incassato${fin.manuale?' (personalizzato)':` (${prev.stato})`}: €${fin.incassato}</div>
         <div class="tl" style="margin-top:4px">${diffLabel}</div>
       </div>`;
       songsHtml = '<div class="song-list">' + tk.songs.map(song=>{

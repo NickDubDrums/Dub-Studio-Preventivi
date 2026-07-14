@@ -659,6 +659,8 @@ function salvaPreventivo() {
   const totIncl = selIncl.reduce((s,v)=>s+v.price,0);
   const totale = Math.round(totIncl * nbrani * (1-sconto/100) + selExtra.reduce((s,v)=>s+v.price,0) + selSession.reduce((s,v)=>s+v.price,0));
 
+  const existingPrev = state.currentEdit ? state.preventivi.find(p=>p.id===state.currentEdit) : null;
+
   const prev = {
     id: state.currentEdit || Date.now().toString(),
     artista, brano, nbrani,
@@ -668,6 +670,9 @@ function salvaPreventivo() {
     revMasterIncluse: parseInt(document.getElementById('p-rev-master').value)||1,
     revMixFatte: 0, revMasterFatte: 0,
     stato: 'bozza',
+    // Campi solo interni: non entrano mai nel .docx consegnato al cliente
+    noteInterne: existingPrev?.noteInterne || '',
+    incassatoManuale: existingPrev?.incassatoManuale ?? null,
     dataCreazione: state.currentEdit
       ? state.preventivi.find(p=>p.id===state.currentEdit)?.dataCreazione || new Date().toISOString()
       : new Date().toISOString(),
@@ -813,6 +818,25 @@ function openDetail(id) {
             ${{bozza:'Bozza',approvato:'Approvato',acconto:'Acconto ricevuto',saldato:'Saldato'}[s]}
           </div>`).join('')}
       </div>
+      <div class="dp-row" style="margin-top:10px;color:var(--text3);font-size:12px">
+        Lo stato sopra assume un acconto = 50% del totale. Se il cliente ti ha mandato una cifra diversa
+        (es. pagamenti a rate su un lavoro lungo), inserisci qui l'importo reale già incassato: verrà usato
+        al posto del 50%/100% automatico, anche nel calcolo di Tracking.
+      </div>
+      <div class="dp-row" style="margin-top:6px;gap:8px">
+        <span>Incassato reale (opzionale)</span>
+        <input type="number" id="incassato-manuale-${id}" value="${p.incassatoManuale ?? ''}" placeholder="es. 150"
+               style="width:110px;background:var(--bg);border:0.5px solid var(--border2);border-radius:6px;padding:6px 10px;color:var(--text)"
+               onchange="saveIncassatoManuale('${id}', this.value)">
+      </div>
+    </div>
+
+    <div class="dp-section">
+      <h3>Note interne <span style="color:var(--text3);font-weight:400;font-size:11px">(private, non finiscono nel .docx per il cliente)</span></h3>
+      <textarea id="note-interne-${id}" rows="3"
+        style="width:100%;background:var(--bg);border:0.5px solid var(--border2);border-radius:6px;padding:10px;color:var(--text);font-family:inherit;font-size:13px;resize:vertical"
+        placeholder="Es. ricevuto bonifico 150€ il 3/7 per brano 1, accordo pagamenti mensili..."
+        onblur="saveNoteInterne('${id}', this.value)">${p.noteInterne||''}</textarea>
     </div>
 
     ${makeRevRow('Revisioni Mix','revMixFatte','revMixIncluse')}
@@ -837,6 +861,25 @@ function closeDetail(e) {
 function setStato(id, stato) {
   const p = state.preventivi.find(x=>x.id===id);
   if (p) { p.stato=stato; saveLocal(); ghFetch('PUT',{preventivi:state.preventivi,tariffe:state.tariffe}).catch(()=>{}); openDetail(id); }
+}
+
+function saveNoteInterne(id, val) {
+  const p = state.preventivi.find(x=>x.id===id);
+  if (!p) return;
+  p.noteInterne = val;
+  saveLocal();
+  ghFetch('PUT',{preventivi:state.preventivi,tariffe:state.tariffe}).catch(()=>{});
+  showSaveBanner();
+}
+
+function saveIncassatoManuale(id, val) {
+  const p = state.preventivi.find(x=>x.id===id);
+  if (!p) return;
+  const v = val.trim();
+  p.incassatoManuale = v==='' ? null : Math.max(0, Number(v)||0);
+  saveLocal();
+  ghFetch('PUT',{preventivi:state.preventivi,tariffe:state.tariffe}).catch(()=>{});
+  showSaveBanner();
 }
 
 function changeRev(id, prop, delta) {
