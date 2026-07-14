@@ -1032,6 +1032,94 @@
           "activePhaseIndex": 1
         }
       ]
+    },
+    "1784024092608": {
+      "startedAt": "2026-07-14T10:15:15.967Z",
+      "songs": [
+        {
+          "id": "mrkhw9vjp6k0c",
+          "title": "OSCAR",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mrkhw9vj1kdxr",
+                  "label": "Rec Voci",
+                  "done": false
+                },
+                {
+                  "id": "mrkhw9vjed92f",
+                  "label": "Editing Voci",
+                  "done": false
+                },
+                {
+                  "id": "mrkhw9vjwf4ou",
+                  "label": "Rec Batterie Reali",
+                  "done": false
+                },
+                {
+                  "id": "mrkhw9vj1oe2y",
+                  "label": "Sound Design",
+                  "done": false
+                },
+                {
+                  "id": "mrkhw9vjbkwn0",
+                  "label": "Live Programming",
+                  "done": false
+                },
+                {
+                  "id": "mrkhw9vjqikkc",
+                  "label": "Composizione Elettronica",
+                  "done": false
+                },
+                {
+                  "id": "mrkhw9vjp7icf",
+                  "label": "Registrazione Batterie DW",
+                  "done": false
+                },
+                {
+                  "id": "mrkhw9vjafloq",
+                  "label": "Videoclip",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mrkhw9vj1na10",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            },
+            {
+              "id": "master",
+              "label": "Master",
+              "elements": [
+                {
+                  "id": "mrkhw9vjcctw2",
+                  "label": "Master completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        }
+      ]
     }
   }
 }
