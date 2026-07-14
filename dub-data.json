@@ -203,5 +203,750 @@
     "s_edit_batt": 60,
     "s_mix_batt": 60,
     "s_video": 200
+  },
+  "trackit": {
+    "1775576021520": {
+      "startedAt": "2026-07-14T09:48:59.803Z",
+      "songs": [
+        {
+          "id": "mrkgyhp7iqj0o",
+          "title": "Change The World",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mrkgyhp7o8s0c",
+                  "label": "Arrangiamento",
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mrkgyhp78pk0r",
+                  "label": "Mix completato",
+                  "done": true
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 1
+        },
+        {
+          "id": "mrkgyhp7l4qap",
+          "title": "Blessing",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mrkgyhp7kktrm",
+                  "label": "Arrangiamento",
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mrkgyhp7m2zpy",
+                  "label": "Mix completato",
+                  "done": true
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 1
+        },
+        {
+          "id": "mrkgyhp7ol0zx",
+          "title": "Carmine",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mrkgyhp7lbwgv",
+                  "label": "Arrangiamento",
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mrkgyhp7oucp7",
+                  "label": "Mix completato",
+                  "done": true
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 1
+        },
+        {
+          "id": "mrkgyhp74zhsg",
+          "title": "Hashire Sakamoto",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mrkgyhp70za2a",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mrkgyhp7j5pbh",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mrkgyhp7tz72v",
+          "title": "Hunting Soul",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mrkgyhp72s2ms",
+                  "label": "Arrangiamento",
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mrkgyhp7lqrlg",
+                  "label": "Mix completato",
+                  "done": true
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 1
+        },
+        {
+          "id": "mrkgyhp7ylbfm",
+          "title": "Hollow Hunger",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mrkgyhp7xtz56",
+                  "label": "Arrangiamento",
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mrkgyhp7ghfml",
+                  "label": "Mix completato",
+                  "done": true
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 1
+        },
+        {
+          "id": "mrkgyhp7ekluy",
+          "title": "Good Morning World",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mrkgyhp78fzey",
+                  "label": "Arrangiamento",
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mrkgyhp7mwpuw",
+                  "label": "Mix completato",
+                  "done": true
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 1
+        },
+        {
+          "id": "mrkgyhp72u693",
+          "title": "Crossing Field",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mrkgyhp7e6rqk",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mrkgyhp7kr4ws",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mrkgyhp704ycf",
+          "title": "Piece Sign",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mrkgyhp7za9go",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mrkgyhp71atlq",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mrkgyhp7lnpqs",
+          "title": "Iris Out",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mrkgyhp7vfbeo",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mrkgyhp7z26je",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mrkgyhp75746h",
+          "title": "Mayday",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mrkgyhp75hl0u",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mrkgyhp77juht",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        }
+      ]
+    },
+    "1775575690677": {
+      "startedAt": "2026-07-14T09:53:25.146Z",
+      "songs": [
+        {
+          "id": "mrkh46fufafs2",
+          "title": "Mr Baseball",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mrkh46furtz6x",
+                  "label": "Arrangiamento",
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mrkh46fupkfud",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 1
+        },
+        {
+          "id": "mrkh46fufcjkp",
+          "title": "Ca",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mrkh46fuvwmu0",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mrkh46fu2jp3q",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mrkh46fua1217",
+          "title": "Doraemon",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mrkh46fub1ygh",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mrkh46fu9kvww",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mrkh46fuztd2t",
+          "title": "Tazmania",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mrkh46fuv9gbp",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mrkh46fukmmaj",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mrkh46fuhsjg4",
+          "title": "Splende Sempre Il Sole",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mrkh46fuqyqsj",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mrkh46fuocur7",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mrkh46fus5mro",
+          "title": "Posso Farcela",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mrkh46fuopdh9",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mrkh46fu3oxuw",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mrkh46fur85fc",
+          "title": "Il Cerchio Della Vita",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mrkh46fupyayg",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mrkh46fuktn2z",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mrkh46fu5mx9d",
+          "title": "Via Di Qua",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mrkh46fupdrjc",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mrkh46fu9clsf",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mrkh46fupk448",
+          "title": "+Siamo + Disneiamo",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mrkh46fufmf87",
+                  "label": "Arrangiamento",
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mrkh46fu4m1le",
+                  "label": "Mix completato",
+                  "done": true
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 1
+        }
+      ]
+    },
+    "1775575483119": {
+      "startedAt": "2026-07-14T09:53:51.386Z",
+      "songs": [
+        {
+          "id": "mrkh4qoq9cjdh",
+          "title": "Bar Michele 2",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mrkh4qoqmk4fx",
+                  "label": "Rec Voci",
+                  "done": true
+                },
+                {
+                  "id": "mrkh4qoq9i2oc",
+                  "label": "Rec Chitarre Elettriche",
+                  "done": true
+                },
+                {
+                  "id": "mrkh4qoqyjiv9",
+                  "label": "Rec Basso / MIDI",
+                  "done": true
+                },
+                {
+                  "id": "mrkh4qoqxn3r4",
+                  "label": "Batterie MIDI",
+                  "done": true
+                },
+                {
+                  "id": "mrkh4qoqb9f47",
+                  "label": "Editing Voci",
+                  "done": true
+                },
+                {
+                  "id": "mrkh4qoqgwlf5",
+                  "label": "Editing Chitarre",
+                  "done": true
+                },
+                {
+                  "id": "mrkh4qoq4hlgn",
+                  "label": "Composizione Batterie",
+                  "done": true
+                },
+                {
+                  "id": "mrkh4qoq47wok",
+                  "label": "Composizione Chitarre",
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mrkh4qoqxx8zc",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 1
+        }
+      ]
+    }
   }
 }
