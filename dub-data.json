@@ -1,6 +1,88 @@
 {
   "preventivi": [
     {
+      "id": "1784024092608",
+      "artista": "Fede Pari",
+      "brano": "OSCAR",
+      "nbrani": 1,
+      "selIncl": [
+        {
+          "id": "rec_voci",
+          "name": "Rec Voci",
+          "price": 80,
+          "note": ""
+        },
+        {
+          "id": "editing_voci",
+          "name": "Editing Voci",
+          "price": 50,
+          "note": ""
+        },
+        {
+          "id": "rec_batt_reali",
+          "name": "Rec Batterie Reali",
+          "price": 150,
+          "note": ""
+        },
+        {
+          "id": "sound_design",
+          "name": "Sound Design",
+          "price": 30,
+          "note": ""
+        },
+        {
+          "id": "live_prog",
+          "name": "Live Programming",
+          "price": 50,
+          "note": ""
+        },
+        {
+          "id": "comp_elett",
+          "name": "Composizione Elettronica",
+          "price": 100,
+          "note": ""
+        },
+        {
+          "id": "mix",
+          "name": "Mix",
+          "price": 130,
+          "note": ""
+        },
+        {
+          "id": "master_1",
+          "name": "Master 1 piattaforma",
+          "price": 60,
+          "note": ""
+        }
+      ],
+      "selExtra": [],
+      "selSession": [
+        {
+          "id": "s_rec_batt",
+          "name": "Registrazione Batterie DW",
+          "price": 150,
+          "note": ""
+        },
+        {
+          "id": "s_video",
+          "name": "Videoclip",
+          "price": 200,
+          "note": ""
+        }
+      ],
+      "sconto": 0,
+      "totale": 1000,
+      "revMixIncluse": 1,
+      "revMasterIncluse": 1,
+      "revMixFatte": 0,
+      "revMasterFatte": 0,
+      "stato": "bozza",
+      "noteInterne": "",
+      "incassatoManuale": null,
+      "dataCreazione": "2026-07-14T10:14:52.608Z",
+      "dataModifica": "2026-07-14T10:14:52.608Z"
+    },
+    {
       "id": "1782721527926",
       "artista": "Hiridis",
       "brano": "Rec/editing Drums 2026",
