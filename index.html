@@ -199,6 +199,7 @@ section.active{display:block}
     <button onclick="showSection('gestionale',this)">Gestionale</button>
     <button onclick="showSection('tariffe',this)">Tariffe</button>
     <button onclick="showSection('impostazioni',this)">Impostazioni</button>
+    <button onclick="window.location.href='trackit/'">Tracking</button>
   </nav>
   <div class="header-right">
     <span id="sync-status"></span>
@@ -388,6 +389,7 @@ let state = {
   tariffe: {},
   preventivi: [],
   currentEdit: null,
+  trackit: {},
 };
 
 // ═══════════ SERVICE DEFINITIONS ═══════════
@@ -467,7 +469,10 @@ const headers = {'Authorization':`Bearer ${token}`,'Content-Type':'application/j
     return {data, sha: j.sha};
   } else {
     const existing = await ghFetch('GET');
-    const jsonStr = JSON.stringify(body, null, 2);
+    // Always carry the in-memory trackit data along, so saves made from the
+    // preventivi/gestionale pages never wipe out data written by the Tracking page.
+    const fullBody = {...body, trackit: state.trackit};
+    const jsonStr = JSON.stringify(fullBody, null, 2);
     const bytes = new TextEncoder().encode(jsonStr);
     const b64 = btoa(String.fromCharCode(...bytes));
     const payload = {message:'DUB Studio update', content: b64, branch};
@@ -485,6 +490,7 @@ async function syncNow() {
     if (res) {
       // merge remote preventivi (keep local changes for non-conflicting)
       const remote = res.data;
+      if (remote.trackit) state.trackit = remote.trackit;
       if (remote.preventivi) {
         // Remote is source of truth for preventivi, merge
         const localIds = new Set(state.preventivi.map(p=>p.id));
@@ -517,6 +523,7 @@ async function loadFromGitHub() {
   if (res?.data) {
     if (res.data.preventivi) state.preventivi = res.data.preventivi;
     if (res.data.tariffe) state.tariffe = res.data.tariffe;
+    if (res.data.trackit) state.trackit = res.data.trackit;
     saveLocal();
   }
 }
@@ -525,6 +532,7 @@ async function loadFromGitHub() {
 function checkPin() {
   const val = document.getElementById('pin-input').value;
   if (val === state.pin) {
+    sessionStorage.setItem('dubStudioAuth', '1');
     document.getElementById('pin-screen').style.display = 'none';
     document.getElementById('app').style.display = 'block';
     initApp();
@@ -1144,6 +1152,11 @@ function showSaveBanner() {
 // ═══════════ BOOT ═══════════
 loadLocal();
 document.getElementById('pin-input').addEventListener('keydown', e=>{ if(e.key==='Enter') checkPin(); });
+if (sessionStorage.getItem('dubStudioAuth') === '1') {
+  document.getElementById('pin-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  initApp();
+}
 </script>
 </body>
 </html>

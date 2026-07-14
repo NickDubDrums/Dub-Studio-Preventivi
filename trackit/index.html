@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DUB Studio - Tracking</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#121212;--bg2:#292929;--bg3:#4b4b4b;
+  --text:#D9D9D9;--text2:#b6b6b6;--text3:#999999;
+  --border:#383837;--border2:#3d3d3c;
+  --accent:#2563EB;--accent-bg:#000000;--accent-fg:#fff;
+  --danger:#c0392b;--success:#2e7d32;--warn:#b7770d;
+  --radius:10px;--radius-sm:6px;
+}
+body{font-family:'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.5}
+
+/* PIN SCREEN */
+#pin-screen{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:1000}
+.pin-box{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:48px 40px;text-align:center;max-width:340px;width:90%}
+.pin-box h1{font-size:22px;font-weight:500;margin-bottom:6px}
+.pin-box p{color:var(--text2);font-size:14px;margin-bottom:28px}
+.pin-box input{color:var(--text2);width:100%;padding:12px 16px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);font-size:20px;text-align:center;letter-spacing:6px;outline:none;background:var(--bg)}
+.pin-box input:focus{border-color:var(--accent)}
+.pin-box .pin-err{color:var(--danger);font-size:13px;margin-top:10px;min-height:20px}
+.pin-box button{margin-top:16px;width:100%;padding:12px;background:var(--accent-bg);color:var(--accent-fg);border:none;border-radius:var(--radius-sm);font-size:15px;cursor:pointer}
+
+/* LAYOUT */
+#app{display:none;min-height:100vh}
+header{background:var(--bg2);border-bottom:0.5px solid var(--border);padding:0 32px;display:flex;align-items:center;gap:32px;height:56px;position:sticky;top:0;z-index:100}
+header .logo{font-size:16px;font-weight:500;letter-spacing:0.5px}
+header .logo a{color:var(--text2);text-decoration:none;font-size:13px;margin-right:16px}
+nav{display:flex;gap:4px;flex:1}
+nav button{background:none;border:none;padding:8px 16px;border-radius:var(--radius-sm);cursor:pointer;font-size:14px;color:var(--text2)}
+nav button.active{background:var(--bg3);color:var(--text);font-weight:500}
+.header-right{display:flex;gap:10px;align-items:center;font-size:13px;color:var(--text3)}
+.header-right button{background:none;border:0.5px solid var(--border2);padding:6px 14px;border-radius:var(--radius-sm);cursor:pointer;font-size:13px;color:var(--text2)}
+
+main{max-width:960px;margin:0 auto;padding:32px 24px}
+.section-title{font-size:20px;font-weight:500;margin-bottom:24px}
+
+/* CARDS */
+.card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:24px}
+.card+.card{margin-top:16px}
+.prev-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.prev-head h3{font-size:16px;font-weight:500}
+.prev-head .sub{font-size:13px;color:var(--text3);margin-top:4px}
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.3px}
+.badge.bozza{background:var(--bg3);color:var(--text2)}
+.badge.approvato{background:#1e3a5f;color:#7cb3f5}
+.badge.acconto{background:#4a3a10;color:#f0c674}
+.badge.saldato{background:#173d1f;color:#7cd992}
+
+.btn{padding:9px 18px;border-radius:var(--radius-sm);cursor:pointer;font-size:13px;border:0.5px solid var(--border2);background:var(--bg3);color:var(--text)}
+.btn-primary{background:var(--accent-bg);color:var(--accent-fg);border-color:var(--accent-bg)}
+.btn-xs{padding:4px 10px;font-size:12px}
+.btn-icon{border:none;background:none;color:var(--text3);cursor:pointer;font-size:15px;padding:2px 6px}
+.btn-icon:hover{color:var(--danger)}
+
+/* PROGRESS */
+.progress-track{background:var(--bg);border-radius:20px;height:8px;overflow:hidden;flex:1}
+.progress-fill{background:var(--accent);height:100%;border-radius:20px;transition:width .25s}
+.progress-fill.done{background:var(--success)}
+.progress-row{display:flex;align-items:center;gap:10px;margin-top:10px}
+.progress-row .pct{font-size:12px;color:var(--text3);min-width:34px;text-align:right}
+.progress-label{font-size:12px;color:var(--text2);margin-bottom:4px}
+
+/* SONG ROWS */
+.song-list{margin-top:16px;display:flex;flex-direction:column;gap:8px}
+.song-row{background:var(--bg);border:0.5px solid var(--border2);border-radius:var(--radius-sm);padding:12px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.song-row:hover{border-color:var(--accent)}
+.song-row .song-title{font-size:14px;flex:1;min-width:100px}
+.song-row .phase-tag{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:0.4px;min-width:80px}
+.song-row .progress-track{max-width:140px}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:flex-start;justify-content:center;z-index:500;overflow-y:auto;padding:40px 16px}
+.modal-overlay.open{display:flex}
+.modal-box{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:28px;max-width:520px;width:100%}
+.modal-box .modal-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;gap:12px}
+.modal-box .modal-title input{background:none;border:none;color:var(--text);font-size:18px;font-weight:500;flex:1;outline:none;border-bottom:1px solid transparent}
+.modal-box .modal-title input:focus{border-bottom:1px solid var(--accent)}
+.modal-box .close-x{cursor:pointer;color:var(--text3);font-size:20px;line-height:1}
+.phase-block{margin-top:20px;border-top:0.5px solid var(--border);padding-top:16px}
+.phase-block.locked{opacity:0.4}
+.phase-block.completed .phase-title{color:var(--success)}
+.phase-title{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.4px;color:var(--text2);display:flex;justify-content:space-between;align-items:center}
+.checklist-item{display:flex;align-items:center;gap:10px;padding:6px 0}
+.checklist-item input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);cursor:pointer}
+.checklist-item span{flex:1;font-size:14px}
+.checklist-item span.done{text-decoration:line-through;color:var(--text3)}
+.add-item-row{display:flex;gap:8px;margin-top:8px}
+.add-item-row input{flex:1;background:var(--bg);border:0.5px solid var(--border2);border-radius:var(--radius-sm);padding:7px 10px;color:var(--text);font-size:13px;outline:none}
+.rev-row{display:flex;align-items:center;gap:10px;margin-top:10px;font-size:13px;color:var(--text2)}
+.rev-row button{width:24px;height:24px;border-radius:50%;border:0.5px solid var(--border2);background:var(--bg);color:var(--text);cursor:pointer}
+.empty{color:var(--text3);font-size:14px;padding:32px 0;text-align:center}
+.total-bar{background:var(--accent-bg);border-radius:var(--radius);padding:16px 20px;margin-bottom:24px}
+.total-bar .tl{font-size:13px;color:#ccc;margin-bottom:8px}
+</style>
+</head>
+<body>
+
+<div id="pin-screen">
+  <div class="pin-box">
+    <h1>DUB Studio</h1>
+    <p>Inserisci il PIN per accedere al Tracking</p>
+    <input type="password" id="pin-input" maxlength="8" autofocus onkeydown="if(event.key==='Enter')checkPin()">
+    <div class="pin-err" id="pin-err"></div>
+    <button onclick="checkPin()">Entra</button>
+  </div>
+</div>
+
+<div id="app">
+  <header>
+    <div class="logo"><a href="../">← Gestionale</a>DUB Studio</div>
+    <nav><button class="active">Tracking</button></nav>
+    <div class="header-right">
+      <span id="sync-status"></span>
+      <button onclick="syncTK()">Sincronizza</button>
+    </div>
+  </header>
+  <main>
+    <div class="section-title">Tracking Lavorazioni</div>
+    <div id="list"></div>
+  </main>
+</div>
+
+<div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box" id="modal-box"></div>
+</div>
+
+<script>
+// ═══════════ STATE (condiviso via localStorage con il gestionale principale) ═══════════
+const STORAGE_KEY = 'dub_studio_v1';
+let state = { pin:'1234', ghConfig:{token:'',user:'',repo:'',branch:'main'}, preventivi:[], tariffe:{}, trackit:{} };
+
+function loadLocal(){
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if(raw) try{ Object.assign(state, JSON.parse(raw)); }catch(e){}
+  if(!state.trackit) state.trackit = {};
+}
+function saveLocal(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+
+// ═══════════ GITHUB SYNC ═══════════
+async function ghGet(){
+  const {token,user,repo} = state.ghConfig;
+  if(!token||!user||!repo) return null;
+  const url = `https://api.github.com/repos/${user}/${repo}/contents/dub-data.json`;
+  const headers = {'Authorization':`Bearer ${token}`,'Content-Type':'application/json'};
+  const r = await fetch(url,{headers});
+  if(!r.ok) return null;
+  const j = await r.json();
+  const data = JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(j.content.replace(/\s/g,'')), c=>c.charCodeAt(0))));
+  return {data, sha:j.sha};
+}
+async function ghPut(fullBody, sha){
+  const {token,user,repo,branch} = state.ghConfig;
+  const url = `https://api.github.com/repos/${user}/${repo}/contents/dub-data.json`;
+  const headers = {'Authorization':`Bearer ${token}`,'Content-Type':'application/json'};
+  const jsonStr = JSON.stringify(fullBody, null, 2);
+  const bytes = new TextEncoder().encode(jsonStr);
+  const b64 = btoa(String.fromCharCode(...bytes));
+  const payload = {message:'Trackit update', content:b64, branch};
+  if(sha) payload.sha = sha;
+  const r = await fetch(url,{method:'PUT',headers,body:JSON.stringify(payload)});
+  return r.ok;
+}
+
+// All'apertura: prende la versione più fresca da GitHub (preventivi/tariffe/trackit)
+async function pullRemote(){
+  const el = document.getElementById('sync-status');
+  try{
+    const res = await ghGet();
+    if(res?.data){
+      if(res.data.preventivi) state.preventivi = res.data.preventivi;
+      if(res.data.tariffe) state.tariffe = res.data.tariffe;
+      if(res.data.trackit) state.trackit = res.data.trackit;
+      saveLocal();
+    }
+    if(el) el.textContent = '';
+  }catch(e){ if(el) el.textContent = '⚠ offline (dati locali)'; }
+}
+
+// Dopo ogni modifica al tracking: rilegge remoto per non perdere preventivi/tariffe
+// aggiornati altrove, e ripubblica il tutto con il trackit locale aggiornato.
+async function pushTrackit(){
+  const el = document.getElementById('sync-status');
+  if(el) el.textContent = 'Salvataggio...';
+  try{
+    const res = await ghGet();
+    if(res?.data){
+      if(res.data.preventivi) state.preventivi = res.data.preventivi;
+      if(res.data.tariffe) state.tariffe = res.data.tariffe;
+    }
+    const ok = await ghPut({preventivi: state.preventivi, tariffe: state.tariffe, trackit: state.trackit}, res?.sha);
+    saveLocal();
+    if(el){ el.textContent = ok ? '✓ Salvato' : '⚠ Errore sync'; setTimeout(()=>el.textContent='',2500); }
+  }catch(e){ if(el){ el.textContent='⚠ Errore sync'; setTimeout(()=>el.textContent='',3000);} }
+}
+async function syncTK(){ await pullRemote(); renderList(); await pushTrackit(); }
+
+// ═══════════ PIN ═══════════
+function checkPin(){
+  const val = document.getElementById('pin-input').value;
+  if(val === state.pin){
+    sessionStorage.setItem('dubStudioAuth', '1');
+    document.getElementById('pin-screen').style.display='none';
+    document.getElementById('app').style.display='block';
+    initApp();
+  }else{
+    document.getElementById('pin-err').textContent='PIN non corretto';
+    document.getElementById('pin-input').value='';
+  }
+}
+
+async function initApp(){
+  renderList();
+  await pullRemote();
+  renderList();
+}
+
+// ═══════════ LOGICA DI TRACKING ═══════════
+function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
+
+const MIX_IDS = ['mix'];
+const MASTER_IDS = ['master_1','master_2','master_3','master_4'];
+const MIX_REV_EXTRA_IDS = ['rev_mix','x_rev_mix'];
+const MASTER_REV_EXTRA_IDS = ['rev_master','x_rev_master'];
+
+function buildDefaultPhases(prev){
+  const all = [...(prev.selIncl||[]), ...(prev.selExtra||[]), ...(prev.selSession||[])];
+  const excl = [...MIX_IDS, ...MASTER_IDS, ...MIX_REV_EXTRA_IDS, ...MASTER_REV_EXTRA_IDS];
+  const prodItems = all.filter(s=>!excl.includes(s.id));
+  const hasMix = all.some(s=>MIX_IDS.includes(s.id));
+  const hasMaster = all.some(s=>MASTER_IDS.includes(s.id));
+  const extraMixRev = all.filter(s=>MIX_REV_EXTRA_IDS.includes(s.id)).length;
+  const extraMasterRev = all.filter(s=>MASTER_REV_EXTRA_IDS.includes(s.id)).length;
+
+  const phases = [];
+  phases.push({
+    id:'produzione', label:'Produzione',
+    elements: prodItems.length ? prodItems.map(s=>({id:uid(), label:s.name, done:false})) : []
+  });
+  if(hasMix){
+    phases.push({
+      id:'mix', label:'Mix',
+      elements:[{id:uid(), label:'Mix completato', done:false}],
+      revisions:{included:(prev.revMixIncluse||1)+extraMixRev, done:0}
+    });
+  }
+  if(hasMaster){
+    phases.push({
+      id:'master', label:'Master',
+      elements:[{id:uid(), label:'Master completato', done:false}],
+      revisions:{included:(prev.revMasterIncluse||1)+extraMasterRev, done:0}
+    });
+  }
+  return phases;
+}
+
+function avviaTracking(prevId){
+  const prev = state.preventivi.find(p=>p.id===prevId);
+  if(!prev) return;
+  const parsedTitles = (prev.brano||'').split(',').map(s=>s.trim()).filter(Boolean);
+  const n = prev.nbrani || parsedTitles.length || 1;
+  // Se i titoli indicati corrispondono uno-a-uno al numero di brani, il cliente
+  // ha già dato i nomi delle singole tracce. Altrimenti (es. solo nome album/EP)
+  // generiamo dei placeholder "Brano 1..N", rinominabili in seguito dal modale.
+  const titles = (parsedTitles.length === n)
+    ? parsedTitles
+    : Array.from({length:n}, (_,i)=>`Brano ${i+1}`);
+  const songs = titles.map(t=>({ id:uid(), title:t, phases:buildDefaultPhases(prev), activePhaseIndex:0 }));
+  state.trackit[prevId] = { startedAt:new Date().toISOString(), songs };
+  saveLocal();
+  renderList();
+  pushTrackit();
+}
+
+function phasePct(phase){
+  if(!phase.elements.length) return 100;
+  const done = phase.elements.filter(e=>e.done).length;
+  return Math.round(done/phase.elements.length*100);
+}
+function songPct(song){
+  if(!song.phases.length) return 0;
+  const sum = song.phases.reduce((s,ph)=>s+phasePct(ph),0);
+  return Math.round(sum/song.phases.length);
+}
+function paymentPct(prev){
+  if(prev.stato==='saldato') return 100;
+  if(prev.stato==='acconto') return 50;
+  return 0;
+}
+function workPct(prevId){
+  const tk = state.trackit[prevId];
+  if(!tk || !tk.songs.length) return 0;
+  return Math.round(tk.songs.reduce((s,so)=>s+songPct(so),0)/tk.songs.length);
+}
+function financeSummary(prevId){
+  const prev = state.preventivi.find(p=>p.id===prevId);
+  const w = workPct(prevId);
+  const paid = paymentPct(prev);
+  const totale = prev.totale||0;
+  const valoreLavoro = Math.round(totale * w/100);
+  const incassato = Math.round(totale * paid/100);
+  const differenza = valoreLavoro - incassato;
+  return {totale, w, paid, valoreLavoro, incassato, differenza};
+}
+function advanceIfComplete(song){
+  while(song.activePhaseIndex < song.phases.length-1 && phasePct(song.phases[song.activePhaseIndex])===100){
+    song.activePhaseIndex++;
+  }
+}
+
+// ═══════════ RENDER ═══════════
+function renderList(){
+  const box = document.getElementById('list');
+  const eligible = state.preventivi.filter(p=>p.stato && p.stato!=='bozza');
+  if(!eligible.length){ box.innerHTML = '<div class="empty">Nessun preventivo approvato da tracciare ancora.</div>'; return; }
+
+  box.innerHTML = eligible.map(prev=>{
+    const tk = state.trackit[prev.id];
+    let financeHtml = '', songsHtml = '';
+    if(tk){
+      const w = workPct(prev.id);
+      const fin = financeSummary(prev.id);
+      const diffLabel = fin.differenza > 0
+        ? `Il cliente ti deve ancora <strong>€${fin.differenza}</strong> rispetto al lavoro svolto`
+        : (fin.differenza < 0
+            ? `Hai incassato €${-fin.differenza} in più rispetto al lavoro svolto finora`
+            : `Incassato allineato al lavoro svolto`);
+      financeHtml = `<div class="total-bar">
+        <div class="tl">Avanzamento lavoro: ${w}% — Totale preventivo: €${fin.totale}</div>
+        <div class="progress-row" style="margin-top:0"><div class="progress-track"><div class="progress-fill ${w===100?'done':''}" style="width:${w}%"></div></div><div class="pct">${w}%</div></div>
+        <div class="tl" style="margin-top:10px">Valore lavoro svolto: €${fin.valoreLavoro} · Incassato (${prev.stato}): €${fin.incassato}</div>
+        <div class="tl" style="margin-top:4px">${diffLabel}</div>
+      </div>`;
+      songsHtml = '<div class="song-list">' + tk.songs.map(song=>{
+        const activePhase = song.phases[song.activePhaseIndex] || song.phases[song.phases.length-1];
+        const pct = songPct(song);
+        return `<div class="song-row" onclick="openModal('${prev.id}','${song.id}')">
+          <div class="song-title">${escapeHtml(song.title)}</div>
+          <div class="phase-tag">${activePhase ? activePhase.label : '—'}</div>
+          <div class="progress-track"><div class="progress-fill ${pct===100?'done':''}" style="width:${pct}%"></div></div>
+          <div class="pct">${pct}%</div>
+        </div>`;
+      }).join('') + '</div>';
+    }
+    return `<div class="card">
+      <div class="prev-head">
+        <div>
+          <h3>${escapeHtml(prev.artista)} — ${escapeHtml(prev.brano)}</h3>
+          <div class="sub">${prev.nbrani} brani</div>
+        </div>
+        <span class="badge ${prev.stato}">${prev.stato}</span>
+      </div>
+      ${tk ? financeHtml : `<div style="margin-top:16px"><button class="btn btn-primary" onclick="avviaTracking('${prev.id}')">Avvia Tracking</button></div>`}
+      ${songsHtml}
+    </div>`;
+  }).join('');
+}
+
+function escapeHtml(s){ return (s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+// ═══════════ MODALE BRANO ═══════════
+let currentPrevId=null, currentSongId=null;
+
+function openModal(prevId, songId){
+  currentPrevId=prevId; currentSongId=songId;
+  renderModal();
+  document.getElementById('modal-overlay').classList.add('open');
+}
+function closeModal(){
+  document.getElementById('modal-overlay').classList.remove('open');
+  currentPrevId=null; currentSongId=null;
+  renderList();
+}
+function getCurrentSong(){
+  const tk = state.trackit[currentPrevId];
+  return tk ? tk.songs.find(s=>s.id===currentSongId) : null;
+}
+function renderModal(){
+  const song = getCurrentSong();
+  if(!song) return;
+  const box = document.getElementById('modal-box');
+  box.innerHTML = `
+    <div class="modal-title">
+      <input value="${escapeHtml(song.title)}" oninput="renameSong(this.value)">
+      <span class="close-x" onclick="closeModal()">✕</span>
+    </div>
+    ${song.phases.map((phase,idx)=>{
+      const pct = phasePct(phase);
+      const locked = idx > song.activePhaseIndex;
+      const completed = pct===100 && idx < song.activePhaseIndex;
+      return `<div class="phase-block ${locked?'locked':''} ${completed?'completed':''}">
+        <div class="phase-title"><span>${phase.label} ${completed?'✓':''}</span><span>${pct}%</span></div>
+        ${phase.elements.map(el=>`
+          <div class="checklist-item">
+            <input type="checkbox" ${el.done?'checked':''} ${locked?'disabled':''} onchange="toggleElement(${idx},'${el.id}')">
+            <span class="${el.done?'done':''}">${escapeHtml(el.label)}</span>
+            <span class="btn-icon" onclick="removeElement(${idx},'${el.id}')">✕</span>
+          </div>`).join('')}
+        <div class="add-item-row">
+          <input type="text" placeholder="Aggiungi elemento..." id="new-item-${idx}" onkeydown="if(event.key==='Enter')addElement(${idx})">
+          <button class="btn btn-xs" onclick="addElement(${idx})">+</button>
+        </div>
+        ${phase.revisions ? `<div class="rev-row">
+          <span>Revisioni: ${phase.revisions.done} / ${phase.revisions.included}</span>
+          <button onclick="changeRev(${idx},-1)">−</button>
+          <button onclick="changeRev(${idx},1)">+</button>
+        </div>` : ''}
+      </div>`;
+    }).join('')}
+  `;
+}
+function persistSongChange(){
+  saveLocal();
+  renderModal();
+  pushTrackit();
+}
+function toggleElement(phaseIdx, elId){
+  const song = getCurrentSong();
+  const el = song.phases[phaseIdx].elements.find(e=>e.id===elId);
+  el.done = !el.done;
+  advanceIfComplete(song);
+  persistSongChange();
+}
+function addElement(phaseIdx){
+  const input = document.getElementById('new-item-'+phaseIdx);
+  const label = input.value.trim();
+  if(!label) return;
+  const song = getCurrentSong();
+  song.phases[phaseIdx].elements.push({id:uid(), label, done:false});
+  input.value='';
+  persistSongChange();
+}
+function removeElement(phaseIdx, elId){
+  const song = getCurrentSong();
+  song.phases[phaseIdx].elements = song.phases[phaseIdx].elements.filter(e=>e.id!==elId);
+  advanceIfComplete(song);
+  persistSongChange();
+}
+function changeRev(phaseIdx, delta){
+  const song = getCurrentSong();
+  const rev = song.phases[phaseIdx].revisions;
+  rev.done = Math.max(0, rev.done+delta);
+  persistSongChange();
+}
+function renameSong(val){
+  const song = getCurrentSong();
+  song.title = val;
+  saveLocal();
+  pushTrackit();
+}
+
+// ═══════════ INIT ═══════════
+loadLocal();
+if (sessionStorage.getItem('dubStudioAuth') === '1') {
+  document.getElementById('pin-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  initApp();
+}
+</script>
+</body>
+</html>
