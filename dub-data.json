@@ -362,7 +362,7 @@
                 {
                   "id": "mrkgyhp7lqrlg",
                   "label": "Mix completato",
-                  "done": false
+                  "done": true
                 }
               ],
               "revisions": {
@@ -384,7 +384,7 @@
                 {
                   "id": "mrkgyhp7xtz56",
                   "label": "Arrangiamento",
-                  "done": false
+                  "done": true
                 }
               ]
             },
@@ -404,7 +404,7 @@
               }
             }
           ],
-          "activePhaseIndex": 0
+          "activePhaseIndex": 1
         },
         {
           "id": "mrkgyhp7ekluy",
