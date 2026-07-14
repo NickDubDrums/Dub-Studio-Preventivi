@@ -587,7 +587,7 @@
                 {
                   "id": "mrkh46furtz6x",
                   "label": "Arrangiamento",
-                  "done": false
+                  "done": true
                 }
               ]
             },
@@ -607,7 +607,7 @@
               }
             }
           ],
-          "activePhaseIndex": 0
+          "activePhaseIndex": 1
         },
         {
           "id": "mrkh46fufcjkp",
