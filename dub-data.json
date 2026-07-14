@@ -395,7 +395,7 @@
                 {
                   "id": "mrkgyhp7ghfml",
                   "label": "Mix completato",
-                  "done": false
+                  "done": true
                 }
               ],
               "revisions": {
@@ -417,7 +417,7 @@
                 {
                   "id": "mrkgyhp78fzey",
                   "label": "Arrangiamento",
-                  "done": false
+                  "done": true
                 }
               ]
             },
@@ -437,7 +437,7 @@
               }
             }
           ],
-          "activePhaseIndex": 0
+          "activePhaseIndex": 1
         },
         {
           "id": "mrkgyhp72u693",
