@@ -899,12 +899,12 @@
                 {
                   "id": "mrkh4qoqyjiv9",
                   "label": "Rec Basso / MIDI",
-                  "done": false
+                  "done": true
                 },
                 {
                   "id": "mrkh4qoqxn3r4",
                   "label": "Batterie MIDI",
-                  "done": false
+                  "done": true
                 },
                 {
                   "id": "mrkh4qoqb9f47",
