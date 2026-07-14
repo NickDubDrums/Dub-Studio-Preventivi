@@ -1055,18 +1055,13 @@
                   "done": true
                 },
                 {
-                  "id": "mrkhw9vjqikkc",
-                  "label": "Composizione Elettronica",
-                  "done": false
+                  "id": "mrkhx2xo5n3rk",
+                  "label": "Foley",
+                  "done": true
                 },
                 {
-                  "id": "mrkhw9vjp7icf",
-                  "label": "Registrazione Batterie DW",
-                  "done": false
-                },
-                {
-                  "id": "mrkhw9vjafloq",
-                  "label": "Videoclip",
+                  "id": "mrkhxshh1smxz",
+                  "label": "Pulizia voci",
                   "done": false
                 }
               ]
@@ -1102,7 +1097,7 @@
               }
             }
           ],
-          "activePhaseIndex": 0
+          "activePhaseIndex": 1
         }
       ]
     }
