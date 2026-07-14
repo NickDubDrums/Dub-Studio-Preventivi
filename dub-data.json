@@ -874,6 +874,79 @@
           "activePhaseIndex": 0
         }
       ]
+    },
+    "1775575483119": {
+      "startedAt": "2026-07-14T09:53:51.386Z",
+      "songs": [
+        {
+          "id": "mrkh4qoq9cjdh",
+          "title": "Bar Michele 2",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mrkh4qoqmk4fx",
+                  "label": "Rec Voci",
+                  "done": false
+                },
+                {
+                  "id": "mrkh4qoq9i2oc",
+                  "label": "Rec Chitarre Elettriche",
+                  "done": false
+                },
+                {
+                  "id": "mrkh4qoqyjiv9",
+                  "label": "Rec Basso / MIDI",
+                  "done": false
+                },
+                {
+                  "id": "mrkh4qoqxn3r4",
+                  "label": "Batterie MIDI",
+                  "done": false
+                },
+                {
+                  "id": "mrkh4qoqb9f47",
+                  "label": "Editing Voci",
+                  "done": false
+                },
+                {
+                  "id": "mrkh4qoqgwlf5",
+                  "label": "Editing Chitarre",
+                  "done": false
+                },
+                {
+                  "id": "mrkh4qoq4hlgn",
+                  "label": "Composizione Batterie",
+                  "done": false
+                },
+                {
+                  "id": "mrkh4qoq47wok",
+                  "label": "Composizione Chitarre",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mrkh4qoqxx8zc",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        }
+      ]
     }
   }
 }
