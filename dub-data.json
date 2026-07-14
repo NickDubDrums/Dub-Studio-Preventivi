@@ -219,7 +219,7 @@
                 {
                   "id": "mrkgyhp7o8s0c",
                   "label": "Arrangiamento",
-                  "done": false
+                  "done": true
                 }
               ]
             },
@@ -239,7 +239,7 @@
               }
             }
           ],
-          "activePhaseIndex": 0
+          "activePhaseIndex": 1
         },
         {
           "id": "mrkgyhp7l4qap",
