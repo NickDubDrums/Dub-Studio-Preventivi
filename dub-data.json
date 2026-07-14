@@ -1,6 +1,39 @@
 {
   "preventivi": [
     {
+      "id": "1784024785446",
+      "artista": "Disneiamo",
+      "brano": "Parte Del Tuo Mondo, Il Mondo è Mio, Cos'è, Il Cerchio della vita, Posso Farcela, Farò di Te un uomo, In Tuo Figlio, Ci Sono Anch'io, Medley (Il Cielo Toccheró - Frozen - All'Alba Sorgerò - Oceania - Olttre L'Orizzonte), Non Si Nomina Bruno",
+      "nbrani": 10,
+      "selIncl": [
+        {
+          "id": "arrangiamento",
+          "name": "Arrangiamento",
+          "price": 50,
+          "note": ""
+        },
+        {
+          "id": "mix",
+          "name": "Mix",
+          "price": 70,
+          "note": ""
+        }
+      ],
+      "selExtra": [],
+      "selSession": [],
+      "sconto": 18,
+      "totale": 984,
+      "revMixIncluse": 1,
+      "revMasterIncluse": 1,
+      "revMixFatte": 0,
+      "revMasterFatte": 0,
+      "stato": "bozza",
+      "noteInterne": "",
+      "incassatoManuale": null,
+      "dataCreazione": "2026-07-14T10:26:25.446Z",
+      "dataModifica": "2026-07-14T10:26:25.446Z"
+    },
+    {
       "id": "1784024092608",
       "artista": "Fede Pari",
       "brano": "OSCAR",
