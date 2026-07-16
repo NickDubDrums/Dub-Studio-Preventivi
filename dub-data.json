@@ -1224,7 +1224,7 @@
                 {
                   "id": "mrnr86xv9mh5y",
                   "label": "Mix completato",
-                  "done": false
+                  "done": true
                 }
               ],
               "revisions": {
@@ -1248,7 +1248,7 @@
               }
             }
           ],
-          "activePhaseIndex": 1
+          "activePhaseIndex": 2
         },
         {
           "id": "mrnr86xvaq10e",
