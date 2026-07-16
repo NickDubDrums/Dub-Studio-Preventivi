@@ -1193,6 +1193,170 @@
           "activePhaseIndex": 1
         }
       ]
+    },
+    "1784221148427": {
+      "startedAt": "2026-07-16T16:59:47.107Z",
+      "songs": [
+        {
+          "id": "mrnr86xvaisyt",
+          "title": "Cipolla",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mrnr86xv3ulns",
+                  "label": "Rec Batterie Reali",
+                  "done": false
+                },
+                {
+                  "id": "mrnr86xvf5acx",
+                  "label": "Editing Batterie Reali",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mrnr86xv9mh5y",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            },
+            {
+              "id": "master",
+              "label": "Master",
+              "elements": [
+                {
+                  "id": "mrnr86xvzmuwl",
+                  "label": "Master completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mrnr86xvaq10e",
+          "title": "Samuele",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mrnr86xvbitiv",
+                  "label": "Rec Batterie Reali",
+                  "done": false
+                },
+                {
+                  "id": "mrnr86xvqoxtm",
+                  "label": "Editing Batterie Reali",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mrnr86xvcekdc",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            },
+            {
+              "id": "master",
+              "label": "Master",
+              "elements": [
+                {
+                  "id": "mrnr86xvlwakx",
+                  "label": "Master completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mrnr86xvo9f15",
+          "title": "La vita",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mrnr86xvtxzm3",
+                  "label": "Rec Batterie Reali",
+                  "done": false
+                },
+                {
+                  "id": "mrnr86xveu6nx",
+                  "label": "Editing Batterie Reali",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mrnr86xvwjnys",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            },
+            {
+              "id": "master",
+              "label": "Master",
+              "elements": [
+                {
+                  "id": "mrnr86xv06sc8",
+                  "label": "Master completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        }
+      ]
     }
   }
 }
