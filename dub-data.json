@@ -1213,7 +1213,7 @@
                 {
                   "id": "mrnr86xvf5acx",
                   "label": "Editing Batterie Reali",
-                  "done": false
+                  "done": true
                 }
               ]
             },
@@ -1248,7 +1248,7 @@
               }
             }
           ],
-          "activePhaseIndex": 0
+          "activePhaseIndex": 1
         },
         {
           "id": "mrnr86xvaq10e",
