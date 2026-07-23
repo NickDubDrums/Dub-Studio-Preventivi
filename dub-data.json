@@ -1,51 +1,6 @@
 {
   "preventivi": [
     {
-      "id": "1784221148427",
-      "artista": "Jolla",
-      "brano": "Cipolla, Samuele, La vita",
-      "nbrani": 3,
-      "selIncl": [
-        {
-          "id": "rec_batt_reali",
-          "name": "Rec Batterie Reali",
-          "price": 150,
-          "note": ""
-        },
-        {
-          "id": "edit_batt",
-          "name": "Editing Batterie Reali",
-          "price": 90,
-          "note": ""
-        },
-        {
-          "id": "mix",
-          "name": "Mix",
-          "price": 130,
-          "note": ""
-        },
-        {
-          "id": "master_1",
-          "name": "Master 1 piattaforma",
-          "price": 60,
-          "note": ""
-        }
-      ],
-      "selExtra": [],
-      "selSession": [],
-      "sconto": 4,
-      "totale": 1238,
-      "revMixIncluse": 1,
-      "revMasterIncluse": 1,
-      "revMixFatte": 0,
-      "revMasterFatte": 0,
-      "stato": "approvato",
-      "noteInterne": "",
-      "incassatoManuale": 50,
-      "dataCreazione": "2026-07-16T16:59:08.427Z",
-      "dataModifica": "2026-07-16T16:59:08.427Z"
-    },
-    {
       "id": "1784024785446",
       "artista": "Disneiamo",
       "brano": "Parte Del Tuo Mondo, Il Mondo è Mio, Cos'è, Il Cerchio della vita, Posso Farcela, Farò di Te un uomo, In Tuo Figlio, Ci Sono Anch'io, Medley (Il Cielo Toccheró - Frozen - All'Alba Sorgerò - Oceania - Olttre L'Orizzonte), Non Si Nomina Bruno",
