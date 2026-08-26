@@ -3,8 +3,8 @@
     {
       "id": "1784024785446",
       "artista": "Disneiamo",
-      "brano": "Parte Del Tuo Mondo, Il Mondo è Mio, Cos'è, Il Cerchio della vita, Posso Farcela, Farò di Te un uomo, In Tuo Figlio, Ci Sono Anch'io, Medley (Il Cielo Toccheró - Frozen - All'Alba Sorgerò - Oceania - Olttre L'Orizzonte), Non Si Nomina Bruno",
-      "nbrani": 10,
+      "brano": "Parte del tuo mondo, Il mondo è mio, Cos'è, Il Cerchio Della Vita, Posso Farcela, Sei Dentro me, Ci Sono Anch'io, Resta Con Me, Medley, Non si Nomina Bruno",
+      "nbrani": 11,
       "selIncl": [
         {
           "id": "arrangiamento",
@@ -21,8 +21,8 @@
       ],
       "selExtra": [],
       "selSession": [],
-      "sconto": 18,
-      "totale": 984,
+      "sconto": 20,
+      "totale": 1056,
       "revMixIncluse": 1,
       "revMasterIncluse": 1,
       "revMixFatte": 0,
@@ -31,7 +31,7 @@
       "noteInterne": "",
       "incassatoManuale": null,
       "dataCreazione": "2026-07-14T10:26:25.446Z",
-      "dataModifica": "2026-07-14T10:26:25.446Z"
+      "dataModifica": "2026-08-26T08:47:03.723Z"
     },
     {
       "id": "1784024092608",
