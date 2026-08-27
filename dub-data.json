@@ -1340,11 +1340,6 @@
               "label": "Produzione",
               "elements": [
                 {
-                  "id": "mtc44jay7i49x",
-                  "label": "Editing Voci",
-                  "done": false
-                },
-                {
                   "id": "mtc44jaytjww4",
                   "label": "Arrangiamento",
                   "done": false
@@ -1377,16 +1372,6 @@
               "id": "produzione",
               "label": "Produzione",
               "elements": [
-                {
-                  "id": "mtc44jay6qst1",
-                  "label": "Rec Voci",
-                  "done": false
-                },
-                {
-                  "id": "mtc44jaytc4gc",
-                  "label": "Editing Voci",
-                  "done": false
-                },
                 {
                   "id": "mtc44jaycjnsa",
                   "label": "Arrangiamento",
