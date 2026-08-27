@@ -1687,16 +1687,6 @@
               "label": "Produzione",
               "elements": [
                 {
-                  "id": "mtc44jaypdcyb",
-                  "label": "Rec Voci",
-                  "done": false
-                },
-                {
-                  "id": "mtc44jayay97d",
-                  "label": "Editing Voci",
-                  "done": false
-                },
-                {
                   "id": "mtc44jayd32sr",
                   "label": "Arrangiamento",
                   "done": false
