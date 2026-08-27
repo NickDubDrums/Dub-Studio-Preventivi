@@ -1,6 +1,56 @@
 {
   "preventivi": [
     {
+      "id": "1787870751354",
+      "artista": "Disneiamo 2",
+      "brano": "Parte Del Tuo Mondo, Il Mondo è Mio, Cos'è, Il Cerchio Della Vita, Via Di Qua, Posso Farcela (Film), Posso Farcela (Bolton), Farò Di Te Un Uomo, Sei Dentro Di Me, Ci Sono Anch'io, Resta Con Me, Madley, Non Si Nomina Bruno, Splende Sempre Il Sole",
+      "nbrani": 14,
+      "tariffarioBase": "old",
+      "selIncl": [
+        {
+          "id": "rec_voci",
+          "name": "Rec Voci",
+          "price": 40,
+          "qty": 5,
+          "note": "Il Cerchio Della Vita, Via Di Qua, Posso Farcela (Film), Posso Farcela (Bolton), Sei Dentro Di Me"
+        },
+        {
+          "id": "editing_voci",
+          "name": "Editing Voci",
+          "price": 10,
+          "qty": 5,
+          "note": "Il Cerchio Della Vita, Via Di Qua, Posso Farcela (Film), Posso Farcela (Bolton), Sei Dentro Di Me"
+        },
+        {
+          "id": "arrangiamento",
+          "name": "Arrangiamento",
+          "price": 50,
+          "qty": 14,
+          "note": ""
+        },
+        {
+          "id": "mix",
+          "name": "Mix",
+          "price": 70,
+          "qty": 14,
+          "note": ""
+        }
+      ],
+      "selExtra": [],
+      "selSession": [],
+      "sconto": 26,
+      "totale": 1428,
+      "revMixIncluse": 1,
+      "revMasterIncluse": 1,
+      "revMixFatte": 0,
+      "revMasterFatte": 0,
+      "stato": "bozza",
+      "noteInterne": "",
+      "incassatoManuale": null,
+      "dataCreazione": "2026-08-27T22:45:51.354Z",
+      "dataModifica": "2026-08-27T22:45:51.354Z"
+    },
+    {
       "id": "1784024785446",
       "artista": "Disneiamo",
       "brano": "Parte del tuo mondo, Il mondo è mio, Cos'è, Il Cerchio Della Vita, Posso Farcela, Sei Dentro me, Ci Sono Anch'io, Resta Con Me, Medley, Non si Nomina Bruno",
@@ -286,41 +336,44 @@
       "dataModifica": "2026-04-07T15:24:43.119Z"
     }
   ],
-  "tariffe": {
-    "rec_voci": 80,
-    "rec_chitarre": 50,
-    "rec_basso": 40,
-    "batterie_midi": 60,
-    "editing_voci": 50,
-    "editing_chit": 30,
-    "editing_basso": 30,
-    "arrangiamento": 50,
-    "rec_batt_reali": 150,
-    "edit_batt": 90,
-    "post_live": 50,
-    "sound_design": 30,
-    "live_prog": 50,
-    "comp_elett": 100,
-    "mix": 70,
-    "rev_mix": 50,
-    "master_1": 60,
-    "master_2": 70,
-    "master_3": 80,
-    "master_4": 90,
-    "rev_master": 50,
-    "x_rev_mix": 30,
-    "x_rev_master": 30,
-    "s_comp_batt": 80,
-    "s_comp_chit": 80,
-    "s_comp_basso": 60,
-    "s_comp_amb": 70,
-    "s_comp_orch": 120,
-    "s_comp_piano": 70,
-    "s_arr": 100,
-    "s_rec_batt": 150,
-    "s_edit_batt": 60,
-    "s_mix_batt": 60,
-    "s_video": 200
+  "tariffari": {
+    "new": {
+      "rec_voci": 80,
+      "rec_chitarre": 50,
+      "rec_basso": 40,
+      "batterie_midi": 60,
+      "editing_voci": 50,
+      "editing_chit": 30,
+      "editing_basso": 30,
+      "arrangiamento": 120,
+      "rec_batt_reali": 150,
+      "edit_batt": 90,
+      "post_live": 50,
+      "sound_design": 30,
+      "live_prog": 50,
+      "comp_elett": 100,
+      "mix": 130,
+      "rev_mix": 50,
+      "master_1": 60,
+      "master_2": 70,
+      "master_3": 80,
+      "master_4": 90,
+      "rev_master": 50,
+      "x_rev_mix": 30,
+      "x_rev_master": 30,
+      "s_comp_batt": 80,
+      "s_comp_chit": 80,
+      "s_comp_basso": 60,
+      "s_comp_amb": 70,
+      "s_comp_orch": 120,
+      "s_comp_piano": 70,
+      "s_arr": 100,
+      "s_rec_batt": 150,
+      "s_edit_batt": 60,
+      "s_mix_batt": 60,
+      "s_video": 200
+    },
+    "old": {}
   },
   "trackit": {
     "1775576021520": {
