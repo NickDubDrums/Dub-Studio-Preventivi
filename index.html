@@ -82,6 +82,7 @@ section.active{display:block}
 .btn-sm{padding:6px 14px;font-size:13px}
 .btn-danger{color:var(--danger);border-color:var(--danger)}
 .btn-danger:hover{background:#fdf0ef}
+.preset-switch{display:flex;gap:8px}
 .actions{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
 
 /* GESTIONALE */
@@ -155,7 +156,7 @@ section.active{display:block}
   .service-row{grid-template-columns:28px 1fr 64px;grid-template-rows:auto auto;gap:4px 8px;padding:10px 0}
   .service-row input[type=checkbox]{grid-column:1;grid-row:1;align-self:center}
   .service-row .svc-name{grid-column:2;grid-row:1;font-size:13px;line-height:1.3}
-  .service-row .svc-price{grid-column:3;grid-row:1;font-size:12px;align-self:center}
+  .service-row .svc-price{grid-column:3;grid-row:1;font-size:12px;align-self:center;width:60px;padding:4px 6px}
   .service-row input[type=text]{grid-column:1/-1;grid-row:2;font-size:13px;display:block;width:100%;padding:5px 8px}
   .totale-bar{flex-direction:column;align-items:flex-start;gap:12px;padding:16px}
   .totale-bar>div:last-child{align-self:flex-end;text-align:right}
@@ -214,6 +215,12 @@ section.active{display:block}
   <div class="section-title">Nuovo Preventivo</div>
 
   <div class="card">
+    <div class="row" style="margin-bottom:14px">
+      <div class="field" style="max-width:280px">
+        <label>Tariffario</label>
+        <div class="preset-switch" id="preventivo-preset-switch"></div>
+      </div>
+    </div>
     <div class="row">
       <div class="field"><label>Nome Artista</label><input type="text" id="p-artista" placeholder="Inserisci nome artista"></div>
       <div class="field"><label>Nome Brano / Album</label><input type="text" id="p-brano" placeholder="Inserisci titolo canzone o album"></div>
@@ -290,7 +297,8 @@ section.active{display:block}
 <!-- ═══════════════ TARIFFE ═══════════════ -->
 <section id="sec-tariffe">
   <div class="section-title">Tariffe & Prezzi</div>
-  <p style="color:var(--text2);font-size:14px;margin-bottom:20px">Modifica i prezzi base. Le modifiche si applicano ai nuovi preventivi.</p>
+  <p style="color:var(--text2);font-size:14px;margin-bottom:12px">Modifica i prezzi base di ciascun tariffario. Le modifiche si applicano ai nuovi preventivi creati con quel tariffario.</p>
+  <div class="preset-switch" id="tariffe-preset-switch" style="margin-bottom:20px"></div>
   <div class="tariffe-grid" id="tariffe-grid"></div>
   <div class="actions" style="margin-top:20px">
     <button class="btn btn-primary" onclick="salvaTariffe()">Salva tariffe</button>
@@ -386,64 +394,122 @@ let state = {
   studioInfo: {name:'DUB Studio',city:'',email:''},
   scontoStep: 2,
   scontoMax: 35,
-  tariffe: {},
+  tariffari: {new:{}, old:{}}, // override per-preset, sparse sopra TARIFFARI_DEFAULT
+  tariffarioAttivo: 'new',      // preset attivo nel form Nuovo Preventivo
   preventivi: [],
   currentEdit: null,
   trackit: {},
 };
 
 // ═══════════ SERVICE DEFINITIONS ═══════════
-const DEFAULT_TARIFFE = {
-  inclusive: [
-    {id:'rec_voci',       name:'Rec Voci',                  price:40},
-    {id:'rec_chitarre',   name:'Rec Chitarre Elettriche',   price:15},
-    {id:'rec_basso',      name:'Rec Basso / MIDI',          price:10},
-    {id:'batterie_midi',  name:'Batterie MIDI',             price:10},
-    {id:'editing_voci',   name:'Editing Voci',              price:10},
-    {id:'editing_chit',   name:'Editing Chitarre',          price:5},
-    {id:'editing_basso',  name:'Editing Basso',             price:5},
-    {id:'arrangiamento',  name:'Arrangiamento',             price:50},
-    {id:'rec_batt_reali', name:'Rec Batterie Reali',        price:70},
-    {id:'edit_batt',      name:'Editing Batterie Reali',    price:30},
-    {id:'post_live',      name:'Post-Produzione per Live',  price:20},
-    {id:'sound_design',   name:'Sound Design',              price:5},
-    {id:'live_prog',      name:'Live Programming',          price:30},
-    {id:'comp_elett',     name:'Composizione Elettronica',  price:50},
-    {id:'mix',            name:'Mix',                       price:70},
-    {id:'rev_mix',        name:'Revisione Mix (extra)',      price:25},
-    {id:'master_1',       name:'Master 1 piattaforma',      price:30},
-    {id:'master_2',       name:'Master 2 piattaforme',      price:25},
-    {id:'master_3',       name:'Master 3 piattaforme',      price:28},
-    {id:'master_4',       name:'Master 4 piattaforme',      price:30},
-    {id:'rev_master',     name:'Revisione Master (extra)',   price:20},
-  ],
-  extra: [
-    {id:'x_rev_mix',    name:'Revisione Mix Extra',    price:30},
-    {id:'x_rev_master', name:'Revisione Master Extra', price:30},
-  ],
-  session: [
-    {id:'s_comp_batt',  name:'Composizione Batterie',        price:45},
-    {id:'s_comp_chit',  name:'Composizione Chitarre',        price:50},
-    {id:'s_comp_basso', name:'Composizione Basso',           price:20},
-    {id:'s_comp_amb',   name:'Composizione Ambient',         price:20},
-    {id:'s_comp_orch',  name:'Composizione Orchestra',       price:40},
-    {id:'s_comp_piano', name:'Composizione Piano',           price:20},
-    {id:'s_arr',        name:'Arrangiamento',                price:40},
-    {id:'s_rec_batt',   name:'Registrazione Batterie DW',    price:70},
-    {id:'s_edit_batt',  name:'Editing Batterie Reali DW',    price:15},
-    {id:'s_mix_batt',   name:'Mix Batterie Reali DW',        price:15},
-    {id:'s_video',      name:'Videoclip',                    price:100},
-  ]
+const TARIFFARIO_LABELS = {new:'Nuovo', old:'Vecchio'};
+
+const TARIFFARI_DEFAULT = {
+  new: {
+    inclusive: [
+      {id:'rec_voci',       name:'Rec Voci',                  price:80},
+      {id:'rec_chitarre',   name:'Rec Chitarre Elettriche',   price:50},
+      {id:'rec_basso',      name:'Rec Basso / MIDI',          price:40},
+      {id:'batterie_midi',  name:'Batterie MIDI',             price:60},
+      {id:'editing_voci',   name:'Editing Voci',              price:50},
+      {id:'editing_chit',   name:'Editing Chitarre',          price:30},
+      {id:'editing_basso',  name:'Editing Basso',             price:30},
+      {id:'arrangiamento',  name:'Arrangiamento',             price:120},
+      {id:'rec_batt_reali', name:'Rec Batterie Reali',        price:150},
+      {id:'edit_batt',      name:'Editing Batterie Reali',    price:90},
+      {id:'post_live',      name:'Post-Produzione per Live',  price:80},
+      {id:'sound_design',   name:'Sound Design',              price:50},
+      {id:'live_prog',      name:'Live Programming',          price:100},
+      {id:'comp_elett',     name:'Composizione Elettronica',  price:100},
+      {id:'mix',            name:'Mix',                       price:130},
+      {id:'rev_mix',        name:'Revisione Mix (extra)',      price:50},
+      {id:'master_1',       name:'Master 1 piattaforma',      price:60},
+      {id:'master_2',       name:'Master 2 piattaforme',      price:70},
+      {id:'master_3',       name:'Master 3 piattaforme',      price:80},
+      {id:'master_4',       name:'Master 4 piattaforme',      price:90},
+      {id:'rev_master',     name:'Revisione Master (extra)',   price:50},
+    ],
+    extra: [
+      {id:'x_rev_mix',    name:'Revisione Mix Extra',    price:50},
+      {id:'x_rev_master', name:'Revisione Master Extra', price:50},
+    ],
+    session: [
+      {id:'s_comp_batt',  name:'Composizione Batterie',        price:80},
+      {id:'s_comp_chit',  name:'Composizione Chitarre',        price:80},
+      {id:'s_comp_basso', name:'Composizione Basso',           price:60},
+      {id:'s_comp_amb',   name:'Composizione Ambient',         price:70},
+      {id:'s_comp_orch',  name:'Composizione Orchestra',       price:120},
+      {id:'s_comp_piano', name:'Composizione Piano',           price:70},
+      {id:'s_arr',        name:'Arrangiamento',                price:100},
+      {id:'s_rec_batt',   name:'Registrazione Batterie DW',    price:150},
+      {id:'s_edit_batt',  name:'Editing Batterie Reali DW',    price:60},
+      {id:'s_mix_batt',   name:'Mix Batterie Reali DW',        price:60},
+      {id:'s_video',      name:'Videoclip',                    price:200},
+    ]
+  },
+  old: {
+    inclusive: [
+      {id:'rec_voci',       name:'Rec Voci',                  price:40},
+      {id:'rec_chitarre',   name:'Rec Chitarre Elettriche',   price:15},
+      {id:'rec_basso',      name:'Rec Basso / MIDI',          price:10},
+      {id:'batterie_midi',  name:'Batterie MIDI',             price:10},
+      {id:'editing_voci',   name:'Editing Voci',              price:10},
+      {id:'editing_chit',   name:'Editing Chitarre',          price:5},
+      {id:'editing_basso',  name:'Editing Basso',             price:5},
+      {id:'arrangiamento',  name:'Arrangiamento',             price:50},
+      {id:'rec_batt_reali', name:'Rec Batterie Reali',        price:70},
+      {id:'edit_batt',      name:'Editing Batterie Reali',    price:30},
+      {id:'post_live',      name:'Post-Produzione per Live',  price:20},
+      {id:'sound_design',   name:'Sound Design',              price:5},
+      {id:'live_prog',      name:'Live Programming',          price:30},
+      {id:'comp_elett',     name:'Composizione Elettronica',  price:50},
+      {id:'mix',            name:'Mix',                       price:70},
+      {id:'rev_mix',        name:'Revisione Mix (extra)',      price:25},
+      {id:'master_1',       name:'Master 1 piattaforma',      price:30},
+      {id:'master_2',       name:'Master 2 piattaforme',      price:25},
+      {id:'master_3',       name:'Master 3 piattaforme',      price:28},
+      {id:'master_4',       name:'Master 4 piattaforme',      price:30},
+      {id:'rev_master',     name:'Revisione Master (extra)',   price:20},
+    ],
+    extra: [
+      {id:'x_rev_mix',    name:'Revisione Mix Extra',    price:30},
+      {id:'x_rev_master', name:'Revisione Master Extra', price:30},
+    ],
+    session: [
+      {id:'s_comp_batt',  name:'Composizione Batterie',        price:45},
+      {id:'s_comp_chit',  name:'Composizione Chitarre',        price:50},
+      {id:'s_comp_basso', name:'Composizione Basso',           price:20},
+      {id:'s_comp_amb',   name:'Composizione Ambient',         price:20},
+      {id:'s_comp_orch',  name:'Composizione Orchestra',       price:40},
+      {id:'s_comp_piano', name:'Composizione Piano',           price:20},
+      {id:'s_arr',        name:'Arrangiamento',                price:40},
+      {id:'s_rec_batt',   name:'Registrazione Batterie DW',    price:70},
+      {id:'s_edit_batt',  name:'Editing Batterie Reali DW',    price:15},
+      {id:'s_mix_batt',   name:'Mix Batterie Reali DW',        price:15},
+      {id:'s_video',      name:'Videoclip',                    price:100},
+    ]
+  }
 };
 
-function getTariffe() {
-  const t = state.tariffe;
+function getTariffe(presetId) {
+  const id = presetId || state.tariffarioAttivo || 'new';
+  const base = TARIFFARI_DEFAULT[id] || TARIFFARI_DEFAULT.new;
+  const t = (state.tariffari && state.tariffari[id]) || {};
   const merge = (arr) => arr.map(s => ({...s, price: t[s.id] ?? s.price}));
   return {
-    inclusive: merge(DEFAULT_TARIFFE.inclusive),
-    extra: merge(DEFAULT_TARIFFE.extra),
-    session: merge(DEFAULT_TARIFFE.session),
+    inclusive: merge(base.inclusive),
+    extra: merge(base.extra),
+    session: merge(base.session),
   };
+}
+
+// Prezzo effettivo di una riga nel form preventivo: legge l'input editabile
+// (che può essere stato personalizzato a mano per questo singolo lavoro),
+// con fallback al prezzo del tariffario selezionato.
+function getRowPrice(svc) {
+  const el = document.getElementById('price_'+svc.id);
+  if (el) { const v = parseFloat(el.value); return isNaN(v) ? svc.price : v; }
+  return svc.price;
 }
 
 // ═══════════ STORAGE ═══════════
@@ -453,6 +519,22 @@ function saveLocal() {
 function loadLocal() {
   const raw = localStorage.getItem(STORAGE_KEY);
   if (raw) try { Object.assign(state, JSON.parse(raw)); } catch(e){}
+  migrateTariffe();
+}
+
+// Migra il vecchio state.tariffe (piatto, un solo listino) al nuovo
+// state.tariffari.{new,old}. Le modifiche fatte finora vengono preservate
+// come override del preset "Nuovo"; il preset "Vecchio" parte pulito dai
+// default del PDF vecchio/nuovo.
+function migrateTariffe() {
+  if (!state.tariffari || typeof state.tariffari !== 'object') state.tariffari = {};
+  if (!state.tariffari.new) state.tariffari.new = {};
+  if (!state.tariffari.old) state.tariffari.old = {};
+  if (state.tariffe && Object.keys(state.tariffe).length) {
+    state.tariffari.new = {...state.tariffe, ...state.tariffari.new};
+    delete state.tariffe;
+  }
+  if (!state.tariffarioAttivo) state.tariffarioAttivo = 'new';
 }
 
 // ═══════════ GITHUB ═══════════
@@ -507,7 +589,7 @@ async function syncNow() {
       }
     }
     // Push current state
-    await ghFetch('PUT', {preventivi: state.preventivi, tariffe: state.tariffe});
+    await ghFetch('PUT', {preventivi: state.preventivi, tariffari: state.tariffari});
     saveLocal();
     el.textContent = '✓ Sincronizzato';
     setTimeout(()=>el.textContent='',3000);
@@ -522,9 +604,16 @@ async function loadFromGitHub() {
   const res = await ghFetch('GET');
   if (res?.data) {
     if (res.data.preventivi) state.preventivi = res.data.preventivi;
-    if (res.data.tariffe) state.tariffe = res.data.tariffe;
+    if (res.data.tariffari) state.tariffari = res.data.tariffari;
+    else if (res.data.tariffe) state.tariffe = res.data.tariffe; // dato legacy, migrato sotto
     if (res.data.trackit) state.trackit = res.data.trackit;
+    migrateTariffe();
     saveLocal();
+    renderServiceTable();
+    renderTariffe();
+    renderPresetSwitch('preventivo-preset-switch', state.tariffarioAttivo, 'selezionaPresetPreventivo');
+    renderPresetSwitch('tariffe-preset-switch', tariffeEditingPreset, 'selezionaPresetTariffe');
+    ricalcola();
   }
 }
 
@@ -554,6 +643,8 @@ function cambiaPin() {
 function initApp() {
   loadGhConfigUI();
   loadStudioInfoUI();
+  renderPresetSwitch('preventivo-preset-switch', state.tariffarioAttivo, 'selezionaPresetPreventivo');
+  renderPresetSwitch('tariffe-preset-switch', tariffeEditingPreset, 'selezionaPresetTariffe');
   renderServiceTable();
   ricalcola();
   renderGestionale();
@@ -573,7 +664,7 @@ function showSection(id, btn) {
 
 // ═══════════ SERVICE TABLE ═══════════
 function renderServiceTable() {
-  const t = getTariffe();
+  const t = getTariffe(state.tariffarioAttivo);
   renderGroup('svc-inclusive', t.inclusive, true);
   renderGroup('svc-extra', t.extra, false);
   renderGroup('svc-session', t.session, false);
@@ -591,11 +682,34 @@ function renderGroup(containerId, services, withNote) {
     row.innerHTML = `
       <input type="checkbox" id="chk_${svc.id}" onchange="ricalcola()">
       <label for="chk_${svc.id}" class="svc-name" style="cursor:pointer">${svc.name}</label>
-      <span class="svc-price">€${svc.price}</span>
+      <input type="number" class="svc-price" id="price_${svc.id}" value="${svc.price}" min="0" step="1" title="Prezzo per questo preventivo (modificabile)" oninput="ricalcola()">
       <input type="text" placeholder="Variante / Note" id="note_${svc.id}" style="font-size:13px">
     `;
     container.appendChild(row);
   });
+}
+
+// ═══════════ PRESET SWITCH (Nuovo / Vecchio) ═══════════
+function renderPresetSwitch(containerId, activeId, onSelectFnName) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  el.innerHTML = Object.keys(TARIFFARIO_LABELS).map(id => `
+    <button type="button" class="btn btn-sm ${id===activeId?'btn-primary':''}" onclick="${onSelectFnName}('${id}')">${TARIFFARIO_LABELS[id]}</button>
+  `).join('');
+}
+
+function selezionaPresetPreventivo(id) {
+  state.tariffarioAttivo = id;
+  renderPresetSwitch('preventivo-preset-switch', id, 'selezionaPresetPreventivo');
+  renderServiceTable();
+  ricalcola();
+}
+
+let tariffeEditingPreset = 'new';
+function selezionaPresetTariffe(id) {
+  tariffeEditingPreset = id;
+  renderPresetSwitch('tariffe-preset-switch', id, 'selezionaPresetTariffe');
+  renderTariffe();
 }
 
 // ═══════════ CALCOLO ═══════════
@@ -607,17 +721,17 @@ function getSconto(nbrani) {
 
 function ricalcola() {
   const nbrani = parseInt(document.getElementById('p-nbrani').value) || 1;
-  const t = getTariffe();
+  const t = getTariffe(state.tariffarioAttivo);
   let totIncl = 0, totExtra = 0, totSession = 0;
 
   t.inclusive.forEach(svc => {
-    if (document.getElementById('chk_'+svc.id)?.checked) totIncl += svc.price;
+    if (document.getElementById('chk_'+svc.id)?.checked) totIncl += getRowPrice(svc);
   });
   t.extra.forEach(svc => {
-    if (document.getElementById('chk_'+svc.id)?.checked) totExtra += svc.price;
+    if (document.getElementById('chk_'+svc.id)?.checked) totExtra += getRowPrice(svc);
   });
   t.session.forEach(svc => {
-    if (document.getElementById('chk_'+svc.id)?.checked) totSession += svc.price;
+    if (document.getElementById('chk_'+svc.id)?.checked) totSession += getRowPrice(svc);
   });
 
   const sconto = getSconto(nbrani);
@@ -639,20 +753,20 @@ function salvaPreventivo() {
   if (!artista || !brano) { alert('Inserisci nome artista e brano/album'); return; }
 
   const nbrani = parseInt(document.getElementById('p-nbrani').value) || 1;
-  const t = getTariffe();
+  const t = getTariffe(state.tariffarioAttivo);
   const selIncl=[], selExtra=[], selSession=[];
 
   t.inclusive.forEach(svc => {
     if (document.getElementById('chk_'+svc.id)?.checked)
-      selIncl.push({...svc, note: document.getElementById('note_'+svc.id)?.value||''});
+      selIncl.push({...svc, price: getRowPrice(svc), note: document.getElementById('note_'+svc.id)?.value||''});
   });
   t.extra.forEach(svc => {
     if (document.getElementById('chk_'+svc.id)?.checked)
-      selExtra.push({...svc, note: document.getElementById('note_'+svc.id)?.value||''});
+      selExtra.push({...svc, price: getRowPrice(svc), note: document.getElementById('note_'+svc.id)?.value||''});
   });
   t.session.forEach(svc => {
     if (document.getElementById('chk_'+svc.id)?.checked)
-      selSession.push({...svc, note: document.getElementById('note_'+svc.id)?.value||''});
+      selSession.push({...svc, price: getRowPrice(svc), note: document.getElementById('note_'+svc.id)?.value||''});
   });
 
   const sconto = getSconto(nbrani);
@@ -664,6 +778,7 @@ function salvaPreventivo() {
   const prev = {
     id: state.currentEdit || Date.now().toString(),
     artista, brano, nbrani,
+    tariffarioBase: state.tariffarioAttivo,
     selIncl, selExtra, selSession,
     sconto, totale,
     revMixIncluse: parseInt(document.getElementById('p-rev-mix').value)||1,
@@ -695,7 +810,7 @@ function salvaPreventivo() {
 
   saveLocal();
   showSaveBanner();
-  ghFetch('PUT',{preventivi:state.preventivi,tariffe:state.tariffe}).catch(()=>{});
+  ghFetch('PUT',{preventivi:state.preventivi,tariffari:state.tariffari}).catch(()=>{});
   renderGestionale();
   resetForm();
 }
@@ -706,9 +821,11 @@ function resetForm() {
   document.getElementById('p-nbrani').value='1';
   document.getElementById('p-rev-mix').value='1';
   document.getElementById('p-rev-master').value='1';
-  document.querySelectorAll('#sec-preventivo input[type=checkbox]').forEach(c=>c.checked=false);
-  document.querySelectorAll('#sec-preventivo input[type=text]').forEach(i=>i.value='');
   state.currentEdit = null;
+  // re-render la tabella servizi: azzera checkbox/note e riporta i prezzi
+  // al listino del tariffario attivo, cancellando eventuali override
+  // personalizzati lasciati da un preventivo appena modificato
+  renderServiceTable();
   ricalcola();
 }
 
@@ -793,7 +910,7 @@ function openDetail(id) {
   panel.innerHTML = `
     <button class="close-btn" onclick="closeDetail()">×</button>
     <h2>${p.artista}</h2>
-    <div class="dp-sub">${p.brano} · ${p.nbrani} brano${p.nbrani>1?'i':''} · ${data}</div>
+    <div class="dp-sub">${p.brano} · ${p.nbrani} brano${p.nbrani>1?'i':''} · ${data}${p.tariffarioBase?` · Tariffario ${TARIFFARIO_LABELS[p.tariffarioBase]||p.tariffarioBase}`:''}</div>
 
     <div class="dp-section">
       <h3>Servizi inclusi</h3>
@@ -860,7 +977,7 @@ function closeDetail(e) {
 
 function setStato(id, stato) {
   const p = state.preventivi.find(x=>x.id===id);
-  if (p) { p.stato=stato; saveLocal(); ghFetch('PUT',{preventivi:state.preventivi,tariffe:state.tariffe}).catch(()=>{}); openDetail(id); }
+  if (p) { p.stato=stato; saveLocal(); ghFetch('PUT',{preventivi:state.preventivi,tariffari:state.tariffari}).catch(()=>{}); openDetail(id); }
 }
 
 function saveNoteInterne(id, val) {
@@ -868,7 +985,7 @@ function saveNoteInterne(id, val) {
   if (!p) return;
   p.noteInterne = val;
   saveLocal();
-  ghFetch('PUT',{preventivi:state.preventivi,tariffe:state.tariffe}).catch(()=>{});
+  ghFetch('PUT',{preventivi:state.preventivi,tariffari:state.tariffari}).catch(()=>{});
   showSaveBanner();
 }
 
@@ -878,13 +995,13 @@ function saveIncassatoManuale(id, val) {
   const v = val.trim();
   p.incassatoManuale = v==='' ? null : Math.max(0, Number(v)||0);
   saveLocal();
-  ghFetch('PUT',{preventivi:state.preventivi,tariffe:state.tariffe}).catch(()=>{});
+  ghFetch('PUT',{preventivi:state.preventivi,tariffari:state.tariffari}).catch(()=>{});
   showSaveBanner();
 }
 
 function changeRev(id, prop, delta) {
   const p = state.preventivi.find(x=>x.id===id);
-  if (p) { p[prop]=Math.max(0,p[prop]+delta); saveLocal(); ghFetch('PUT',{preventivi:state.preventivi,tariffe:state.tariffe}).catch(()=>{}); openDetail(id); }
+  if (p) { p[prop]=Math.max(0,p[prop]+delta); saveLocal(); ghFetch('PUT',{preventivi:state.preventivi,tariffari:state.tariffari}).catch(()=>{}); openDetail(id); }
 }
 
 function editPreventivo(id) {
@@ -896,15 +1013,20 @@ function editPreventivo(id) {
   document.getElementById('p-rev-mix').value = p.revMixIncluse;
   document.getElementById('p-rev-master').value = p.revMasterIncluse;
 
-  // reset all checkboxes
-  document.querySelectorAll('#sec-preventivo input[type=checkbox]').forEach(c=>c.checked=false);
-  document.querySelectorAll('#sec-preventivo input[type=text]').forEach(i=>i.value='');
+  // riseleziona il tariffario usato per questo preventivo, così la tabella
+  // servizi riparte dai prezzi giusti prima di riapplicare gli eventuali
+  // prezzi personalizzati salvati riga per riga
+  state.tariffarioAttivo = p.tariffarioBase || state.tariffarioAttivo;
+  renderPresetSwitch('preventivo-preset-switch', state.tariffarioAttivo, 'selezionaPresetPreventivo');
+  renderServiceTable();
 
   [...p.selIncl,...p.selExtra,...p.selSession].forEach(s=>{
     const chk = document.getElementById('chk_'+s.id);
     const note = document.getElementById('note_'+s.id);
+    const priceEl = document.getElementById('price_'+s.id);
     if (chk) chk.checked=true;
     if (note) note.value=s.note||'';
+    if (priceEl) priceEl.value=s.price;
   });
   state.currentEdit = id;
   document.getElementById('detail-overlay').classList.remove('open');
@@ -916,7 +1038,7 @@ function eliminaPreventivo(id) {
   if (!confirm('Eliminare questo preventivo?')) return;
   state.preventivi = state.preventivi.filter(p=>p.id!==id);
   saveLocal();
-  ghFetch('PUT',{preventivi:state.preventivi,tariffe:state.tariffe}).catch(()=>{});
+  ghFetch('PUT',{preventivi:state.preventivi,tariffari:state.tariffari}).catch(()=>{});
   document.getElementById('detail-overlay').classList.remove('open');
   renderGestionale();
 }
@@ -924,10 +1046,12 @@ function eliminaPreventivo(id) {
 // ═══════════ TARIFFE ═══════════
 function renderTariffe() {
   const grid = document.getElementById('tariffe-grid');
+  const preset = TARIFFARI_DEFAULT[tariffeEditingPreset];
+  const overrides = (state.tariffari && state.tariffari[tariffeEditingPreset]) || {};
   const groups = [
-    {title:'Pacchetto Studio', items: DEFAULT_TARIFFE.inclusive},
-    {title:'Extra', items: DEFAULT_TARIFFE.extra},
-    {title:'Session Artist', items: DEFAULT_TARIFFE.session},
+    {title:'Pacchetto Studio', items: preset.inclusive},
+    {title:'Extra', items: preset.extra},
+    {title:'Session Artist', items: preset.session},
   ];
   grid.innerHTML = groups.map(g=>`
     <div class="tariffe-group">
@@ -935,33 +1059,36 @@ function renderTariffe() {
       ${g.items.map(s=>`
         <div class="tariffe-row">
           <span class="tr-name">${s.name}</span>
-          <input type="number" id="t_${s.id}" value="${state.tariffe[s.id]??s.price}" min="0" step="1">
+          <input type="number" id="t_${s.id}" value="${overrides[s.id]??s.price}" min="0" step="1">
           <span class="tr-unit">€</span>
         </div>`).join('')}
     </div>`).join('');
 }
 
 function salvaTariffe() {
-  const all = [...DEFAULT_TARIFFE.inclusive,...DEFAULT_TARIFFE.extra,...DEFAULT_TARIFFE.session];
+  const preset = TARIFFARI_DEFAULT[tariffeEditingPreset];
+  const all = [...preset.inclusive,...preset.extra,...preset.session];
+  if (!state.tariffari[tariffeEditingPreset]) state.tariffari[tariffeEditingPreset] = {};
   all.forEach(s=>{
     const el = document.getElementById('t_'+s.id);
-    if (el) state.tariffe[s.id] = parseFloat(el.value)||0;
+    if (el) state.tariffari[tariffeEditingPreset][s.id] = parseFloat(el.value)||0;
   });
   state.scontoStep = parseFloat(document.getElementById('sconto-step').value)||2;
   state.scontoMax = parseFloat(document.getElementById('sconto-max').value)||35;
   saveLocal();
-  ghFetch('PUT',{preventivi:state.preventivi,tariffe:state.tariffe}).catch(()=>{});
-  renderServiceTable();
+  ghFetch('PUT',{preventivi:state.preventivi,tariffari:state.tariffari}).catch(()=>{});
+  if (tariffeEditingPreset === state.tariffarioAttivo) renderServiceTable();
   ricalcola();
   showSaveBanner();
 }
 
 function resetTariffe() {
-  if (!confirm('Ripristinare i prezzi di default?')) return;
-  state.tariffe = {};
+  const label = TARIFFARIO_LABELS[tariffeEditingPreset];
+  if (!confirm(`Ripristinare i prezzi di default del tariffario "${label}"?`)) return;
+  state.tariffari[tariffeEditingPreset] = {};
   saveLocal();
   renderTariffe();
-  renderServiceTable();
+  if (tariffeEditingPreset === state.tariffarioAttivo) renderServiceTable();
   ricalcola();
 }
 
@@ -1007,16 +1134,16 @@ function buildPrevData() {
   const artista = document.getElementById('p-artista').value.trim();
   const brano = document.getElementById('p-brano').value.trim();
   const nbrani = parseInt(document.getElementById('p-nbrani').value)||1;
-  const t = getTariffe();
+  const t = getTariffe(state.tariffarioAttivo);
   const selIncl=[], selExtra=[], selSession=[];
-  t.inclusive.forEach(svc=>{if(document.getElementById('chk_'+svc.id)?.checked) selIncl.push({...svc,note:document.getElementById('note_'+svc.id)?.value||''});});
-  t.extra.forEach(svc=>{if(document.getElementById('chk_'+svc.id)?.checked) selExtra.push({...svc,note:document.getElementById('note_'+svc.id)?.value||''});});
-  t.session.forEach(svc=>{if(document.getElementById('chk_'+svc.id)?.checked) selSession.push({...svc,note:document.getElementById('note_'+svc.id)?.value||''});});
+  t.inclusive.forEach(svc=>{if(document.getElementById('chk_'+svc.id)?.checked) selIncl.push({...svc,price:getRowPrice(svc),note:document.getElementById('note_'+svc.id)?.value||''});});
+  t.extra.forEach(svc=>{if(document.getElementById('chk_'+svc.id)?.checked) selExtra.push({...svc,price:getRowPrice(svc),note:document.getElementById('note_'+svc.id)?.value||''});});
+  t.session.forEach(svc=>{if(document.getElementById('chk_'+svc.id)?.checked) selSession.push({...svc,price:getRowPrice(svc),note:document.getElementById('note_'+svc.id)?.value||''});});
   const sconto = getSconto(nbrani);
   const totale = Math.round(selIncl.reduce((s,v)=>s+v.price,0)*nbrani*(1-sconto/100)+selExtra.reduce((s,v)=>s+v.price,0)+selSession.reduce((s,v)=>s+v.price,0));
   const revMixIncluse = parseInt(document.getElementById('p-rev-mix').value)||1;
   const revMasterIncluse = parseInt(document.getElementById('p-rev-master').value)||1;
-  return {artista,brano,nbrani,selIncl,selExtra,selSession,sconto,totale,revMixIncluse,revMasterIncluse};
+  return {artista,brano,nbrani,tariffarioBase:state.tariffarioAttivo,selIncl,selExtra,selSession,sconto,totale,revMixIncluse,revMasterIncluse};
 }
 
 function esportaDocx() {
