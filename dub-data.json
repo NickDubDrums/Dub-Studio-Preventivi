@@ -1755,7 +1755,7 @@
                 {
                   "id": "mtc44jaytw0ka",
                   "label": "Arrangiamento",
-                  "done": false
+                  "done": true
                 }
               ]
             },
@@ -1775,7 +1775,7 @@
               }
             }
           ],
-          "activePhaseIndex": 0
+          "activePhaseIndex": 1
         },
         {
           "id": "mtc44jay7b8jq",
