@@ -1532,7 +1532,7 @@
                 {
                   "id": "mtc44jayemrx9",
                   "label": "Editing Voci",
-                  "done": false
+                  "done": true
                 },
                 {
                   "id": "mtc44jay7oe5b",
@@ -1613,7 +1613,7 @@
                 {
                   "id": "mtc44jayq5s59",
                   "label": "Arrangiamento",
-                  "done": true
+                  "done": false
                 }
               ]
             },
