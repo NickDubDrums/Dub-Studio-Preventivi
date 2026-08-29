@@ -1342,7 +1342,7 @@
                 {
                   "id": "mtc44jaytjww4",
                   "label": "Arrangiamento",
-                  "done": false
+                  "done": true
                 }
               ]
             },
@@ -1362,7 +1362,7 @@
               }
             }
           ],
-          "activePhaseIndex": 0
+          "activePhaseIndex": 1
         },
         {
           "id": "mtc44jayi48rd",
