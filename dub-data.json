@@ -1341,11 +1341,6 @@
               "label": "Produzione",
               "elements": [
                 {
-                  "id": "mtf25hjg78ztf",
-                  "label": "Rec Voci",
-                  "done": false
-                },
-                {
                   "id": "mtf25wo42acdk",
                   "label": "Arrangiamento",
                   "done": false
@@ -1424,11 +1419,6 @@
                 {
                   "id": "mtf25hjgzcxp6",
                   "label": "Rec Voci",
-                  "done": false
-                },
-                {
-                  "id": "mtf25hjgt490w",
-                  "label": "Editing Voci",
                   "done": false
                 },
                 {
