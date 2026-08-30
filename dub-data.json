@@ -1533,12 +1533,12 @@
                 {
                   "id": "mtf25hjg5dknu",
                   "label": "Editing Voci",
-                  "done": false
+                  "done": true
                 },
                 {
                   "id": "mtf25hjgbou9t",
                   "label": "Arrangiamento",
-                  "done": false
+                  "done": true
                 }
               ]
             },
@@ -1549,7 +1549,7 @@
                 {
                   "id": "mtf25hjglyxkf",
                   "label": "Mix completato",
-                  "done": false
+                  "done": true
                 }
               ],
               "revisions": {
@@ -1558,7 +1558,7 @@
               }
             }
           ],
-          "activePhaseIndex": 0
+          "activePhaseIndex": 1
         },
         {
           "id": "mtf25hjgjpwf5",
