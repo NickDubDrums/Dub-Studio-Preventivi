@@ -337,45 +337,7 @@
       "dataModifica": "2026-04-07T15:24:43.119Z"
     }
   ],
-  "tariffari": {
-    "new": {
-      "rec_voci": 80,
-      "rec_chitarre": 50,
-      "rec_basso": 40,
-      "batterie_midi": 60,
-      "editing_voci": 50,
-      "editing_chit": 30,
-      "editing_basso": 30,
-      "arrangiamento": 120,
-      "rec_batt_reali": 150,
-      "edit_batt": 90,
-      "post_live": 50,
-      "sound_design": 30,
-      "live_prog": 50,
-      "comp_elett": 100,
-      "mix": 130,
-      "rev_mix": 50,
-      "master_1": 60,
-      "master_2": 70,
-      "master_3": 80,
-      "master_4": 90,
-      "rev_master": 50,
-      "x_rev_mix": 30,
-      "x_rev_master": 30,
-      "s_comp_batt": 80,
-      "s_comp_chit": 80,
-      "s_comp_basso": 60,
-      "s_comp_amb": 70,
-      "s_comp_orch": 120,
-      "s_comp_piano": 70,
-      "s_arr": 100,
-      "s_rec_batt": 150,
-      "s_edit_batt": 60,
-      "s_mix_batt": 60,
-      "s_video": 200
-    },
-    "old": {}
-  },
+  "tariffe": {},
   "trackit": {
     "1775576021520": {
       "startedAt": "2026-07-14T09:48:59.803Z",
@@ -1354,6 +1316,613 @@
                 {
                   "id": "mrnr86xv06sc8",
                   "label": "Master completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        }
+      ]
+    },
+    "1788048897084": {
+      "startedAt": "2026-08-30T00:15:05.740Z",
+      "songs": [
+        {
+          "id": "mtf25hjgnrtsz",
+          "title": "Parte Del Tuo Mondo",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mtf25hjg78ztf",
+                  "label": "Rec Voci",
+                  "done": false
+                },
+                {
+                  "id": "mtf25hjghaaxp",
+                  "label": "Editing Voci",
+                  "done": false
+                },
+                {
+                  "id": "mtf25hjgovak4",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mtf25hjgint0d",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mtf25hjgm38if",
+          "title": "Il Mondo è Mio",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mtf25hjgu3su5",
+                  "label": "Rec Voci",
+                  "done": false
+                },
+                {
+                  "id": "mtf25hjg9uscz",
+                  "label": "Editing Voci",
+                  "done": false
+                },
+                {
+                  "id": "mtf25hjgu7ztz",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mtf25hjgg5tz3",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mtf25hjgeotrq",
+          "title": "Cos'è",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mtf25hjgzcxp6",
+                  "label": "Rec Voci",
+                  "done": false
+                },
+                {
+                  "id": "mtf25hjgt490w",
+                  "label": "Editing Voci",
+                  "done": false
+                },
+                {
+                  "id": "mtf25hjg8b1op",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mtf25hjgs9hag",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mtf25hjgn5le3",
+          "title": "Il Cerchio Della Vita",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mtf25hjgoovvy",
+                  "label": "Rec Voci",
+                  "done": false
+                },
+                {
+                  "id": "mtf25hjg1yv5r",
+                  "label": "Editing Voci",
+                  "done": false
+                },
+                {
+                  "id": "mtf25hjgp8xai",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mtf25hjg9wj4e",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mtf25hjg0j75c",
+          "title": "Via Di Qua",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mtf25hjghinhe",
+                  "label": "Rec Voci",
+                  "done": false
+                },
+                {
+                  "id": "mtf25hjg4y5su",
+                  "label": "Editing Voci",
+                  "done": false
+                },
+                {
+                  "id": "mtf25hjgavec9",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mtf25hjg7xkkm",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mtf25hjg9ky8c",
+          "title": "Posso Farcela (Film)",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mtf25hjgyotor",
+                  "label": "Rec Voci",
+                  "done": false
+                },
+                {
+                  "id": "mtf25hjg5dknu",
+                  "label": "Editing Voci",
+                  "done": false
+                },
+                {
+                  "id": "mtf25hjgbou9t",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mtf25hjglyxkf",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mtf25hjgjpwf5",
+          "title": "Posso Farcela (Bolton)",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mtf25hjgdxbei",
+                  "label": "Rec Voci",
+                  "done": false
+                },
+                {
+                  "id": "mtf25hjgig3rm",
+                  "label": "Editing Voci",
+                  "done": false
+                },
+                {
+                  "id": "mtf25hjgjyrfi",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mtf25hjgeto8p",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mtf25hjgcmacj",
+          "title": "Farò Di Te Un Uomo",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mtf25hjgwb4gk",
+                  "label": "Rec Voci",
+                  "done": false
+                },
+                {
+                  "id": "mtf25hjgtvy9p",
+                  "label": "Editing Voci",
+                  "done": false
+                },
+                {
+                  "id": "mtf25hjgxqnxb",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mtf25hjg7ewvf",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mtf25hjg4oqox",
+          "title": "Sei Dentro Di Me",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mtf25hjg3m65h",
+                  "label": "Rec Voci",
+                  "done": false
+                },
+                {
+                  "id": "mtf25hjgd6c7n",
+                  "label": "Editing Voci",
+                  "done": false
+                },
+                {
+                  "id": "mtf25hjg8oqle",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mtf25hjgb43z6",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mtf25hjggaz48",
+          "title": "Ci Sono Anch'io",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mtf25hjgcvao1",
+                  "label": "Rec Voci",
+                  "done": false
+                },
+                {
+                  "id": "mtf25hjgz5b05",
+                  "label": "Editing Voci",
+                  "done": false
+                },
+                {
+                  "id": "mtf25hjgiihni",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mtf25hjgds4u5",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mtf25hjgrlb6o",
+          "title": "Resta Con Me",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mtf25hjg8abc7",
+                  "label": "Rec Voci",
+                  "done": false
+                },
+                {
+                  "id": "mtf25hjgjwx7r",
+                  "label": "Editing Voci",
+                  "done": false
+                },
+                {
+                  "id": "mtf25hjglj58l",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mtf25hjg7x9ud",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mtf25hjg9pwy1",
+          "title": "Madley",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mtf25hjgocnb2",
+                  "label": "Rec Voci",
+                  "done": false
+                },
+                {
+                  "id": "mtf25hjg7cf5p",
+                  "label": "Editing Voci",
+                  "done": false
+                },
+                {
+                  "id": "mtf25hjgoyumb",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mtf25hjgfontu",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mtf25hjghazao",
+          "title": "Non Si Nomina Bruno",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mtf25hjgouyag",
+                  "label": "Rec Voci",
+                  "done": false
+                },
+                {
+                  "id": "mtf25hjgges6p",
+                  "label": "Editing Voci",
+                  "done": false
+                },
+                {
+                  "id": "mtf25hjgdn3sd",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mtf25hjghmpn3",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mtf25hjglawc9",
+          "title": "Splende Sempre Il Sole",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mtf25hjgqkee9",
+                  "label": "Rec Voci",
+                  "done": false
+                },
+                {
+                  "id": "mtf25hjg9pyiz",
+                  "label": "Editing Voci",
+                  "done": false
+                },
+                {
+                  "id": "mtf25hjgoute0",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mtf25hjgmu9nj",
+                  "label": "Mix completato",
                   "done": false
                 }
               ],
