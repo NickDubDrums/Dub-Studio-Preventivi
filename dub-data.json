@@ -1701,7 +1701,7 @@
                 {
                   "id": "mtf25hjgds4u5",
                   "label": "Mix completato",
-                  "done": false
+                  "done": true
                 }
               ],
               "revisions": {
@@ -1763,11 +1763,6 @@
               "id": "produzione",
               "label": "Produzione",
               "elements": [
-                {
-                  "id": "mtf25hjgocnb2",
-                  "label": "Rec Voci",
-                  "done": false
-                },
                 {
                   "id": "mtf25hjg7cf5p",
                   "label": "Editing Voci",
