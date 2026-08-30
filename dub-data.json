@@ -1417,11 +1417,6 @@
               "label": "Produzione",
               "elements": [
                 {
-                  "id": "mtf25hjgzcxp6",
-                  "label": "Rec Voci",
-                  "done": false
-                },
-                {
                   "id": "mtf25hjg8b1op",
                   "label": "Arrangiamento",
                   "done": false
