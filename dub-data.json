@@ -1766,7 +1766,7 @@
                 {
                   "id": "mtf25hjgoyumb",
                   "label": "Arrangiamento",
-                  "done": false
+                  "done": true
                 }
               ]
             },
@@ -1786,7 +1786,7 @@
               }
             }
           ],
-          "activePhaseIndex": 0
+          "activePhaseIndex": 1
         },
         {
           "id": "mtf25hjghazao",
