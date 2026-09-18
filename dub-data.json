@@ -40,7 +40,7 @@
       "revMasterFatte": 0,
       "stato": "approvato",
       "noteInterne": "",
-      "incassatoManuale": null,
+      "incassatoManuale": 300,
       "dataCreazione": "2026-09-18T08:26:26.677Z",
       "dataModifica": "2026-09-18T08:26:26.677Z"
     },
