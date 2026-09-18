@@ -1990,7 +1990,7 @@
                 {
                   "id": "mu6p35itqvt7g",
                   "label": "Arrangiamento",
-                  "done": false
+                  "done": true
                 }
               ]
             },
@@ -2010,7 +2010,7 @@
               }
             }
           ],
-          "activePhaseIndex": 0
+          "activePhaseIndex": 1
         },
         {
           "id": "mu6p35ith3z2a",
@@ -2099,7 +2099,7 @@
                 {
                   "id": "mu6p35itzuy90",
                   "label": "Rec Voci",
-                  "done": false
+                  "done": true
                 },
                 {
                   "id": "mu6p35ity25rv",
