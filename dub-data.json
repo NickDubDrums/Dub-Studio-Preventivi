@@ -754,7 +754,7 @@
                 {
                   "id": "mrkh46fuvwmu0",
                   "label": "Arrangiamento",
-                  "done": false
+                  "done": true
                 }
               ]
             },
@@ -774,7 +774,7 @@
               }
             }
           ],
-          "activePhaseIndex": 0
+          "activePhaseIndex": 1
         },
         {
           "id": "mrkh46fua1217",
@@ -1121,12 +1121,12 @@
                 {
                   "id": "mrkhy2c2rdvy2",
                   "label": "Foley",
-                  "done": false
+                  "done": true
                 },
                 {
                   "id": "mrkxlsq2c4afm",
                   "label": "Musica",
-                  "done": false
+                  "done": true
                 }
               ]
             },
