@@ -1988,11 +1988,6 @@
               "label": "Produzione",
               "elements": [
                 {
-                  "id": "mu6p35it6o6ca",
-                  "label": "Rec Voci",
-                  "done": false
-                },
-                {
                   "id": "mu6p35itqvt7g",
                   "label": "Arrangiamento",
                   "done": false
