@@ -381,45 +381,7 @@
       "dataModifica": "2026-04-07T15:24:43.119Z"
     }
   ],
-  "tariffari": {
-    "new": {
-      "rec_voci": 80,
-      "rec_chitarre": 50,
-      "rec_basso": 40,
-      "batterie_midi": 60,
-      "editing_voci": 50,
-      "editing_chit": 30,
-      "editing_basso": 30,
-      "arrangiamento": 120,
-      "rec_batt_reali": 150,
-      "edit_batt": 90,
-      "post_live": 50,
-      "sound_design": 30,
-      "live_prog": 50,
-      "comp_elett": 100,
-      "mix": 130,
-      "rev_mix": 50,
-      "master_1": 60,
-      "master_2": 70,
-      "master_3": 80,
-      "master_4": 90,
-      "rev_master": 50,
-      "x_rev_mix": 30,
-      "x_rev_master": 30,
-      "s_comp_batt": 80,
-      "s_comp_chit": 80,
-      "s_comp_basso": 60,
-      "s_comp_amb": 70,
-      "s_comp_orch": 120,
-      "s_comp_piano": 70,
-      "s_arr": 100,
-      "s_rec_batt": 150,
-      "s_edit_batt": 60,
-      "s_mix_batt": 60,
-      "s_video": 200
-    },
-    "old": {}
-  },
+  "tariffe": {},
   "trackit": {
     "1775576021520": {
       "startedAt": "2026-07-14T09:48:59.803Z",
@@ -1934,6 +1896,353 @@
               "elements": [
                 {
                   "id": "mtf25hjgmu9nj",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        }
+      ]
+    },
+    "1789719986677": {
+      "startedAt": "2026-09-18T08:26:54.773Z",
+      "songs": [
+        {
+          "id": "mu6p35itrj10c",
+          "title": "Mr Baseball",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mu6p35itr8cto",
+                  "label": "Rec Voci",
+                  "done": false
+                },
+                {
+                  "id": "mu6p35itter8j",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mu6p35itflz79",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mu6p35itzhcme",
+          "title": "+ Siamo + Disneiamo",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mu6p35itiglb4",
+                  "label": "Rec Voci",
+                  "done": false
+                },
+                {
+                  "id": "mu6p35it6roxx",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mu6p35itxwkuv",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mu6p35itavpvy",
+          "title": "Tra Cielo e Terra",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mu6p35it6o6ca",
+                  "label": "Rec Voci",
+                  "done": false
+                },
+                {
+                  "id": "mu6p35itqvt7g",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mu6p35itxx3be",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mu6p35ith3z2a",
+          "title": "Doraemon",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mu6p35it1nj5w",
+                  "label": "Rec Voci",
+                  "done": false
+                },
+                {
+                  "id": "mu6p35it357ns",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mu6p35itnce9f",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mu6p35it20owe",
+          "title": "Tazmania",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mu6p35itchhza",
+                  "label": "Rec Voci",
+                  "done": false
+                },
+                {
+                  "id": "mu6p35itcfwoi",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mu6p35itq14wh",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mu6p35iteqa01",
+          "title": "Candy Candy",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mu6p35itzuy90",
+                  "label": "Rec Voci",
+                  "done": false
+                },
+                {
+                  "id": "mu6p35ity25rv",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mu6p35it5tmla",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mu6p35itewim7",
+          "title": "Sampei",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mu6p35itg7ksx",
+                  "label": "Rec Voci",
+                  "done": false
+                },
+                {
+                  "id": "mu6p35it6869k",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mu6p35it6bloz",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mu6p35it3m2v7",
+          "title": "Power Ranger",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mu6p35it88q61",
+                  "label": "Rec Voci",
+                  "done": false
+                },
+                {
+                  "id": "mu6p35it9u3a8",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mu6p35itfy2lr",
+                  "label": "Mix completato",
+                  "done": false
+                }
+              ],
+              "revisions": {
+                "included": 1,
+                "done": 0
+              }
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "mu6p35it045si",
+          "title": "Pinocchio",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "mu6p35itfrsvd",
+                  "label": "Rec Voci",
+                  "done": false
+                },
+                {
+                  "id": "mu6p35itdt3hf",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mix",
+              "label": "Mix",
+              "elements": [
+                {
+                  "id": "mu6p35itywc5p",
                   "label": "Mix completato",
                   "done": false
                 }
