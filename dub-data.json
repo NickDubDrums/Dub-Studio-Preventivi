@@ -1924,7 +1924,7 @@
                 {
                   "id": "mu6p35itter8j",
                   "label": "Arrangiamento",
-                  "done": false
+                  "done": true
                 }
               ]
             },
@@ -1935,7 +1935,7 @@
                 {
                   "id": "mu6p35itflz79",
                   "label": "Mix completato",
-                  "done": false
+                  "done": true
                 }
               ],
               "revisions": {
@@ -1944,7 +1944,7 @@
               }
             }
           ],
-          "activePhaseIndex": 0
+          "activePhaseIndex": 1
         },
         {
           "id": "mu6p35itzhcme",
