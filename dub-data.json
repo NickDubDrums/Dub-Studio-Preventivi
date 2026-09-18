@@ -1420,7 +1420,7 @@
                 {
                   "id": "mtf25hjgu7ztz",
                   "label": "Arrangiamento",
-                  "done": false
+                  "done": true
                 }
               ]
             },
@@ -1440,7 +1440,7 @@
               }
             }
           ],
-          "activePhaseIndex": 0
+          "activePhaseIndex": 1
         },
         {
           "id": "mtf25hjgeotrq",
