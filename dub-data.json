@@ -1957,7 +1957,7 @@
                 {
                   "id": "mu6p35it6roxx",
                   "label": "Arrangiamento",
-                  "done": false
+                  "done": true
                 }
               ]
             },
@@ -1968,7 +1968,7 @@
                 {
                   "id": "mu6p35itxwkuv",
                   "label": "Mix completato",
-                  "done": false
+                  "done": true
                 }
               ],
               "revisions": {
@@ -1977,7 +1977,7 @@
               }
             }
           ],
-          "activePhaseIndex": 0
+          "activePhaseIndex": 1
         },
         {
           "id": "mu6p35itavpvy",
