@@ -1955,11 +1955,6 @@
               "label": "Produzione",
               "elements": [
                 {
-                  "id": "mu6p35itiglb4",
-                  "label": "Rec Voci",
-                  "done": false
-                },
-                {
                   "id": "mu6p35it6roxx",
                   "label": "Arrangiamento",
                   "done": false
