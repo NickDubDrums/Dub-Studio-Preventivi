@@ -6,7 +6,7 @@
       "brano": "Qualcosa da prendere la notte, Parti, Così così",
       "nbrani": 3,
       "tariffarioBase": "old",
-      "scontoAttivo": true,
+      "scontoAttivo": false,
       "selIncl": [
         {
           "id": "rec_voci",
@@ -46,8 +46,8 @@
       ],
       "selExtra": [],
       "selSession": [],
-      "sconto": 4,
-      "totale": 216,
+      "sconto": 0,
+      "totale": 225,
       "revMixIncluse": 1,
       "revMasterIncluse": 1,
       "revMixFatte": 0,
@@ -56,7 +56,7 @@
       "noteInterne": "",
       "incassatoManuale": null,
       "dataCreazione": "2026-09-30T14:50:14.931Z",
-      "dataModifica": "2026-09-30T14:50:14.933Z"
+      "dataModifica": "2026-09-30T14:51:58.876Z"
     },
     {
       "id": "1789719986677",
