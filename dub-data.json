@@ -439,45 +439,7 @@
       "dataModifica": "2026-04-07T15:24:43.119Z"
     }
   ],
-  "tariffari": {
-    "new": {
-      "rec_voci": 80,
-      "rec_chitarre": 50,
-      "rec_basso": 40,
-      "batterie_midi": 60,
-      "editing_voci": 50,
-      "editing_chit": 30,
-      "editing_basso": 30,
-      "arrangiamento": 50,
-      "rec_batt_reali": 150,
-      "edit_batt": 90,
-      "post_live": 50,
-      "sound_design": 30,
-      "live_prog": 50,
-      "comp_elett": 100,
-      "mix": 70,
-      "rev_mix": 50,
-      "master_1": 60,
-      "master_2": 70,
-      "master_3": 80,
-      "master_4": 90,
-      "rev_master": 50,
-      "x_rev_mix": 30,
-      "x_rev_master": 30,
-      "s_comp_batt": 80,
-      "s_comp_chit": 80,
-      "s_comp_basso": 60,
-      "s_comp_amb": 70,
-      "s_comp_orch": 120,
-      "s_comp_piano": 70,
-      "s_arr": 100,
-      "s_rec_batt": 150,
-      "s_edit_batt": 60,
-      "s_mix_batt": 60,
-      "s_video": 200
-    },
-    "old": {}
-  },
+  "tariffe": {},
   "trackit": {
     "1775576021520": {
       "startedAt": "2026-07-14T09:48:59.803Z",
@@ -2332,6 +2294,125 @@
                 "included": 1,
                 "done": 0
               }
+            }
+          ],
+          "activePhaseIndex": 0
+        }
+      ]
+    },
+    "1790779814931": {
+      "startedAt": "2026-09-30T14:55:15.314Z",
+      "songs": [
+        {
+          "id": "muo88sc148ikv",
+          "title": "Qualcosa da prendere la notte",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "muo88sc20st1i",
+                  "label": "Rec Voci",
+                  "done": false
+                },
+                {
+                  "id": "muo88sc29lu6s",
+                  "label": "Rec Chitarre Elettriche",
+                  "done": false
+                },
+                {
+                  "id": "muo88sc28dw32",
+                  "label": "Rec Basso / MIDI",
+                  "done": false
+                },
+                {
+                  "id": "muo88sc2mgw2b",
+                  "label": "Editing Voci",
+                  "done": false
+                },
+                {
+                  "id": "muo88sc2gn2r0",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "muo88sc2m1fdn",
+          "title": "Parti",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "muo88sc2hrprg",
+                  "label": "Rec Voci",
+                  "done": false
+                },
+                {
+                  "id": "muo88sc2iehoy",
+                  "label": "Rec Chitarre Elettriche",
+                  "done": false
+                },
+                {
+                  "id": "muo88sc2w8p0r",
+                  "label": "Rec Basso / MIDI",
+                  "done": false
+                },
+                {
+                  "id": "muo88sc2bdafo",
+                  "label": "Editing Voci",
+                  "done": false
+                },
+                {
+                  "id": "muo88sc2lncvd",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
+            }
+          ],
+          "activePhaseIndex": 0
+        },
+        {
+          "id": "muo88sc2a7nfj",
+          "title": "Così così",
+          "phases": [
+            {
+              "id": "produzione",
+              "label": "Produzione",
+              "elements": [
+                {
+                  "id": "muo88sc2gg9ba",
+                  "label": "Rec Voci",
+                  "done": false
+                },
+                {
+                  "id": "muo88sc2umib2",
+                  "label": "Rec Chitarre Elettriche",
+                  "done": false
+                },
+                {
+                  "id": "muo88sc2ba4km",
+                  "label": "Rec Basso / MIDI",
+                  "done": false
+                },
+                {
+                  "id": "muo88sc221hy3",
+                  "label": "Editing Voci",
+                  "done": false
+                },
+                {
+                  "id": "muo88sc2rxcti",
+                  "label": "Arrangiamento",
+                  "done": false
+                }
+              ]
             }
           ],
           "activePhaseIndex": 0
