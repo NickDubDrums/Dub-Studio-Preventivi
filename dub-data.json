@@ -1,6 +1,64 @@
 {
   "preventivi": [
     {
+      "id": "1790779814931",
+      "artista": "Tose",
+      "brano": "Qualcosa da prendere la notte, Parti, Così così",
+      "nbrani": 3,
+      "tariffarioBase": "old",
+      "scontoAttivo": true,
+      "selIncl": [
+        {
+          "id": "rec_voci",
+          "name": "Rec Voci",
+          "price": 40,
+          "qty": 3,
+          "note": ""
+        },
+        {
+          "id": "rec_chitarre",
+          "name": "Rec Chitarre Elettriche",
+          "price": 15,
+          "qty": 1,
+          "note": ""
+        },
+        {
+          "id": "rec_basso",
+          "name": "Rec Basso / MIDI",
+          "price": 10,
+          "qty": 1,
+          "note": ""
+        },
+        {
+          "id": "editing_voci",
+          "name": "Editing Voci",
+          "price": 10,
+          "qty": 3,
+          "note": ""
+        },
+        {
+          "id": "arrangiamento",
+          "name": "Arrangiamento",
+          "price": 50,
+          "qty": 1,
+          "note": ""
+        }
+      ],
+      "selExtra": [],
+      "selSession": [],
+      "sconto": 4,
+      "totale": 216,
+      "revMixIncluse": 1,
+      "revMasterIncluse": 1,
+      "revMixFatte": 0,
+      "revMasterFatte": 0,
+      "stato": "bozza",
+      "noteInterne": "",
+      "incassatoManuale": null,
+      "dataCreazione": "2026-09-30T14:50:14.931Z",
+      "dataModifica": "2026-09-30T14:50:14.933Z"
+    },
+    {
       "id": "1789719986677",
       "artista": "Stefano Bersola",
       "brano": "Mr Baseball, + Siamo + Disneiamo, Tra Cielo e Terra, Doraemon, Tazmania, Candy Candy, Sampei, Power Ranger, Pinocchio",
