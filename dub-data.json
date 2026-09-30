@@ -2365,17 +2365,17 @@
                 {
                   "id": "muo88sc2gg9ba",
                   "label": "Rec Voci",
-                  "done": false
+                  "done": true
                 },
                 {
                   "id": "muo88sc2umib2",
                   "label": "Rec Chitarre Elettriche",
-                  "done": false
+                  "done": true
                 },
                 {
                   "id": "muo88sc2ba4km",
                   "label": "Rec Basso / MIDI",
-                  "done": false
+                  "done": true
                 },
                 {
                   "id": "muo88sc221hy3",
