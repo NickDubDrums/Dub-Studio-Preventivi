@@ -1,6 +1,36 @@
 {
   "preventivi": [
     {
+      "id": "1793117914067",
+      "artista": "Gin",
+      "brano": "Mix episodio Digital Cirus",
+      "nbrani": 1,
+      "tariffarioBase": "new",
+      "scontoAttivo": true,
+      "selIncl": [
+        {
+          "id": "mix",
+          "name": "Mix",
+          "price": 200,
+          "qty": 1,
+          "note": ""
+        }
+      ],
+      "selExtra": [],
+      "selSession": [],
+      "sconto": 0,
+      "totale": 200,
+      "revMixIncluse": 1,
+      "revMasterIncluse": 1,
+      "revMixFatte": 0,
+      "revMasterFatte": 0,
+      "stato": "bozza",
+      "noteInterne": "",
+      "incassatoManuale": null,
+      "dataCreazione": "2026-10-27T16:18:34.067Z",
+      "dataModifica": "2026-10-27T16:18:34.067Z"
+    },
+    {
       "id": "1789719986677",
       "artista": "Stefano Bersola",
       "brano": "Mr Baseball, + Siamo + Disneiamo, Tra Cielo e Terra, Doraemon, Tazmania, Candy Candy, Sampei, Power Ranger, Pinocchio",
@@ -381,7 +411,45 @@
       "dataModifica": "2026-04-07T15:24:43.119Z"
     }
   ],
-  "tariffe": {},
+  "tariffari": {
+    "new": {
+      "rec_voci": 80,
+      "rec_chitarre": 50,
+      "rec_basso": 40,
+      "batterie_midi": 60,
+      "editing_voci": 50,
+      "editing_chit": 30,
+      "editing_basso": 30,
+      "arrangiamento": 50,
+      "rec_batt_reali": 150,
+      "edit_batt": 90,
+      "post_live": 50,
+      "sound_design": 30,
+      "live_prog": 50,
+      "comp_elett": 100,
+      "mix": 70,
+      "rev_mix": 50,
+      "master_1": 60,
+      "master_2": 70,
+      "master_3": 80,
+      "master_4": 90,
+      "rev_master": 50,
+      "x_rev_mix": 30,
+      "x_rev_master": 30,
+      "s_comp_batt": 80,
+      "s_comp_chit": 80,
+      "s_comp_basso": 60,
+      "s_comp_amb": 70,
+      "s_comp_orch": 120,
+      "s_comp_piano": 70,
+      "s_arr": 100,
+      "s_rec_batt": 150,
+      "s_edit_batt": 60,
+      "s_mix_batt": 60,
+      "s_video": 200
+    },
+    "old": {}
+  },
   "trackit": {
     "1775576021520": {
       "startedAt": "2026-07-14T09:48:59.803Z",
