@@ -2376,7 +2376,13 @@
             {
               "id": "produzione",
               "label": "Produzione",
-              "elements": []
+              "elements": [
+                {
+                  "id": "mvqw4lgtetq5i",
+                  "label": "Preparazione progetto",
+                  "done": false
+                }
+              ]
             },
             {
               "id": "mix",
