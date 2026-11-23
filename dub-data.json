@@ -526,7 +526,7 @@
                 {
                   "id": "mrkgyhp70za2a",
                   "label": "Arrangiamento",
-                  "done": false
+                  "done": true
                 }
               ]
             },
@@ -546,7 +546,7 @@
               }
             }
           ],
-          "activePhaseIndex": 0
+          "activePhaseIndex": 1
         },
         {
           "id": "mrkgyhp7tz72v",
